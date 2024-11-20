@@ -1,0 +1,25 @@
+# common
+node_modules/
+
+# api
+api/output/
+api/build/
+api/nodemon.json
+api/google-bucket-key.json
+
+# app
+app/.expo/
+app/android
+app/google-services.json
+app/.env*
+app/eas.json
+app/dist/
+app/npm-debug.*
+app/*.jks
+app/*.p8
+app/*.p12
+app/*.key
+app/*.mobileprovision
+app/*.orig.*
+app/web-build/
+app/expo-env.d.ts
