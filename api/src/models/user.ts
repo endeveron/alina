@@ -32,17 +32,16 @@ const userSchema = new Schema<User>(
       },
     },
     statistics: {
-      // elevenlabs: {
-      //   creditsUsed: {
-      //     type: Number,
-      //   },
-      //   updTimestamp: {
-      //     type: Number,
-      //   },
-      // },
-      googleSpeechToText: {
-        totalBilledTime: {
-          type: Number,
+      google: {
+        speechToText: {
+          totalBilledTime: {
+            type: Number,
+          },
+        },
+        textToSpeech: {
+          totalCharacters: {
+            type: Number,
+          },
         },
         updTimestamp: {
           type: Number,

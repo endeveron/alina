@@ -11,12 +11,13 @@ type UserAccount = {
 };
 
 type Statistics = {
-  // elevenlabs: {
-  //   creditsUsed: number;
-  //   updTimestamp: number;
-  // };
-  googleSpeechToText: {
-    totalBilledTime: number;
+  google: {
+    speechToText: {
+      totalBilledTime: number;
+    };
+    textToSpeech: {
+      totalCharacters: number;
+    };
     updTimestamp: number;
   };
 };

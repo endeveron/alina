@@ -57,8 +57,13 @@ export const signup = async (
         },
       },
       statistics: {
-        googleSpeechToText: {
-          totalBilledTime: 0,
+        google: {
+          speechToText: {
+            totalBilledTime: 0,
+          },
+          textToSpeech: {
+            totalCharacters: 0,
+          },
           updTimestamp: Date.now(),
         },
       },

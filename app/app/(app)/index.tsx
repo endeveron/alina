@@ -26,7 +26,12 @@ export default function HomeScreen() {
   const [audio, setAudio] = useState<Audio.Sound | null>(null);
   const [transcript, setTranscript] = useState('');
 
-  const audioRecordingRef = useRef(recording);
+  const audioRecordingRef = useRef<Audio.Recording>(recording);
+  const transcriptTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const silenceThreshold = 5; // seconds of silence before stopping the recording
+  const silenceTimer = useRef<NodeJS.Timeout | null>(null); // to track silence
+  const silenceDuration = useRef(0); // track how long silence has lasted
 
   const authData = {
     token: session!.token,
@@ -69,7 +74,14 @@ export default function HomeScreen() {
         { shouldPlay: true }
       );
       setAudio(sound);
-      setTranscript(humanTranscript);
+      setTranscript(aiTranscript);
+
+      if (transcriptTimerRef.current) clearTimeout(transcriptTimerRef.current);
+      // Set the time of text transcription display depending on the text length
+      const showTime = Math.floor(aiTranscript.length / 20) * 1000 + 3000;
+      transcriptTimerRef.current = setTimeout(() => {
+        setTranscript('');
+      }, showTime);
     }
   };
 
@@ -97,11 +109,20 @@ export default function HomeScreen() {
     };
   }, [audio]);
 
+  useEffect(() => {
+    return () => {
+      // Cleanup the timeout if the component unmounts
+      if (transcriptTimerRef.current) {
+        clearTimeout(transcriptTimerRef.current);
+      }
+    };
+  }, []);
+
   return (
     <View className="relative flex-1">
       <View className="relative flex-1 flex-col justify-between py-16 z-20">
         {/* Screen title */}
-        <Text className="text-center font-pbold text-4xl py-8">Alina</Text>
+        {/* <Text className="text-center font-pbold text-4xl py-8">Alina</Text> */}
 
         {/* Transcript section */}
         <ScrollView className="flex-col-reverse flex-1 rounded-[32px]">

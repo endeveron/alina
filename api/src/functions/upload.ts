@@ -11,7 +11,7 @@ const storage = new Storage({
 // Get a reference to the bucket
 const bucket = storage.bucket(GOOGLE_BUCKET_NAME);
 
-export const uploadAudioToGoogleStorage = async (
+export const uploadReadableStreamToGoogleStorage = async (
   readableStream: NodeJS.ReadableStream
 ) => {
   // The name of the file to upload the stream
@@ -52,7 +52,6 @@ export const uploadAudioToGoogleStorage = async (
     };
   }
 };
-
 async function clearBucket() {
   await bucket.deleteFiles();
 }

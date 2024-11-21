@@ -1,11 +1,13 @@
+export type LanguageCode = 'en-US' | 'uk-UA';
+
 export type GoogleSpeechToTextConfig = {
   encoding: 'LINEAR16' | 'AMR_WB';
   sampleRateHertz: number;
-  languageCode: string;
+  languageCode: LanguageCode;
 };
 
 export type SpeechToTextResData = {
-  languageCode: string;
+  languageCode: LanguageCode;
   requestId: string;
   transcript: string;
   totalBilledTime: number;

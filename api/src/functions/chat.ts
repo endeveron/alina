@@ -1,5 +1,6 @@
 import { Readable } from 'stream';
-import speech from '@google-cloud/speech';
+import speechToText from '@google-cloud/speech';
+import textToSpeech from '@google-cloud/text-to-speech';
 
 import {
   ELEVENLABS_API_KEY,
@@ -8,11 +9,20 @@ import {
   GOOGLE_PROJECT_ID,
 } from '../constants';
 import logger from '../helpers/logger';
-import { GoogleSpeechToTextConfig, SpeechToTextResData } from '../types/chat';
+import {
+  GoogleSpeechToTextConfig,
+  LanguageCode,
+  SpeechToTextResData,
+} from '../types/chat';
 import { Result } from '../types/common';
-import { uploadAudioToGoogleStorage } from './upload';
+import { uploadReadableStreamToGoogleStorage } from './upload';
 
-const client = new speech.SpeechClient({
+const speechToTextClient = new speechToText.SpeechClient({
+  projectId: GOOGLE_PROJECT_ID,
+  keyFilename: 'google-sa.json',
+});
+
+const textToSpeechClient = new textToSpeech.TextToSpeechClient({
   projectId: GOOGLE_PROJECT_ID,
   keyFilename: 'google-sa.json',
 });
@@ -26,9 +36,9 @@ const convertSpeechToTextUsingGoogleAPI = async ({
 }): Promise<Result<SpeechToTextResData>> => {
   const defaultErrMessage = `Unable to transcribe speech`;
 
+  // Make request to the google api
+  // https://cloud.google.com/speech-to-text/docs/reference/rest/v1/speech/recognize
   try {
-    // Make request to the google api
-    // See https://cloud.google.com/speech-to-text/docs/reference/rest/v1/speech/recognize
     const options = {
       method: 'POST',
       headers: {
@@ -100,7 +110,10 @@ const convertSpeechToTextUsingGoogleAPI = async ({
     // The api should provide the totalBilledTime as a string, ending with 's'
     let totalBilledTime = 0;
     if (resData.totalBilledTime) {
-      const parsedData = parseFloat(resData.totalBilledTime.replace(/s/g, ''));
+      const parsedData = parseInt(
+        resData.totalBilledTime.replace(/s/g, ''),
+        10
+      );
       if (typeof parsedData === 'number') {
         totalBilledTime = parsedData;
       } else {
@@ -137,6 +150,8 @@ const convertSpeechToTextUsingGoogleClient = async ({
 }): Promise<Result<SpeechToTextResData>> => {
   const defaultErrMessage = `Unable to transcribe speech`;
 
+  // https://codelabs.developers.google.com/codelabs/cloud-speech-text-node#5
+
   try {
     const request = {
       audio: { content: recordingBase64 },
@@ -144,7 +159,7 @@ const convertSpeechToTextUsingGoogleClient = async ({
     };
 
     // Detects speech in the audio file
-    const [resData] = await client.recognize(request);
+    const [resData] = await speechToTextClient.recognize(request);
     if (!resData.results?.length) {
       return {
         error: { message: `Unable to get data from the google client` },
@@ -174,6 +189,8 @@ const convertSpeechToTextUsingGoogleClient = async ({
         data: null,
       };
     }
+    // console.log('G-STT result', firstResult);
+
     const transcript = firstResult.alternatives[0].transcript;
     if (!transcript) {
       return {
@@ -182,9 +199,18 @@ const convertSpeechToTextUsingGoogleClient = async ({
       };
     }
 
-    const totalBilledTime = (resData.totalBilledTime?.seconds as number) ?? 0;
-    if (!totalBilledTime) console.error('Invalid totalBilledTime');
-    const languageCode = firstResult.languageCode as string;
+    // Convert totalBilledTime (seconds) to an integer
+    let totalBilledTime = 0;
+    const seconds = resData.totalBilledTime?.seconds;
+    if (typeof seconds === 'number') {
+      totalBilledTime = seconds;
+    } else if (typeof seconds === 'string') {
+      totalBilledTime = parseInt(seconds, 10);
+    } else {
+      console.error('Invalid totalBilledTime value', resData.totalBilledTime);
+    }
+
+    const languageCode = firstResult.languageCode as LanguageCode;
     const requestId = resData.requestId as string;
 
     return {
@@ -205,36 +231,16 @@ const convertSpeechToTextUsingGoogleClient = async ({
   }
 };
 
-export const convertSpeechToText = async ({
-  config,
-  recordingBase64,
+const convertTextToSpeechUsingElevenlabsAPI = async ({
+  text,
 }: {
-  config: GoogleSpeechToTextConfig;
-  recordingBase64: string;
-}): Promise<Result<SpeechToTextResData>> => {
-  // const result = await convertSpeechToTextUsingGoogleAPI({
-  //   config,
-  //   recordingBase64,
-  // });
+  text: string;
+}) => {
+  const defaultErrMessage = `Unable to convert text to speech`;
 
-  const result = await convertSpeechToTextUsingGoogleClient({
-    config,
-    recordingBase64,
-  });
-
-  console.log('result', result);
-
-  return result;
-};
-
-export const askAi = async () => {};
-
-export const convertTextToAudio = async ({ text }: { text: string }) => {
-  const defaultErrMessage = `Unable to convert text to audio`;
-
+  // Make request to the elevenlabs's text-to-speech api
+  // https://elevenlabs.io/docs/api-reference/text-to-speech
   try {
-    // Make request to the elevenlabs api
-    // See https://elevenlabs.io/docs/api-reference/text-to-speech
     const options = {
       method: 'POST',
       headers: {
@@ -272,7 +278,9 @@ export const convertTextToAudio = async ({ text }: { text: string }) => {
     const readableStream = Readable.from(audioStream);
 
     // Upload audio stream to google cloud storage
-    const uploadResult = await uploadAudioToGoogleStorage(readableStream);
+    const uploadResult = await uploadReadableStreamToGoogleStorage(
+      readableStream
+    );
     if (!uploadResult.data) {
       const errMessage = 'Unable to upload audio to google storage';
       return {
@@ -285,10 +293,122 @@ export const convertTextToAudio = async ({ text }: { text: string }) => {
       data: uploadResult.data,
     };
   } catch (err: any) {
-    logger.r(`convertTextToSpeech: ${defaultErrMessage}`);
+    logger.r(`convertTextToSpeechUsingElevenlabsAPI: ${defaultErrMessage}`);
     return {
       error: { message: defaultErrMessage },
       data: null,
     };
   }
 };
+
+const convertTextToSpeechUsingGoogleClient = async ({
+  text,
+  languageCode,
+}: {
+  text: string;
+  languageCode: LanguageCode;
+}) => {
+  const defaultErrMessage = `Unable to convert text to speech`;
+
+  // https://codelabs.developers.google.com/codelabs/cloud-text-speech-node#6
+
+  try {
+    const [resData] = await textToSpeechClient.synthesizeSpeech({
+      audioConfig: { audioEncoding: 'MP3' },
+      input: { text },
+      voice: {
+        name:
+          languageCode.toLowerCase() === 'en-us'
+            ? 'en-US-Standard-H'
+            : 'uk-UA-Standard-A',
+        ssmlGender: 'FEMALE',
+        languageCode,
+      },
+    });
+
+    if (!resData.audioContent) {
+      return {
+        error: { message: `Unable to get audio buffer data` },
+        data: null,
+      };
+    }
+
+    const audioBuffer = Buffer.from(resData.audioContent);
+
+    // Convert the Buffer data to a Node.js Readable stream
+    const readableStream = Readable.from(audioBuffer);
+
+    // Upload audio stream to google cloud storage
+    const uploadResult = await uploadReadableStreamToGoogleStorage(
+      readableStream
+    );
+    if (!uploadResult.data) {
+      const errMessage = 'Unable to upload audio to google storage';
+      return {
+        error: { message: errMessage },
+        data: null,
+      };
+    }
+    return {
+      error: null,
+      data: uploadResult.data,
+    };
+
+    // // dev
+    // return {
+    //   error: null,
+    //   data: null,
+    // };
+  } catch (err: any) {
+    logger.r(`convertTextToSpeechUsingGoogleClient: ${defaultErrMessage}`);
+    return {
+      error: { message: defaultErrMessage },
+      data: null,
+    };
+  }
+};
+
+export const convertSpeechToText = async ({
+  config,
+  recordingBase64,
+}: {
+  config: GoogleSpeechToTextConfig;
+  recordingBase64: string;
+}): Promise<Result<SpeechToTextResData>> => {
+  // Make request to the google's speech-to-text api
+  // const result = await convertSpeechToTextUsingGoogleAPI({
+  //   config,
+  //   recordingBase64,
+  // });
+
+  // Using the @google-cloud/speech library
+  const result = await convertSpeechToTextUsingGoogleClient({
+    config,
+    recordingBase64,
+  });
+
+  // console.log('convertSpeechToText result', result);
+  return result;
+};
+
+export const convertTextToSpeech = async ({
+  text,
+  languageCode,
+}: {
+  text: string;
+  languageCode: LanguageCode;
+}) => {
+  // // Make request to the elevenlabs's text-to-speech api
+  // const result = await convertTextToSpeechUsingElevenlabsAPI({ text });
+
+  // Make request to the elevenlabs's text-to-speech api
+  const result = await convertTextToSpeechUsingGoogleClient({
+    text,
+    languageCode,
+  });
+
+  // console.log('convertTextToSpeech result', result);
+  return result;
+};
+
+export const askAi = async () => {};
