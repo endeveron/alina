@@ -14,8 +14,8 @@ export type GoogleSpeechToTextConfig = {
   languageCode: string;
 };
 
-export type SpeechToTextResData = {
-  alternatives: TranscriptionAlternative[];
-  requestId: string;
-  totalBilledTime: string;
+export type AskAIResData = {
+  audioUrl: string;
+  humanTranscript: string;
+  aiTranscript: string;
 };

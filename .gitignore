@@ -5,7 +5,7 @@ node_modules/
 api/output/
 api/build/
 api/nodemon.json
-api/google-bucket-key.json
+api/google-sa.json
 
 # app
 app/.expo/

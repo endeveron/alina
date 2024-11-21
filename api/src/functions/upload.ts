@@ -5,13 +5,15 @@ import { GOOGLE_BUCKET_NAME, GOOGLE_PROJECT_ID } from '../constants';
 // Create a storage client using the API Key for authentication
 const storage = new Storage({
   projectId: GOOGLE_PROJECT_ID,
-  keyFilename: 'google-bucket-key.json',
+  keyFilename: 'google-sa.json',
 });
 
 // Get a reference to the bucket
 const bucket = storage.bucket(GOOGLE_BUCKET_NAME);
 
-export const uploadAudio = async (readableStream: NodeJS.ReadableStream) => {
+export const uploadAudioToGoogleStorage = async (
+  readableStream: NodeJS.ReadableStream
+) => {
   // The name of the file to upload the stream
   const timestamp = Date.now();
   const fileName = `audio_${timestamp}.mp3`;

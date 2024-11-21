@@ -3,10 +3,11 @@ import * as FileSystem from 'expo-file-system';
 import { Dispatch, MutableRefObject, SetStateAction } from 'react';
 import { Platform } from 'react-native';
 
-import { postSpeechToText } from '@/core/services/chat';
+import { postChat } from '@/core/services/chat';
 import { recordingOptions } from '@/core/settings/audio';
 import { AuthData } from '@/core/types/auth';
-import { SpeechToTextResData } from '@/core/types/chat';
+import { AskAIResData } from '@/core/types/chat';
+import { Response } from '@/core/types/common';
 
 export const recordSpeech = async (
   audioRecordingRef: MutableRefObject<Audio.Recording>,
@@ -49,9 +50,7 @@ export const recordSpeech = async (
 
     if (!recordingStatus?.canRecord) {
       // audioRecordingRef.current = new Audio.Recording();
-
       await audioRecordingRef.current.prepareToRecordAsync(recordingOptions);
-      console.log('Prepared recording instance');
     }
 
     // Start recording
@@ -66,7 +65,7 @@ export const recordSpeech = async (
   }
 };
 
-export const transcribeSpeech = async ({
+export const askAI = async ({
   audioRecordingRef,
   authData,
   languageCode = 'en-US',
@@ -74,12 +73,7 @@ export const transcribeSpeech = async ({
   audioRecordingRef: MutableRefObject<Audio.Recording>;
   authData: AuthData;
   languageCode?: string;
-}): Promise<{
-  error: {
-    message: string;
-  } | null;
-  data: SpeechToTextResData | null;
-}> => {
+}): Promise<Response<AskAIResData>> => {
   if (!audioRecordingRef.current) {
     return {
       data: null,
@@ -138,7 +132,7 @@ export const transcribeSpeech = async ({
     };
 
     // Make request to server
-    const result = await postSpeechToText({
+    const result = await postChat({
       config,
       recordingBase64,
       authData,
@@ -150,6 +144,12 @@ export const transcribeSpeech = async ({
         error: { message: result.error.message },
       };
     }
+
+    // data: result.data: SpeechToTextResData = {
+    //   alternatives: TranscriptionAlternative[];
+    //   requestId: string;
+    //   totalBilledTime: string;
+    // };
 
     return {
       data: result.data,
