@@ -10,11 +10,7 @@ const apiVersion = `/api/v1`;
 
 const app = express();
 app.use(cors());
-app.use(
-  express.json({
-    limit: '50mb',
-  })
-);
+app.use(express.json({ limit: '50mb' }));
 
 // // Serve static files from the 'public' directory
 // app.use('/public', express.static('public'));
@@ -24,8 +20,12 @@ app.use(`${apiVersion}/auth`, authRoutes);
 app.use(`${apiVersion}/chat`, chatRoutes);
 app.use(`${apiVersion}/users`, usersRoutes);
 
-app.use(`${apiVersion}/ping`, (req, res) => {
+app.use(`/ping`, (req, res) => {
   res.status(200).json({ message: 'Ping OK' });
+});
+
+app.use((req, res) => {
+  res.status(404).send('Not found');
 });
 
 // connect to DB

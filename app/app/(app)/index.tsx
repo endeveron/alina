@@ -16,6 +16,13 @@ import { LangCode } from '@/core/types/chat';
 
 const recording = new Audio.Recording();
 
+const bgImageSourceMap = new Map([
+  [1, require(`@/assets/images/bg/bg-1.jpg`)],
+  [2, require(`@/assets/images/bg/bg-2.jpg`)],
+  [3, require(`@/assets/images/bg/bg-3.jpg`)],
+]);
+const bgImageMaxNumber = bgImageSourceMap.size;
+
 export default function HomeScreen() {
   const { session } = useSession();
   const { showToast } = useToast();
@@ -25,13 +32,11 @@ export default function HomeScreen() {
   const [isPermissionGranted, setIsPermissionGranted] = useState(false);
   const [audio, setAudio] = useState<Audio.Sound | null>(null);
   const [transcript, setTranscript] = useState('');
+  const [curBgImgNum, setCurBgImgNum] = useState(1);
+  const [bgImgSource, setBgImgSource] = useState(bgImageSourceMap.get(1));
 
   const audioRecordingRef = useRef<Audio.Recording>(recording);
   const transcriptTimerRef = useRef<NodeJS.Timeout | null>(null);
-
-  const silenceThreshold = 5; // seconds of silence before stopping the recording
-  const silenceTimer = useRef<NodeJS.Timeout | null>(null); // to track silence
-  const silenceDuration = useRef(0); // track how long silence has lasted
 
   const authData = {
     token: session!.token,
@@ -100,6 +105,12 @@ export default function HomeScreen() {
     }
   };
 
+  const changeBackgroundImage = () => {
+    const newBgImgNumber = curBgImgNum < bgImageMaxNumber ? curBgImgNum + 1 : 1;
+    setBgImgSource(bgImageSourceMap.get(newBgImgNumber));
+    setCurBgImgNum(newBgImgNumber);
+  };
+
   useEffect(() => {
     return () => {
       // Clean up the audioResponse object when the component is unmounted
@@ -125,7 +136,10 @@ export default function HomeScreen() {
         {/* <Text className="text-center font-pbold text-4xl py-8">Alina</Text> */}
 
         {/* Transcript section */}
-        <ScrollView className="flex-col-reverse flex-1 rounded-[32px]">
+        <ScrollView
+          onTouchEnd={changeBackgroundImage}
+          className="flex-col-reverse flex-1 rounded-[32px]"
+        >
           <View
             // style={{ backgroundColor: card }}
             className="flex-col items-center justify-center"
@@ -186,26 +200,6 @@ export default function HomeScreen() {
                 </Text>
               </View>
             </TouchableOpacity>
-            {/* <TouchableOpacity activeOpacity={0.5} onPress={signOut}>
-            <View
-              style={{ backgroundColor: card }}
-              className="w-16 h-16 items-center justify-center rounded-full"
-            >
-              <Text colorName="icon" className="font-pmedium text-base">
-                Exit
-              </Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.5} onPress={stopAudio}>
-            <View
-              style={{ backgroundColor: card }}
-              className="w-16 h-16 items-center justify-center rounded-full"
-            >
-              <Text colorName="icon" className="font-pmedium text-base">
-                Stop
-              </Text>
-            </View>
-          </TouchableOpacity> */}
           </View>
         </View>
       </View>
@@ -214,9 +208,9 @@ export default function HomeScreen() {
       <View className="absolute flex-1 items-center justify-center h-full w-full inset-x-0 inset-y-0 z-10">
         <Image
           style={styles.image}
-          source="https://m.endeveron.com/alina-bg.jpg"
+          source={bgImgSource}
           contentFit="cover"
-          transition={1000}
+          transition={500}
         />
       </View>
     </View>
