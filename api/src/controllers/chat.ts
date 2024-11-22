@@ -5,6 +5,9 @@ import { HttpError } from '../helpers/error';
 import { isReqValid } from '../helpers/http';
 import logger from '../helpers/logger';
 import UserModel from '../models/user';
+import { askGoogleGenAI } from '../functions/llm';
+
+const AI_INSTRUCTIONS = `Play the role of a cute clever woman. Be brief and creative.`;
 
 export const akAI = async (req: Request, res: Response, next: NextFunction) => {
   if (!isReqValid(req, next)) return;
@@ -31,36 +34,60 @@ export const akAI = async (req: Request, res: Response, next: NextFunction) => {
       return;
     }
     if (!speechToTextResult.data) {
-      const speechToTextErrMessage = `Unable to convert speech to text`;
-      logger.r(speechToTextErrMessage);
-      next(new HttpError(speechToTextErrMessage, 500));
+      const errMessage = `Unable to convert speech to text`;
+      logger.r(errMessage);
+      next(new HttpError(errMessage, 500));
       return;
     }
 
     const {
-      languageCode,
+      langCode,
       requestId,
       totalBilledTime,
       transcript: humanTranscript,
     } = speechToTextResult.data;
 
-    // Update statistics in db
+    const langName = langCode === 'en-us' ? 'English' : 'Ukrainian';
+
+    // Ask AI
+    const googleAIResult = await askGoogleGenAI({
+      instructions: `${AI_INSTRUCTIONS} Answer in ${langName}`,
+      question: humanTranscript,
+    });
+
+    if (!googleAIResult.data) {
+      const errMessage = `Unable to get data from AI`;
+      logger.r(errMessage);
+      next(new HttpError(errMessage, 500));
+      return;
+    }
+
+    const { answer, aiUsage } = googleAIResult.data;
+
+    // Get current statistics data from the db
     const totalBilledTimeFromDb =
       user.statistics.google.speechToText.totalBilledTime;
     const totalCharactersFromDb =
       user.statistics.google.textToSpeech.totalCharacters;
+    const aiInputTokensFromDb = user.statistics.google.ai.inputTokens;
+    const aiOutputTokensFromDb = user.statistics.google.ai.outputTokens;
+
+    // Update statistics
     const newTotalBilledTime = totalBilledTimeFromDb + totalBilledTime;
     const newTotalCharacters = totalCharactersFromDb + humanTranscript.length;
+    const newAiInputTokens = aiInputTokensFromDb + aiUsage.inputTokens;
+    const newAiOutputTokens = aiOutputTokensFromDb + aiUsage.outputTokens;
     user.statistics.google.speechToText.totalBilledTime = newTotalBilledTime;
     user.statistics.google.textToSpeech.totalCharacters = newTotalCharacters;
+    user.statistics.google.ai.inputTokens = newAiInputTokens;
+    user.statistics.google.ai.outputTokens = newAiOutputTokens;
     user.statistics.google.updTimestamp = Date.now();
-
     await user.save();
 
     // Convert text to speech (mp3 audio)
     const textToSpeechResult = await convertTextToSpeech({
-      text: humanTranscript,
-      languageCode,
+      text: answer,
+      langCode,
     });
 
     if (textToSpeechResult.error) {
@@ -69,9 +96,9 @@ export const akAI = async (req: Request, res: Response, next: NextFunction) => {
       return;
     }
     if (!textToSpeechResult.data) {
-      const textToAudioErrMessage = `Unable to convert text to speech`;
-      logger.r(textToAudioErrMessage);
-      next(new HttpError(textToAudioErrMessage, 500));
+      const errMessage = `Unable to convert text to speech`;
+      logger.r(errMessage);
+      next(new HttpError(errMessage, 500));
       return;
     }
     const { audioUrl } = textToSpeechResult.data;
@@ -79,7 +106,7 @@ export const akAI = async (req: Request, res: Response, next: NextFunction) => {
     res.status(200).json({
       audioUrl,
       humanTranscript,
-      aiTranscript: humanTranscript,
+      aiTranscript: answer,
     });
   } catch (err) {
     logger.r('speechToText', err);

@@ -1,13 +1,24 @@
-export type LanguageCode = 'en-US' | 'uk-UA';
+export type LangCode = 'en-US' | 'uk-UA';
+export type LangCodeLower = 'en-us' | 'uk-ua';
 
 export type GoogleSpeechToTextConfig = {
   encoding: 'LINEAR16' | 'AMR_WB';
   sampleRateHertz: number;
-  languageCode: LanguageCode;
+  langCode: LangCode;
+};
+
+export type AIUsageStatistics = {
+  inputTokens: number;
+  outputTokens: number;
+};
+
+export type GoogleGenAIResData = {
+  answer: string;
+  aiUsage: AIUsageStatistics;
 };
 
 export type SpeechToTextResData = {
-  languageCode: LanguageCode;
+  langCode: LangCodeLower;
   requestId: string;
   transcript: string;
   totalBilledTime: number;

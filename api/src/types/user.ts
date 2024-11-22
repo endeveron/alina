@@ -1,4 +1,5 @@
 import { ObjectId } from 'mongoose';
+import { AIUsageStatistics } from './chat';
 
 type UserAccount = {
   name: string;
@@ -18,6 +19,7 @@ type Statistics = {
     textToSpeech: {
       totalCharacters: number;
     };
+    ai: AIUsageStatistics;
     updTimestamp: number;
   };
 };

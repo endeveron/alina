@@ -11,11 +11,13 @@ import {
 import logger from '../helpers/logger';
 import {
   GoogleSpeechToTextConfig,
-  LanguageCode,
+  LangCode,
+  LangCodeLower,
   SpeechToTextResData,
 } from '../types/chat';
 import { Result } from '../types/common';
 import { uploadReadableStreamToGoogleStorage } from './upload';
+import { askGoogleGenAI } from './llm';
 
 const speechToTextClient = new speechToText.SpeechClient({
   projectId: GOOGLE_PROJECT_ID,
@@ -50,8 +52,14 @@ const convertSpeechToTextUsingGoogleAPI = async ({
         audio: { content: recordingBase64 },
       }),
     };
+
+    // !! Get the right GOOGLE_API_KEY in Credentials > API Keys
+    // !! Restrictions : 'Cloud Speech-to-Text API'
+    // https://console.cloud.google.com/apis/credentials
+
     const response = await fetch(
-      `https://speech.googleapis.com/v1/speech:recognize?key=${GOOGLE_API_KEY}`,
+      // `https://speech.googleapis.com/v1/speech:recognize?key=${GOOGLE_API_KEY}`,
+      `https://speech.googleapis.com/v1/speech:recognize`,
       options
     );
 
@@ -75,7 +83,7 @@ const convertSpeechToTextUsingGoogleAPI = async ({
     //     {
     //       alternatives: [Array],
     //       resultEndTime: '2.550s',
-    //       languageCode: 'en-us'
+    //       langCode: 'en-us'
     //     }
     //   ],
     //   totalBilledTime: '3s',
@@ -120,13 +128,13 @@ const convertSpeechToTextUsingGoogleAPI = async ({
         console.error('Invalid totalBilledTime');
       }
     }
-    const languageCode = resData.languageCode;
+    const langCode = resData.langCode;
     const requestId = resData.requestId;
 
     return {
       error: null,
       data: {
-        languageCode,
+        langCode,
         requestId,
         transcript,
         totalBilledTime,
@@ -173,7 +181,7 @@ const convertSpeechToTextUsingGoogleClient = async ({
     //       alternatives: [Array],
     //       channelTag: 0,
     //       resultEndTime: [Object],
-    //       languageCode: 'en-us'
+    //       langCode: 'en-us'
     //     }
     //   ],
     //   totalBilledTime: { seconds: '2', nanos: 0 },
@@ -210,20 +218,20 @@ const convertSpeechToTextUsingGoogleClient = async ({
       console.error('Invalid totalBilledTime value', resData.totalBilledTime);
     }
 
-    const languageCode = firstResult.languageCode as LanguageCode;
+    const langCode = firstResult.languageCode as LangCodeLower;
     const requestId = resData.requestId as string;
 
     return {
       error: null,
       data: {
-        languageCode,
+        langCode,
         requestId,
         transcript,
         totalBilledTime,
       },
     };
   } catch (err: any) {
-    logger.r(`convertSpeechToTextUsingGoogleClient: ${defaultErrMessage}`);
+    console.error(`convertSpeechToTextUsingGoogleClient: ${err}`);
     return {
       error: { message: defaultErrMessage },
       data: null,
@@ -293,7 +301,7 @@ const convertTextToSpeechUsingElevenlabsAPI = async ({
       data: uploadResult.data,
     };
   } catch (err: any) {
-    logger.r(`convertTextToSpeechUsingElevenlabsAPI: ${defaultErrMessage}`);
+    console.error(`convertTextToSpeechUsingElevenlabsAPI: ${err}`);
     return {
       error: { message: defaultErrMessage },
       data: null,
@@ -303,10 +311,10 @@ const convertTextToSpeechUsingElevenlabsAPI = async ({
 
 const convertTextToSpeechUsingGoogleClient = async ({
   text,
-  languageCode,
+  langCode,
 }: {
   text: string;
-  languageCode: LanguageCode;
+  langCode: LangCodeLower;
 }) => {
   const defaultErrMessage = `Unable to convert text to speech`;
 
@@ -317,12 +325,9 @@ const convertTextToSpeechUsingGoogleClient = async ({
       audioConfig: { audioEncoding: 'MP3' },
       input: { text },
       voice: {
-        name:
-          languageCode.toLowerCase() === 'en-us'
-            ? 'en-US-Standard-H'
-            : 'uk-UA-Standard-A',
+        name: langCode === 'en-us' ? 'en-US-Standard-H' : 'uk-UA-Standard-A',
         ssmlGender: 'FEMALE',
-        languageCode,
+        languageCode: langCode,
       },
     });
 
@@ -360,7 +365,7 @@ const convertTextToSpeechUsingGoogleClient = async ({
     //   data: null,
     // };
   } catch (err: any) {
-    logger.r(`convertTextToSpeechUsingGoogleClient: ${defaultErrMessage}`);
+    console.error(`convertTextToSpeechUsingGoogleClient: ${err}`);
     return {
       error: { message: defaultErrMessage },
       data: null,
@@ -393,10 +398,10 @@ export const convertSpeechToText = async ({
 
 export const convertTextToSpeech = async ({
   text,
-  languageCode,
+  langCode,
 }: {
   text: string;
-  languageCode: LanguageCode;
+  langCode: LangCodeLower;
 }) => {
   // // Make request to the elevenlabs's text-to-speech api
   // const result = await convertTextToSpeechUsingElevenlabsAPI({ text });
@@ -404,11 +409,9 @@ export const convertTextToSpeech = async ({
   // Make request to the elevenlabs's text-to-speech api
   const result = await convertTextToSpeechUsingGoogleClient({
     text,
-    languageCode,
+    langCode,
   });
 
   // console.log('convertTextToSpeech result', result);
   return result;
 };
-
-export const askAi = async () => {};

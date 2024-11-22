@@ -34,18 +34,16 @@ const userSchema = new Schema<User>(
     statistics: {
       google: {
         speechToText: {
-          totalBilledTime: {
-            type: Number,
-          },
+          totalBilledTime: { type: Number },
         },
         textToSpeech: {
-          totalCharacters: {
-            type: Number,
-          },
+          totalCharacters: { type: Number },
         },
-        updTimestamp: {
-          type: Number,
+        ai: {
+          inputTokens: { type: Number },
+          outputTokens: { type: Number },
         },
+        updTimestamp: { type: Number },
       },
     },
   },

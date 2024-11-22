@@ -26,12 +26,12 @@ const bgImageMaxNumber = bgImageSourceMap.size;
 export default function HomeScreen() {
   const { session } = useSession();
   const { showToast } = useToast();
-  const [languageCode, setLanguageCode] = useState<LangCode>(LangCode.en);
+  const [langCode, setLanguageCode] = useState<LangCode>(LangCode.en);
   const [isRecording, setIsRecording] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
   const [isPermissionGranted, setIsPermissionGranted] = useState(false);
   const [audio, setAudio] = useState<Audio.Sound | null>(null);
-  const [transcript, setTranscript] = useState('');
+  const [aiMessage, setAiMessage] = useState('');
   const [curBgImgNum, setCurBgImgNum] = useState(1);
   const [bgImgSource, setBgImgSource] = useState(bgImageSourceMap.get(1));
 
@@ -48,8 +48,7 @@ export default function HomeScreen() {
 
   const startRecording = async () => {
     setIsRecording(true);
-    setTranscript('');
-
+    setAiMessage('');
     await recordSpeech(audioRecordingRef, setIsRecording, isPermissionGranted);
   };
 
@@ -60,7 +59,7 @@ export default function HomeScreen() {
     const askAIResult = await askAI({
       audioRecordingRef,
       authData,
-      languageCode,
+      langCode,
     });
     setIsFetching(false);
 
@@ -79,14 +78,15 @@ export default function HomeScreen() {
         { shouldPlay: true }
       );
       setAudio(sound);
-      setTranscript(aiTranscript);
+      setAiMessage(aiTranscript);
 
-      if (transcriptTimerRef.current) clearTimeout(transcriptTimerRef.current);
-      // Set the time of text transcription display depending on the text length
-      const showTime = Math.floor(aiTranscript.length / 20) * 1000 + 3000;
-      transcriptTimerRef.current = setTimeout(() => {
-        setTranscript('');
-      }, showTime);
+      // Auto hide the message
+      // if (transcriptTimerRef.current) clearTimeout(transcriptTimerRef.current);
+      // // Set the time of text transcription display depending on the text length
+      // const showTime = Math.floor(aiTranscript.length / 10) * 1000 + 2000;
+      // transcriptTimerRef.current = setTimeout(() => {
+      //   setTranscript('');
+      // }, showTime);
     }
   };
 
@@ -144,14 +144,27 @@ export default function HomeScreen() {
             // style={{ backgroundColor: card }}
             className="flex-col items-center justify-center"
           >
-            {transcript ? (
+            {/* {humanMessage ? (
+              <View
+                style={{ backgroundColor: background }}
+                className="py-4 px-8 rounded-[32px] mb-4"
+              >
+                <Text
+                  onPress={() => copyToClipboard(humanMessage)}
+                  className="!font-pbold !text-xl/8 text-center w-auto"
+                >
+                  {humanMessage}
+                </Text>
+              </View>
+            ) : null} */}
+            {aiMessage ? (
               <View className="py-4 px-8 rounded-[32px] bg-slate-50">
                 <Text
-                  onPress={() => copyToClipboard(transcript)}
+                  onPress={() => copyToClipboard(aiMessage)}
                   colorName="background"
-                  className="!font-pbold !text-xl/10 text-center w-auto"
+                  className="!font-pbold !text-xl/8 text-center w-auto"
                 >
-                  {transcript}
+                  {aiMessage}
                 </Text>
               </View>
             ) : null}
@@ -196,7 +209,7 @@ export default function HomeScreen() {
                 className="opacity-60 w-40 h-16 items-center justify-center rounded-full bg-white/10"
               >
                 <Text className="font-pmedium text-base">
-                  {languageCode === LangCode.en ? 'English' : 'Українська'}
+                  {langCode === LangCode.en ? 'English' : 'Українська'}
                 </Text>
               </View>
             </TouchableOpacity>

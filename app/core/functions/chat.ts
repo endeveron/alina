@@ -68,11 +68,11 @@ export const recordSpeech = async (
 export const askAI = async ({
   audioRecordingRef,
   authData,
-  languageCode = 'en-US',
+  langCode = 'en-US',
 }: {
   audioRecordingRef: MutableRefObject<Audio.Recording>;
   authData: AuthData;
-  languageCode?: string;
+  langCode?: string;
 }): Promise<Response<AskAIResData>> => {
   if (!audioRecordingRef.current) {
     return {
@@ -128,7 +128,7 @@ export const askAI = async ({
     const config = {
       encoding: Platform.OS === 'android' ? 'AMR_WB' : 'LINEAR16',
       sampleRateHertz: Platform.OS === 'android' ? 16000 : 41000,
-      languageCode,
+      languageCode: langCode,
     };
 
     // Make request to server
