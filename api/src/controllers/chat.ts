@@ -1,13 +1,14 @@
 import { NextFunction, Request, Response } from 'express';
 
-import { convertSpeechToText, convertTextToSpeech } from '../functions/chat';
+import { convertSpeechToText } from '../functions/chat';
 import { HttpError } from '../helpers/error';
 import { isReqValid } from '../helpers/http';
 import logger from '../helpers/logger';
 import UserModel from '../models/user';
 import { askGoogleGenAI } from '../functions/llm';
+import { Statistics } from '../types/user';
 
-const AI_INSTRUCTIONS = `Play the role of a cute clever woman. Be brief and creative.`;
+const AI_INSTRUCTIONS = `Act like you're a creative cute woman. Your answer must be under 120 characters.`;
 
 export const akAI = async (req: Request, res: Response, next: NextFunction) => {
   if (!isReqValid(req, next)) return;
@@ -44,7 +45,7 @@ export const akAI = async (req: Request, res: Response, next: NextFunction) => {
       langCode,
       requestId,
       totalBilledTime,
-      transcript: humanTranscript,
+      transcript: humanMessage,
     } = speechToTextResult.data;
 
     const langName = langCode === 'en-us' ? 'English' : 'Ukrainian';
@@ -52,7 +53,7 @@ export const akAI = async (req: Request, res: Response, next: NextFunction) => {
     // Ask AI
     const googleAIResult = await askGoogleGenAI({
       instructions: `${AI_INSTRUCTIONS} Answer in ${langName}`,
-      question: humanTranscript,
+      question: humanMessage,
     });
 
     if (!googleAIResult.data) {
@@ -64,49 +65,53 @@ export const akAI = async (req: Request, res: Response, next: NextFunction) => {
 
     const { answer, aiUsage } = googleAIResult.data;
 
+    // Handle statistics
+    // Detect whether a new month has started to reset statistics
+    let statistics: Statistics = user.statistics;
+    const prevTimestamp = statistics.updTimestamp;
+    const prevDate = new Date(prevTimestamp);
+    const curDate = new Date();
+    const prevDateMonth = prevDate.getMonth();
+    const curDateMonth = curDate.getMonth();
+    const prevDateYear = prevDate.getFullYear();
+    const curDateYear = curDate.getFullYear();
+    const isNewMonth =
+      prevDateMonth !== curDateMonth || prevDateYear !== curDateYear;
+
+    if (isNewMonth) {
+      // Reset statistics
+      statistics = {
+        google: {
+          ai: {
+            inputTokens: 0,
+            outputTokens: 0,
+          },
+          sttBilledTime: 0,
+        },
+        updTimestamp: Date.now(),
+      };
+    } else {
+      statistics.updTimestamp = Date.now();
+    }
+
     // Get current statistics data from the db
-    const totalBilledTimeFromDb =
-      user.statistics.google.speechToText.totalBilledTime;
-    const totalCharactersFromDb =
-      user.statistics.google.textToSpeech.totalCharacters;
+    const sttBilledTimeFromDb = user.statistics.google.sttBilledTime;
     const aiInputTokensFromDb = user.statistics.google.ai.inputTokens;
     const aiOutputTokensFromDb = user.statistics.google.ai.outputTokens;
 
     // Update statistics
-    const newTotalBilledTime = totalBilledTimeFromDb + totalBilledTime;
-    const newTotalCharacters = totalCharactersFromDb + humanTranscript.length;
+    const newSttBilledTime = sttBilledTimeFromDb + totalBilledTime;
     const newAiInputTokens = aiInputTokensFromDb + aiUsage.inputTokens;
     const newAiOutputTokens = aiOutputTokensFromDb + aiUsage.outputTokens;
-    user.statistics.google.speechToText.totalBilledTime = newTotalBilledTime;
-    user.statistics.google.textToSpeech.totalCharacters = newTotalCharacters;
+    user.statistics.google.sttBilledTime = newSttBilledTime;
     user.statistics.google.ai.inputTokens = newAiInputTokens;
     user.statistics.google.ai.outputTokens = newAiOutputTokens;
-    user.statistics.google.updTimestamp = Date.now();
+
     await user.save();
 
-    // Convert text to speech (mp3 audio)
-    const textToSpeechResult = await convertTextToSpeech({
-      text: answer,
-      langCode,
-    });
-
-    if (textToSpeechResult.error) {
-      logger.r(textToSpeechResult.error.message);
-      next(new HttpError(textToSpeechResult.error.message, 500));
-      return;
-    }
-    if (!textToSpeechResult.data) {
-      const errMessage = `Unable to convert text to speech`;
-      logger.r(errMessage);
-      next(new HttpError(errMessage, 500));
-      return;
-    }
-    const { audioUrl } = textToSpeechResult.data;
-
     res.status(200).json({
-      audioUrl,
-      humanTranscript,
-      aiTranscript: answer,
+      humanMessage,
+      aiMessage: answer,
     });
   } catch (err) {
     logger.r('speechToText', err);

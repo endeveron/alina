@@ -1,13 +1,13 @@
 import { API_BASE_URL } from '@/core/constants';
 import { BASE_HEADERS } from '@/core/constants';
 import { AuthCredentials, UserAuthData } from '@/core/types/auth';
-import { Response } from '@/core/types/common';
+import { Result } from '@/core/types/common';
 
 export const postSignUp = async ({
   name,
   email,
   password,
-}: AuthCredentials): Promise<Response<UserAuthData> | undefined> => {
+}: AuthCredentials): Promise<Result<UserAuthData> | undefined> => {
   try {
     const response = await fetch(`${API_BASE_URL}/auth/signup`, {
       method: 'POST',
@@ -61,7 +61,7 @@ export const postSignUp = async ({
 export const postSignIn = async ({
   email,
   password,
-}: AuthCredentials): Promise<Response<UserAuthData> | undefined> => {
+}: AuthCredentials): Promise<Result<UserAuthData> | undefined> => {
   try {
     const response = await fetch(`${API_BASE_URL}/auth/signin`, {
       method: 'POST',

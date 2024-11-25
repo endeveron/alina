@@ -5,11 +5,11 @@ import { GoogleGenAIResData } from '../types/chat';
 
 // Create a llm model instance
 const llm = new ChatGoogleGenerativeAI({
-  apiKey: process.env.GOOGLE_API_KEY,
+  apiKey: process.env.GOOGLE_AI_STUDIO_API_KEY,
   model: 'gemini-1.5-flash-8b',
   maxRetries: 2,
-  maxOutputTokens: 20, // 80 characters ~ 10-15 words
-  temperature: 0.8,
+  maxOutputTokens: 30, // 120 characters
+  temperature: 1,
   safetySettings: [
     {
       // See: https://ai.google.dev/gemini-api/docs/safety-settings
@@ -43,8 +43,8 @@ export const askGoogleGenAI = async ({
       },
     };
 
-    console.log(`AI answer: "${answer}"`);
-    console.log('AI usage:', data.aiUsage);
+    // console.log(`AI answer: "${answer}"`);
+    // console.log('AI usage:', data.aiUsage);
 
     return {
       data,

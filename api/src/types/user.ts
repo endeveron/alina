@@ -11,17 +11,12 @@ type UserAccount = {
   };
 };
 
-type Statistics = {
+export type Statistics = {
   google: {
-    speechToText: {
-      totalBilledTime: number;
-    };
-    textToSpeech: {
-      totalCharacters: number;
-    };
     ai: AIUsageStatistics;
-    updTimestamp: number;
+    sttBilledTime: number;
   };
+  updTimestamp: number;
 };
 
 export type User = {

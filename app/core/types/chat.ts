@@ -1,6 +1,7 @@
 export enum LangCode {
   en = 'en-US',
   uk = 'uk-UA',
+  fr = 'fr-CA',
 }
 
 export type TranscriptionAlternative = {
@@ -15,7 +16,7 @@ export type GoogleSpeechToTextConfig = {
 };
 
 export type AskAIResData = {
-  audioUrl: string;
-  humanTranscript: string;
-  aiTranscript: string;
+  // audioUrl: string;
+  humanMessage: string;
+  aiMessage: string;
 };

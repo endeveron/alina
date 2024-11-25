@@ -58,14 +58,13 @@ export const signup = async (
       },
       statistics: {
         google: {
-          speechToText: {
-            totalBilledTime: 0,
+          ai: {
+            inputTokens: 0,
+            outputTokens: 0,
           },
-          textToSpeech: {
-            totalCharacters: 0,
-          },
-          updTimestamp: Date.now(),
+          sttBilledTime: 0,
         },
+        updTimestamp: Date.now(),
       },
     });
 

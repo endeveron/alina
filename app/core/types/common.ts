@@ -5,9 +5,16 @@ export type Screen = {
 
 export type Status = { success: boolean };
 
-export type Response<T> = {
+export type Result<T> = {
   data: T | null;
   error: { message: string } | null;
+};
+
+export type Language = {
+  identifier: string;
+  language: string;
+  name: string;
+  quality: string;
 };
 
 export type LogType = 'error' | 'info' | 'success' | 'warning';

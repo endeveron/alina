@@ -2,7 +2,7 @@ export const colors = {
   light: {
     text: '#F3F4F6', // Gray-100
     background: '#030712', // Gray-950
-    brand: '#1E3A8A', // Blue-900
+    btn: '#F3F4F6', // Gray-100
     btnSecondary: '#1F2937', // Gray-800
     card: '#111827', // Gray-900
     border: '#1F2937', // Gray-800
@@ -15,7 +15,7 @@ export const colors = {
   dark: {
     text: '#F3F4F6', // Gray-100
     background: '#030712', // Gray-950
-    brand: '#172554', // Blue-900
+    btn: '#F3F4F6', // Gray-100
     btnSecondary: '#1F2937', // Gray-800
     card: '#111827', // Gray-900
     border: '#1F2937', // Gray-800

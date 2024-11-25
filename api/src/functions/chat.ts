@@ -1,153 +1,135 @@
-import { Readable } from 'stream';
 import speechToText from '@google-cloud/speech';
-import textToSpeech from '@google-cloud/text-to-speech';
 
 import {
-  ELEVENLABS_API_KEY,
-  ELEVENLABS_VOICEID_SARAH,
-  GOOGLE_API_KEY,
-  GOOGLE_PROJECT_ID,
-} from '../constants';
-import logger from '../helpers/logger';
-import {
   GoogleSpeechToTextConfig,
-  LangCode,
   LangCodeLower,
   SpeechToTextResData,
 } from '../types/chat';
 import { Result } from '../types/common';
-import { uploadReadableStreamToGoogleStorage } from './upload';
-import { askGoogleGenAI } from './llm';
 
 const speechToTextClient = new speechToText.SpeechClient({
-  projectId: GOOGLE_PROJECT_ID,
   keyFilename: 'google-sa.json',
 });
 
-const textToSpeechClient = new textToSpeech.TextToSpeechClient({
-  projectId: GOOGLE_PROJECT_ID,
-  keyFilename: 'google-sa.json',
-});
+// const convertSpeechToTextUsingGoogleAPI = async ({
+//   config,
+//   recordingBase64,
+// }: {
+//   config: GoogleSpeechToTextConfig;
+//   recordingBase64: string;
+// }): Promise<Result<SpeechToTextResData>> => {
+//   const defaultErrMessage = `Unable to transcribe speech`;
 
-const convertSpeechToTextUsingGoogleAPI = async ({
-  config,
-  recordingBase64,
-}: {
-  config: GoogleSpeechToTextConfig;
-  recordingBase64: string;
-}): Promise<Result<SpeechToTextResData>> => {
-  const defaultErrMessage = `Unable to transcribe speech`;
+//   // Make request to the google api
+//   // https://cloud.google.com/speech-to-text/docs/reference/rest/v1/speech/recognize
+//   try {
+//     const options = {
+//       method: 'POST',
+//       headers: {
+//         Accept: 'application/json',
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify({
+//         config,
+//         audio: { content: recordingBase64 },
+//       }),
+//     };
 
-  // Make request to the google api
-  // https://cloud.google.com/speech-to-text/docs/reference/rest/v1/speech/recognize
-  try {
-    const options = {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        config,
-        audio: { content: recordingBase64 },
-      }),
-    };
+//     // !! Get the right GOOGLE_API_KEY in Credentials > API Keys
+//     // !! Restrictions : 'Cloud Speech-to-Text API'
+//     // https://console.cloud.google.com/apis/credentials
 
-    // !! Get the right GOOGLE_API_KEY in Credentials > API Keys
-    // !! Restrictions : 'Cloud Speech-to-Text API'
-    // https://console.cloud.google.com/apis/credentials
+//     const response = await fetch(
+//       // `https://speech.googleapis.com/v1/speech:recognize?key=${GOOGLE_API_KEY}`,
+//       `https://speech.googleapis.com/v1/speech:recognize`,
+//       options
+//     );
 
-    const response = await fetch(
-      // `https://speech.googleapis.com/v1/speech:recognize?key=${GOOGLE_API_KEY}`,
-      `https://speech.googleapis.com/v1/speech:recognize`,
-      options
-    );
+//     if (response && !response.ok) {
+//       return {
+//         error: { message: defaultErrMessage },
+//         data: null,
+//       };
+//     }
 
-    if (response && !response.ok) {
-      return {
-        error: { message: defaultErrMessage },
-        data: null,
-      };
-    }
+//     const resData = await response.json();
+//     if (!resData?.results[0]?.alternatives[0]) {
+//       return {
+//         error: { message: `Unable to get data from the google api` },
+//         data: null,
+//       };
+//     }
 
-    const resData = await response.json();
-    if (!resData?.results[0]?.alternatives[0]) {
-      return {
-        error: { message: `Unable to get data from the google api` },
-        data: null,
-      };
-    }
+//     // resData {
+//     //   results: [
+//     //     {
+//     //       alternatives: [Array],
+//     //       resultEndTime: '2.550s',
+//     //       langCode: 'en-us'
+//     //     }
+//     //   ],
+//     //   totalBilledTime: '3s',
+//     //   requestId: '884987086151728353'
+//     // }
 
-    // resData {
-    //   results: [
-    //     {
-    //       alternatives: [Array],
-    //       resultEndTime: '2.550s',
-    //       langCode: 'en-us'
-    //     }
-    //   ],
-    //   totalBilledTime: '3s',
-    //   requestId: '884987086151728353'
-    // }
+//     // // Get transcript
+//     // const transcript = resData.results[0].alternatives[0].transcript ?? '';
+//     // if (!transcript) {
+//     //   return {
+//     //     error: { message: `Unable to get transcript from the google api` },
+//     //     data: null,
+//     //   };
+//     // }
 
-    // // Get transcript
-    // const transcript = resData.results[0].alternatives[0].transcript ?? '';
-    // if (!transcript) {
-    //   return {
-    //     error: { message: `Unable to get transcript from the google api` },
-    //     data: null,
-    //   };
-    // }
+//     // Get transcript
+//     const firstResult = resData.results[0];
+//     if (!firstResult.alternatives?.length) {
+//       return {
+//         error: { message: `Unable to get alternatives from the google api` },
+//         data: null,
+//       };
+//     }
+//     const transcript = firstResult.alternatives[0].transcript;
+//     if (!transcript) {
+//       return {
+//         error: { message: `Unable to get transcript from the google api` },
+//         data: null,
+//       };
+//     }
 
-    // Get transcript
-    const firstResult = resData.results[0];
-    if (!firstResult.alternatives?.length) {
-      return {
-        error: { message: `Unable to get alternatives from the google api` },
-        data: null,
-      };
-    }
-    const transcript = firstResult.alternatives[0].transcript;
-    if (!transcript) {
-      return {
-        error: { message: `Unable to get transcript from the google api` },
-        data: null,
-      };
-    }
+//     // The api should provide the totalBilledTime as a string, ending with 's'
+//     let totalBilledTime = 0;
+//     if (resData.totalBilledTime) {
+//       const parsedData = parseInt(
+//         resData.totalBilledTime.replace(/s/g, ''),
+//         10
+//       );
+//       if (typeof parsedData === 'number') {
+//         totalBilledTime = parsedData;
+//       } else {
+//         console.error('Invalid totalBilledTime');
+//       }
+//     }
+//     const langCode = resData.langCode;
+//     const requestId = resData.requestId;
 
-    // The api should provide the totalBilledTime as a string, ending with 's'
-    let totalBilledTime = 0;
-    if (resData.totalBilledTime) {
-      const parsedData = parseInt(
-        resData.totalBilledTime.replace(/s/g, ''),
-        10
-      );
-      if (typeof parsedData === 'number') {
-        totalBilledTime = parsedData;
-      } else {
-        console.error('Invalid totalBilledTime');
-      }
-    }
-    const langCode = resData.langCode;
-    const requestId = resData.requestId;
-
-    return {
-      error: null,
-      data: {
-        langCode,
-        requestId,
-        transcript,
-        totalBilledTime,
-      },
-    };
-  } catch (err: any) {
-    logger.r(`convertSpeechToTextUsingGoogleAPI: ${defaultErrMessage}`);
-    return {
-      error: { message: defaultErrMessage },
-      data: null,
-    };
-  }
-};
+//     return {
+//       error: null,
+//       data: {
+//         langCode,
+//         requestId,
+//         transcript,
+//         totalBilledTime,
+//       },
+//     };
+//   } catch (err: any) {
+//     logger.r(`convertSpeechToTextUsingGoogleAPI: ${defaultErrMessage}`);
+//     return {
+//       error: { message: defaultErrMessage },
+//       data: null,
+//     };
+//   }
+// };
 
 const convertSpeechToTextUsingGoogleClient = async ({
   config,
@@ -239,140 +221,6 @@ const convertSpeechToTextUsingGoogleClient = async ({
   }
 };
 
-const convertTextToSpeechUsingElevenlabsAPI = async ({
-  text,
-}: {
-  text: string;
-}) => {
-  const defaultErrMessage = `Unable to convert text to speech`;
-
-  // Make request to the elevenlabs's text-to-speech api
-  // https://elevenlabs.io/docs/api-reference/text-to-speech
-  try {
-    const options = {
-      method: 'POST',
-      headers: {
-        Accept: 'audio/mpeg',
-        'Content-Type': 'application/json',
-        'xi-api-key': ELEVENLABS_API_KEY,
-      },
-      body: JSON.stringify({
-        text,
-        model_id: 'eleven_multilingual_v2', // default: eleven_monolingual_v1
-      }),
-    };
-    const response = await fetch(
-      `https://api.elevenlabs.io/v1/text-to-speech/${ELEVENLABS_VOICEID_SARAH}`,
-      options
-    );
-
-    if (response && !response.ok) {
-      return {
-        error: { message: defaultErrMessage },
-        data: null,
-      };
-    }
-
-    const audioStream: ReadableStream<Uint8Array> | null = response.body;
-    if (!audioStream) {
-      const errMessage = 'Unable to get audio stream from api';
-      return {
-        error: { message: errMessage },
-        data: null,
-      };
-    }
-
-    // Convert the Web Streams API ReadableStream to a Node.js Readable stream
-    const readableStream = Readable.from(audioStream);
-
-    // Upload audio stream to google cloud storage
-    const uploadResult = await uploadReadableStreamToGoogleStorage(
-      readableStream
-    );
-    if (!uploadResult.data) {
-      const errMessage = 'Unable to upload audio to google storage';
-      return {
-        error: { message: errMessage },
-        data: null,
-      };
-    }
-    return {
-      error: null,
-      data: uploadResult.data,
-    };
-  } catch (err: any) {
-    console.error(`convertTextToSpeechUsingElevenlabsAPI: ${err}`);
-    return {
-      error: { message: defaultErrMessage },
-      data: null,
-    };
-  }
-};
-
-const convertTextToSpeechUsingGoogleClient = async ({
-  text,
-  langCode,
-}: {
-  text: string;
-  langCode: LangCodeLower;
-}) => {
-  const defaultErrMessage = `Unable to convert text to speech`;
-
-  // https://codelabs.developers.google.com/codelabs/cloud-text-speech-node#6
-
-  try {
-    const [resData] = await textToSpeechClient.synthesizeSpeech({
-      audioConfig: { audioEncoding: 'MP3' },
-      input: { text },
-      voice: {
-        name: langCode === 'en-us' ? 'en-US-Standard-H' : 'uk-UA-Standard-A',
-        ssmlGender: 'FEMALE',
-        languageCode: langCode,
-      },
-    });
-
-    if (!resData.audioContent) {
-      return {
-        error: { message: `Unable to get audio buffer data` },
-        data: null,
-      };
-    }
-
-    const audioBuffer = Buffer.from(resData.audioContent);
-
-    // Convert the Buffer data to a Node.js Readable stream
-    const readableStream = Readable.from(audioBuffer);
-
-    // Upload audio stream to google cloud storage
-    const uploadResult = await uploadReadableStreamToGoogleStorage(
-      readableStream
-    );
-    if (!uploadResult.data) {
-      const errMessage = 'Unable to upload audio to google storage';
-      return {
-        error: { message: errMessage },
-        data: null,
-      };
-    }
-    return {
-      error: null,
-      data: uploadResult.data,
-    };
-
-    // // dev
-    // return {
-    //   error: null,
-    //   data: null,
-    // };
-  } catch (err: any) {
-    console.error(`convertTextToSpeechUsingGoogleClient: ${err}`);
-    return {
-      error: { message: defaultErrMessage },
-      data: null,
-    };
-  }
-};
-
 export const convertSpeechToText = async ({
   config,
   recordingBase64,
@@ -392,26 +240,5 @@ export const convertSpeechToText = async ({
     recordingBase64,
   });
 
-  // console.log('convertSpeechToText result', result);
-  return result;
-};
-
-export const convertTextToSpeech = async ({
-  text,
-  langCode,
-}: {
-  text: string;
-  langCode: LangCodeLower;
-}) => {
-  // // Make request to the elevenlabs's text-to-speech api
-  // const result = await convertTextToSpeechUsingElevenlabsAPI({ text });
-
-  // Make request to the elevenlabs's text-to-speech api
-  const result = await convertTextToSpeechUsingGoogleClient({
-    text,
-    langCode,
-  });
-
-  // console.log('convertTextToSpeech result', result);
   return result;
 };

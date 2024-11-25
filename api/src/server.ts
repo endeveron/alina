@@ -12,9 +12,6 @@ const app = express();
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 
-// // Serve static files from the 'public' directory
-// app.use('/public', express.static('public'));
-
 // routes
 app.use(`${apiVersion}/auth`, authRoutes);
 app.use(`${apiVersion}/chat`, chatRoutes);

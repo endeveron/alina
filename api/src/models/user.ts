@@ -33,18 +33,13 @@ const userSchema = new Schema<User>(
     },
     statistics: {
       google: {
-        speechToText: {
-          totalBilledTime: { type: Number },
-        },
-        textToSpeech: {
-          totalCharacters: { type: Number },
-        },
         ai: {
           inputTokens: { type: Number },
           outputTokens: { type: Number },
         },
-        updTimestamp: { type: Number },
+        sttBilledTime: { type: Number },
       },
+      updTimestamp: { type: Number },
     },
   },
   {

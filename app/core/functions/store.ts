@@ -3,14 +3,14 @@ import * as SecureStore from 'expo-secure-store';
 import { KEY_AUTH_DATA } from '@/core/constants';
 
 import { StoreAuthData, UserAuthData } from '@/core/types/auth';
-import { Response, Status } from '@/core/types/common';
+import { Result, Status } from '@/core/types/common';
 
 /**
  * Retrieves authentication data including token and user information from SecureStore.
- * @returns a Promise that resolves to an object of type `Response` { token, user }
+ * @returns a Promise that resolves to an object of type `Result` { token, user }
  */
 export const getAuthDataFromSecureStore = async (): Promise<
-  Response<StoreAuthData>
+  Result<StoreAuthData>
 > => {
   try {
     const authDataStr = await SecureStore.getItemAsync(KEY_AUTH_DATA);
@@ -37,11 +37,11 @@ export const getAuthDataFromSecureStore = async (): Promise<
  * Stores authentication data in SecureStore
  * @param authData StoreAuthData
  * @returns a Promise that resolves to an object of type
- * `Response` Status indicating success or failure.
+ * `Result` Status indicating success or failure.
  */
 export const saveAuthDataInSecureStore = async (
   authData: UserAuthData
-): Promise<Response<Status>> => {
+): Promise<Result<Status>> => {
   try {
     const data = {
       ...authData,
@@ -65,10 +65,10 @@ export const saveAuthDataInSecureStore = async (
 /**
  * Deletes authentication data from SecureStore.
  * @returns a Promise that resolves to an object of type
- * `Response` Status indicating success or failure.
+ * `Result` Status indicating success or failure.
  */
 export const deleteAuthDataFromSecureStore = async (): Promise<
-  Response<Status>
+  Result<Status>
 > => {
   try {
     await SecureStore.deleteItemAsync(KEY_AUTH_DATA);

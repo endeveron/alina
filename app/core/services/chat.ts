@@ -1,7 +1,7 @@
 import { API_BASE_URL, BASE_HEADERS } from '@/core/constants';
 import { AuthData } from '@/core/types/auth';
 import { AskAIResData, GoogleSpeechToTextConfig } from '@/core/types/chat';
-import { Response } from '@/core/types/common';
+import { Result } from '@/core/types/common';
 
 export const postChat = async ({
   authData,
@@ -11,7 +11,7 @@ export const postChat = async ({
   authData: AuthData;
   config: GoogleSpeechToTextConfig;
   recordingBase64: string;
-}): Promise<Response<AskAIResData>> => {
+}): Promise<Result<AskAIResData>> => {
   const defaultErrMessage = `Unable to transcribe speech`;
   try {
     const response = await fetch(`${API_BASE_URL}/chat/`, {

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "app",
-    "slug": "app",
+    "name": "Alina",
+    "slug": "alina",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -11,11 +11,22 @@
     "ios": {
       "supportsTablet": true
     },
+    "splash": {
+      "backgroundColor": "#030712",
+      "image": "./assets/images/splash_screen.png",
+      "resizeMode": "cover"
+    },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "foregroundImage": "./assets/images/adaptive_icon.png",
+        "monochromeImage": "./assets/images/adaptive_icon.png",
+        "backgroundColor": "#6c17ad"
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS"
+      ],
+      "package": "com.app.alina.alina"
     },
     "web": {
       "bundler": "metro",
@@ -38,16 +49,21 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
-          "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "#030712",
+          "image": "./assets/images/splash_icon.png",
+          "imageWidth": 256
         }
       ],
       "expo-secure-store"
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "0b310ab9-affd-4d0b-acb7-9ba394b84fbe"
+      }
+    },
+    "owner": "app.alina"
   }
 }

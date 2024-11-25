@@ -7,7 +7,7 @@ import { postChat } from '@/core/services/chat';
 import { recordingOptions } from '@/core/settings/audio';
 import { AuthData } from '@/core/types/auth';
 import { AskAIResData } from '@/core/types/chat';
-import { Response } from '@/core/types/common';
+import { Result } from '@/core/types/common';
 
 export const recordSpeech = async (
   audioRecordingRef: MutableRefObject<Audio.Recording>,
@@ -73,7 +73,7 @@ export const askAI = async ({
   audioRecordingRef: MutableRefObject<Audio.Recording>;
   authData: AuthData;
   langCode?: string;
-}): Promise<Response<AskAIResData>> => {
+}): Promise<Result<AskAIResData>> => {
   if (!audioRecordingRef.current) {
     return {
       data: null,
