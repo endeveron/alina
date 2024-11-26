@@ -1,5 +1,5 @@
-import AntIcon from '@expo/vector-icons/AntDesign';
 import IonIcon from '@expo/vector-icons/Ionicons';
+import FontAwesomeIcon from '@expo/vector-icons/FontAwesome5';
 import { Audio } from 'expo-av';
 import * as Clipboard from 'expo-clipboard';
 import { Image } from 'expo-image';
@@ -15,6 +15,7 @@ import { useToast } from '@/core/hooks/useToast';
 import { LangCode } from '@/core/types/chat';
 import { prepareTextForSynthesis } from '@/core/utils/voiceSynthesis';
 import { greetings } from '@/core/constants/phrases';
+import AIAnimation from '@/components/AIAnimation';
 
 const recording = new Audio.Recording();
 
@@ -33,9 +34,10 @@ const prefVoiceMap = new Map([
 ]);
 
 export default function HomeScreen() {
-  const { session } = useSession();
+  const { session, signOut } = useSession();
   const { showToast } = useToast();
   const [langCode, setLanguageCode] = useState<LangCode>(LangCode.en);
+  const [isRecordAllowed, setIsRecordAllowed] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
   const [isPermissionGranted, setIsPermissionGranted] = useState(false);
@@ -51,11 +53,11 @@ export default function HomeScreen() {
     userId: session!.user.id,
   };
 
-  const background = useThemeColor('background');
   const text = useThemeColor('text');
-  const red = useThemeColor('red');
+  const background = useThemeColor('background');
 
   const speakText = (text: string) => {
+    setIsRecordAllowed(false);
     Speech.speak(text, {
       language: langCode,
       voice: prefVoiceMap.get(langCode),
@@ -65,9 +67,10 @@ export default function HomeScreen() {
     // Auto hide the message
     if (transcriptTimerRef.current) clearTimeout(transcriptTimerRef.current);
     // Set the time of text transcription display depending on the text length
-    const showTime = Math.floor(text.length / 10) * 1000 + 5000;
+    const showTime = Math.floor(text.length / 10) * 1000 + 3000;
     transcriptTimerRef.current = setTimeout(() => {
       setAiMessage('');
+      setIsRecordAllowed(true);
     }, showTime);
   };
 
@@ -147,7 +150,7 @@ export default function HomeScreen() {
 
   return (
     <View className="relative flex-1">
-      <View className="relative flex-1 flex-col justify-between py-16 z-20">
+      <View className="relative flex-1 flex-col justify-between py-20 z-20">
         {/* Screen title */}
         {/* <Text className="text-center font-pbold text-4xl py-8">Alina</Text> */}
 
@@ -168,7 +171,7 @@ export default function HomeScreen() {
               </View>
             ) : null} */}
             {aiMessage ? (
-              <View className="py-6 px-12 rounded-[32px] bg-slate-50">
+              <View className="py-6 px-12 rounded-[32px] bg-slate-50 animate-fade-in">
                 <Text
                   onPress={() => copyToClipboard(aiMessage)}
                   colorName="background"
@@ -184,31 +187,35 @@ export default function HomeScreen() {
         {/* Toolbar */}
         <View className="mt-12 gap-12">
           <View className="items-center justify-center">
-            {/* Record button */}
+            {/* AI 'thinking' */}
             {isFetching ? (
-              <View
-                style={{ backgroundColor: background }}
-                className="items-center justify-center w-28 h-28 rounded-full animate-bounce"
-              >
-                <AntIcon size={42} name="dingding" color="#fff" />
+              <View className="-mb-5">
+                <AIAnimation />
               </View>
-            ) : (
+            ) : null}
+
+            {/* Record / Stop buttons */}
+            {!isFetching && isRecordAllowed ? (
               <TouchableOpacity
                 activeOpacity={0.75}
                 onPress={isRecording ? stopRecording : startRecording}
               >
                 <View
-                  style={{ backgroundColor: isRecording ? red : text }}
-                  className="w-28 h-28 items-center justify-center rounded-full"
+                  style={{ backgroundColor: text }}
+                  className="w-24 h-24 items-center justify-center rounded-full animate-fade-in"
                 >
-                  <IonIcon
-                    size={42}
-                    name={isRecording ? 'stop' : 'mic'}
-                    color={isRecording ? '#fff' : background}
-                  />
+                  {isRecording ? (
+                    <IonIcon size={38} name="stop" color={background} />
+                  ) : (
+                    <FontAwesomeIcon
+                      size={40}
+                      name="microphone"
+                      color={background}
+                    />
+                  )}
                 </View>
               </TouchableOpacity>
-            )}
+            ) : null}
           </View>
 
           <View className="flex-row items-center justify-center gap-4">
@@ -218,6 +225,12 @@ export default function HomeScreen() {
                 <Text className="font-pmedium text-lg">
                   {langCode === LangCode.en ? 'English' : 'Українська'}
                 </Text>
+              </View>
+            </TouchableOpacity>
+            {/* Sign Out */}
+            <TouchableOpacity activeOpacity={0.5} onPress={signOut}>
+              <View className="opacity-60 w-40 h-16 items-center justify-center rounded-full bg-white/10">
+                <Text className="font-pmedium text-lg">Sign Out</Text>
               </View>
             </TouchableOpacity>
           </View>

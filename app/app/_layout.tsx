@@ -27,6 +27,12 @@ const screens: Screen[] = [
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
+// Set the animation options. Doesn't work in Expo Go
+SplashScreen.setOptions({
+  duration: 500,
+  fade: true,
+});
+
 export default function RootLayout() {
   const colorScheme = useColorScheme() ?? 'light';
 

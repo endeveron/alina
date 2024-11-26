@@ -17,6 +17,7 @@ import { logMessage } from '@/core/functions/helpers';
 import { useToast } from '@/core/hooks/useToast';
 import { signUpSchema, SignUpFormData } from '@/core/utils/validation';
 import AuthScreen from '@/components/AuthScreen';
+import AIAnimation from '@/components/AIAnimation';
 
 const SignUp = () => {
   const { isLoading, signUp } = useSession();
@@ -57,7 +58,10 @@ const SignUp = () => {
   return (
     <AuthScreen>
       <>
-        <Text className="text-3xl font-pbold mb-6">Sign Up</Text>
+        <View className="flex-row justify-center">
+          <AIAnimation />
+        </View>
+        <Text className="text-3xl font-pbold text-center">Sign Up</Text>
         <Controller
           control={control}
           render={({

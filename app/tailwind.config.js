@@ -26,6 +26,26 @@ module.exports = {
         pextrabold: ['Poppins-ExtraBold', 'sans-serif'], // 800
         pblack: ['Poppins-Black', 'sans-serif'], // 900
       },
+      animation: {
+        'fade-in': 'fadeIn 0.25s ease-in-out',
+        'fly-ai': 'fly-ai 3s cubic-bezier(0.3,0,0.7,1) infinite',
+        'pulse-ai': 'pulse-ai 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        'fly-ai': {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-16px)' },
+        },
+        'pulse-ai': {
+          '0%, 20%, 100%': { opacity: '1' },
+          '10%': { opacity: '.5' },
+          '60%': { opacity: '.7' },
+        },
+      },
     },
   },
   plugins: [],

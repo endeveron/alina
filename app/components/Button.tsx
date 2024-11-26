@@ -12,17 +12,34 @@ export const Button = ({
 }: {
   title: string;
   handlePress: () => void;
-  variant?: 'primary' | 'secondary';
+  variant?: 'primary' | 'secondary' | 'brand';
   containerClassName?: string;
   textClassName?: string;
   isLoading?: boolean;
 }) => {
-  const btn = useThemeColor('btn');
-  const btnSecondary = useThemeColor('btnSecondary');
+  const btnPrimaryText = useThemeColor('btnPrimaryText');
+  const btnPrimaryBg = useThemeColor('btnPrimaryBackground');
+  const btnSecondaryText = useThemeColor('btnSecondaryText');
+  const btnSecondaryBg = useThemeColor('btnSecondaryBackground');
+  const btnBrandText = useThemeColor('btnBrandText');
+  const btnBrandBg = useThemeColor('btnBrandBackground');
 
   const containerOpacity = isLoading ? 'opacity-50' : '';
-  const textStyle =
-    variant === 'secondary' ? 'opacity-70 text-white' : 'text-black';
+  let textStyle = { color: btnPrimaryText };
+  let bgStyle = { backgroundColor: btnPrimaryBg };
+
+  switch (variant) {
+    case 'brand':
+      {
+        textStyle = { color: btnBrandText };
+        bgStyle = { backgroundColor: btnBrandBg };
+      }
+      break;
+    case 'secondary': {
+      textStyle = { color: btnSecondaryText };
+      bgStyle = { backgroundColor: btnSecondaryBg };
+    }
+  }
 
   return (
     <TouchableOpacity
@@ -32,14 +49,13 @@ export const Button = ({
       disabled={isLoading}
     >
       <Text
-        className={`relative z-10  text-lg font-pbold ${textClassName} ${textStyle}`}
+        style={textStyle}
+        className={`relative z-10  text-lg font-pbold ${textClassName}`}
       >
         {title}
       </Text>
       <View
-        style={{
-          backgroundColor: variant === 'primary' ? btn : btnSecondary,
-        }}
+        style={bgStyle}
         className="absolute inset-x-0 inset-y-0 h-full z-0"
       ></View>
     </TouchableOpacity>

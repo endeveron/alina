@@ -16,8 +16,8 @@ import { useSession } from '@/core/context/SessionProvider';
 import { logMessage } from '@/core/functions/helpers';
 import { useToast } from '@/core/hooks/useToast';
 import { signInSchema, SignInFormData } from '@/core/utils/validation';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import AuthScreen from '@/components/AuthScreen';
+import AIAnimation from '@/components/AIAnimation';
 
 const SignIn = () => {
   const { isLoading, signIn } = useSession();
@@ -57,7 +57,10 @@ const SignIn = () => {
   return (
     <AuthScreen>
       <>
-        <Text className="text-3xl font-pbold mb-6">Sign In</Text>
+        <View className="flex-row justify-center">
+          <AIAnimation />
+        </View>
+        <Text className="text-3xl font-pbold text-center">Sign In</Text>
         <Controller
           control={control}
           render={({

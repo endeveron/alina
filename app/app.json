@@ -11,15 +11,10 @@
     "ios": {
       "supportsTablet": true
     },
-    "splash": {
-      "backgroundColor": "#030712",
-      "image": "./assets/images/splash_screen.png",
-      "resizeMode": "cover"
-    },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive_icon.png",
-        "monochromeImage": "./assets/images/adaptive_icon.png",
+        "foregroundImage": "./assets/images/icon_colored.png",
+        "monochromeImage": "./assets/images/icon_monochrome.png",
         "backgroundColor": "#6c17ad"
       },
       "permissions": [
@@ -49,8 +44,8 @@
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#030712",
-          "image": "./assets/images/splash_icon.png",
+          "backgroundColor": "#181827",
+          "image": "./assets/images/icon_colored.png",
           "imageWidth": 256
         }
       ],
