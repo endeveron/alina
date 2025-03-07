@@ -21,7 +21,7 @@ export const handleHttpError = (
   res: Response,
   next: NextFunction
 ) => {
-  logger.r('Error', err.message);
+  logger.error('Error', err.message);
 
   if (res.headersSent) {
     return next(err);

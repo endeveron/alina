@@ -45,12 +45,12 @@ export const Button = ({
     <TouchableOpacity
       onPress={handlePress}
       activeOpacity={0.8}
-      className={`relative overflow-hidden rounded-full min-h-[56px] flex flex-row justify-center items-center transition-opacity ${containerClassName} ${containerOpacity}`}
+      className={`relative overflow-hidden rounded-full min-h-[60px] flex flex-row justify-center items-center px-8 transition-opacity ${containerClassName} ${containerOpacity}`}
       disabled={isLoading}
     >
       <Text
         style={textStyle}
-        className={`relative z-10  text-lg font-pbold ${textClassName}`}
+        className={`relative z-10  text-xl font-pbold ${textClassName}`}
       >
         {title}
       </Text>

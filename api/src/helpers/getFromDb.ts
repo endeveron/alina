@@ -24,7 +24,7 @@ const handleResData = <T>(
 };
 
 const handleHttpError = <T>(err: any, itemModel: Model<T>) => {
-  logger.r(`getItem 500 ${itemModel.modelName}`, err);
+  logger.error(`getItem 500 ${itemModel.modelName}`, err);
   return {
     data: null,
     error: new HttpError('Server error. Please try again later.', 500),

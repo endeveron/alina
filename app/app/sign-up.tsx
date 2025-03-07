@@ -9,6 +9,7 @@ import { FormField } from '@/components/FormField';
 import { Text } from '@/components/Text';
 import {
   AUTH_EMAIL,
+  AUTH_NAME,
   AUTH_PASSWORD,
   DEFAULT_REDIRECT_URL,
 } from '@/core/constants';
@@ -28,7 +29,7 @@ const SignUp = () => {
 
   // fill out the form
   useEffect(() => {
-    setValue('name', 'Admin');
+    setValue('name', AUTH_NAME);
     setValue('email', AUTH_EMAIL);
     setValue('password', AUTH_PASSWORD);
   }, []);
@@ -74,7 +75,7 @@ const SignUp = () => {
               value={value}
               onBlur={onBlur}
               handleChangeText={onChange}
-              containerClassName="mt-6"
+              containerClassName="mt-8"
               error={error}
             />
           )}
@@ -93,7 +94,7 @@ const SignUp = () => {
               value={value}
               onBlur={onBlur}
               handleChangeText={onChange}
-              containerClassName="mt-6"
+              containerClassName="mt-4"
               error={error}
               keyboardType="email-address"
             />
@@ -113,7 +114,7 @@ const SignUp = () => {
               value={value}
               onBlur={onBlur}
               handleChangeText={onChange}
-              containerClassName="mt-6"
+              containerClassName="mt-4"
               error={error}
             />
           )}
@@ -126,12 +127,12 @@ const SignUp = () => {
           containerClassName="mt-8"
           isLoading={isLoading}
         />
-        <View className="flex justify-center py-6 flex-row gap-3">
+        <View className="flex items-center justify-center py-8 flex-row gap-3">
           <Text colorName="muted" className="font-pmedium py-4">
             Have an account already?
           </Text>
           <Link href="/sign-in" className="ml-4 py-4 pr-4">
-            <Text className="font-pmedium">Signin</Text>
+            <Text className="font-pmedium text-lg">Sign In</Text>
           </Link>
         </View>
       </>

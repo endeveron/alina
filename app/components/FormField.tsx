@@ -41,10 +41,8 @@ export const FormField = ({
 
   const textColor = useThemeColor('text');
   const inputColor = useThemeColor('input');
-  const borderColor = useThemeColor('border');
   const redColor = useThemeColor('red');
   const mutedColor = useThemeColor('muted');
-  const backgroundColor = useThemeColor('background');
 
   const nultiline = numberOfLines > 1;
   let heightClassName = 'h-16';
@@ -62,7 +60,7 @@ export const FormField = ({
   return (
     <View className={`${containerClassName}`}>
       {!!label ? (
-        <Text colorName="muted" className="font-pmedium mb-1">
+        <Text colorName="muted" className="font-pmedium mb-3">
           {label}
         </Text>
       ) : null}

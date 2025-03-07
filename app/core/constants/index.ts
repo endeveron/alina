@@ -1,5 +1,7 @@
 const API_BASE_URL =
   process.env.API_BASE_URL || process.env.EXPO_PUBLIC_API_BASE_URL || '';
+const AUTH_NAME =
+  process.env.AUTH_NAME || process.env.EXPO_PUBLIC_AUTH_NAME || '';
 const AUTH_EMAIL =
   process.env.AUTH_EMAIL || process.env.EXPO_PUBLIC_AUTH_EMAIL || '';
 const AUTH_PASSWORD =
@@ -14,14 +16,17 @@ const BASE_HEADERS = {
 // Router
 const DEFAULT_REDIRECT_URL = '/(app)';
 
-// Store keys
-const KEY_AUTH_DATA = 'auth_data';
+const LANG_MAP: { [key: string]: string } = {
+  en: 'English',
+  uk: 'Українська',
+};
 
 export {
   API_BASE_URL,
+  AUTH_NAME,
   AUTH_EMAIL,
   AUTH_PASSWORD,
   BASE_HEADERS,
   DEFAULT_REDIRECT_URL,
-  KEY_AUTH_DATA,
+  LANG_MAP,
 };

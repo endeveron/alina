@@ -1,8 +1,13 @@
 export enum LangCode {
   en = 'en-US',
   uk = 'uk-UA',
-  fr = 'fr-CA',
 }
+
+export type ChatConfig = {
+  langCode: string;
+  isGreet: boolean;
+  isAIMessagesTranscript: boolean;
+};
 
 export type TranscriptionAlternative = {
   confidence: number;

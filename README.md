@@ -1,9 +1,3 @@
-## Alina App
+## AI Voice chat
 
-### API
-
-Node.js, Express, Mongoose, JWT
-
-### App
-
-Expo
+AI-powered voice chat app for seamless, natural conversations. Enjoy real-time voice interactions, smart responses, and a personalized chat experience.

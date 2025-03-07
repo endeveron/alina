@@ -1,5 +1,5 @@
 type Logger = {
-  [key: string]: (msg: string, data?: any) => void;
+  [key: string]: (msg: string, data?: unknown) => void;
 };
 
 const colors = {
@@ -14,41 +14,19 @@ const colors = {
  * @param  {string} msg    message text
  * @param  {any} data      data for logging
  */
-const logToConsole = (color: string, msg: string, data: any) => {
+const logToConsole = (color: string, msg: string, data: unknown) => {
   console.log(color, msg, data ? data : '');
 };
 
-/**
- *  Message text:
- * `r` - red,
- * `g` - green,
- * `y` - yellow,
- * `b` - blue
- */
 const logger: Logger = {
-  /**
-   * Red message text
-   *
-   * @param  {string} msg  message text
-   * @param  {any} data    data for logging
-   */
-  r: (msg: string, data: any) => logToConsole(colors.red, msg, data),
-
   /**
    * Green message text
    *
    * @param  {string} msg  message text
    * @param  {any} data    data for logging
    */
-  g: (msg: string, data: any) => logToConsole(colors.green, msg, data),
-
-  /**
-   * Yellow message text
-   *
-   * @param  {string} msg  message text
-   * @param  {any} data    data for logging
-   */
-  y: (msg: string, data: any) => logToConsole(colors.yellow, msg, data),
+  success: (msg: string, data: unknown) =>
+    logToConsole(colors.green, msg, data),
 
   /**
    * Blue message text
@@ -56,7 +34,26 @@ const logger: Logger = {
    * @param  {string} msg  message text
    * @param  {any} data    data for logging
    */
-  b: (msg: string, data: any) => logToConsole(colors.blue, msg, data),
+  info: (msg: string, data: unknown) =>
+    logToConsole(colors.blue, `✔️ ${msg}`, data),
+
+  /**
+   * Yellow message text
+   *
+   * @param  {string} msg  message text
+   * @param  {any} data    data for logging
+   */
+  warning: (msg: string, data: unknown) =>
+    logToConsole(colors.yellow, msg, data),
+
+  /**
+   * Red message text
+   *
+   * @param  {string} msg  message text
+   * @param  {any} data    data for logging
+   */
+  error: (msg: string, data: unknown) =>
+    logToConsole(colors.red, `❌ ${msg}`, data),
 };
 
 export default logger;

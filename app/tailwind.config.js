@@ -10,21 +10,32 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        // // Heading
-        // mlight: ['Merriweather-Light', 'serif'], // 300
-        // mregular: ['Merriweather-Regular', 'serif'], // 400
-        // mbold: ['Merriweather-Bold', 'serif'], // 700
-        // mblack: ['Merriweather-Black', 'serif'], // 900
         // Paragraph
-        pthin: ['Poppins-Thin', 'sans-serif'], // 100
-        pextralight: ['Poppins-ExtraLight', 'sans-serif'], // 200
-        plight: ['Poppins-Light', 'sans-serif'], // 300
-        pregular: ['Poppins-Regular', 'sans-serif'], // 400
-        pmedium: ['Poppins-Medium', 'sans-serif'], // 500
-        psemibold: ['Poppins-SemiBold', 'sans-serif'], // 600
-        pbold: ['Poppins-Bold', 'sans-serif'], // 700
-        pextrabold: ['Poppins-ExtraBold', 'sans-serif'], // 800
-        pblack: ['Poppins-Black', 'sans-serif'], // 900
+        pthin: ['MontserratAlt-Thin', 'sans-serif'], // 100
+        pextralight: ['MontserratAlt-ExtraLight', 'sans-serif'], // 200
+        plight: ['MontserratAlt-Light', 'sans-serif'], // 300
+        pregular: ['MontserratAlt-Regular', 'sans-serif'], // 400
+        pmedium: ['MontserratAlt-Medium', 'sans-serif'], // 500
+        psemibold: ['MontserratAlt-SemiBold', 'sans-serif'], // 600
+        pbold: ['MontserratAlt-Bold', 'sans-serif'], // 700
+        pextrabold: ['MontserratAlt-ExtraBold', 'sans-serif'], // 800
+        pblack: ['MontserratAlt-Black', 'sans-serif'], // 900
+      },
+      fontSize: {
+        '2xl': [
+          '1.375rem' /* 22px */,
+          {
+            lineHeight: '2.125rem' /* 34px */,
+            letterSpacing: '-0.01em',
+          },
+        ],
+        '3xl': [
+          '2rem' /* 32px */,
+          {
+            lineHeight: '2.75rem' /* 44px */,
+            letterSpacing: '-0.02em',
+          },
+        ],
       },
       animation: {
         'fade-in': 'fadeIn 0.25s ease-in-out',
@@ -41,9 +52,8 @@ module.exports = {
           '50%': { transform: 'translateY(-16px)' },
         },
         'pulse-ai': {
-          '0%, 20%, 100%': { opacity: '1' },
-          '10%': { opacity: '.5' },
-          '60%': { opacity: '.7' },
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '.7' },
         },
       },
     },

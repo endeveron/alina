@@ -50,11 +50,19 @@ export const askGoogleGenAI = async ({
       data,
       error: null,
     };
-  } catch (err: any) {
-    console.error(`askGoogleGenAI ${err}`);
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      console.error(`askGoogleGenAI ${err.message}`);
+      return {
+        data: null,
+        error: { message: err.message ?? 'askGoogleGenAI error' },
+      };
+    }
+    // If err is not an instance of Error, handle it accordingly
+    console.error('askGoogleGenAI Unknown error', err);
     return {
       data: null,
-      error: err.message ?? 'askGoogleGenAI error',
+      error: { message: 'askGoogleGenAI error' },
     };
   }
 };

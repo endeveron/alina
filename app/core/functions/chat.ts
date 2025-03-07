@@ -11,8 +11,7 @@ import { Result } from '@/core/types/common';
 
 export const recordSpeech = async (
   audioRecordingRef: MutableRefObject<Audio.Recording>,
-  setIsRecording: Dispatch<SetStateAction<boolean>>,
-  isPermissionGranted: boolean
+  setIsRecording: Dispatch<SetStateAction<boolean>>
 ): Promise<{
   error: {
     message: string;
@@ -34,16 +33,6 @@ export const recordSpeech = async (
     // Check if the recording done
     const doneRecording = audioRecordingRef.current._isDoneRecording;
     if (doneRecording) audioRecordingRef.current = new Audio.Recording();
-
-    // Check the permissions
-    if (Platform.OS !== 'web' && !isPermissionGranted) {
-      const permissionResponse = await Audio.requestPermissionsAsync();
-      if (permissionResponse?.status !== 'granted') {
-        return {
-          error: { message: 'Permission to record audio is required' },
-        };
-      }
-    }
 
     const recordingStatus = await audioRecordingRef.current.getStatusAsync();
     setIsRecording(true);

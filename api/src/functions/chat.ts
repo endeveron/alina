@@ -123,7 +123,7 @@ const speechToTextClient = new speechToText.SpeechClient({
 //       },
 //     };
 //   } catch (err: any) {
-//     logger.r(`convertSpeechToTextUsingGoogleAPI: ${defaultErrMessage}`);
+//     logger.error(`convertSpeechToTextUsingGoogleAPI: ${defaultErrMessage}`);
 //     return {
 //       error: { message: defaultErrMessage },
 //       data: null,
@@ -212,7 +212,7 @@ const convertSpeechToTextUsingGoogleClient = async ({
         totalBilledTime,
       },
     };
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error(`convertSpeechToTextUsingGoogleClient: ${err}`);
     return {
       error: { message: defaultErrMessage },

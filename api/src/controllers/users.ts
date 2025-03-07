@@ -29,7 +29,7 @@ export const getSomething = async (
       data: {},
     });
   } catch (err: any) {
-    logger.r('getSomething', err);
+    logger.error('getSomething', err);
     return next(new HttpError('Unable to fetch .', 500));
   }
 };

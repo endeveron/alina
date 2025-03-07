@@ -30,20 +30,19 @@ export const akAI = async (req: Request, res: Response, next: NextFunction) => {
       recordingBase64,
     });
     if (speechToTextResult.error) {
-      logger.r(speechToTextResult.error.message);
+      logger.error(speechToTextResult.error.message);
       next(new HttpError(speechToTextResult.error.message, 500));
       return;
     }
     if (!speechToTextResult.data) {
       const errMessage = `Unable to convert speech to text`;
-      logger.r(errMessage);
+      logger.error(errMessage);
       next(new HttpError(errMessage, 500));
       return;
     }
 
     const {
       langCode,
-      requestId,
       totalBilledTime,
       transcript: humanMessage,
     } = speechToTextResult.data;
@@ -58,7 +57,7 @@ export const akAI = async (req: Request, res: Response, next: NextFunction) => {
 
     if (!googleAIResult.data) {
       const errMessage = `Unable to get data from AI`;
-      logger.r(errMessage);
+      logger.error(errMessage);
       next(new HttpError(errMessage, 500));
       return;
     }
@@ -114,7 +113,7 @@ export const akAI = async (req: Request, res: Response, next: NextFunction) => {
       aiMessage: answer,
     });
   } catch (err) {
-    logger.r('speechToText', err);
+    logger.error('speechToText', err);
     next(new HttpError(defaultErrMessage, 500));
   }
 };

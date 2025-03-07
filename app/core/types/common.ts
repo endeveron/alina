@@ -1,6 +1,5 @@
 export type Screen = {
   name: string;
-  title: string;
 };
 
 export type Status = { success: boolean };
@@ -15,6 +14,11 @@ export type Language = {
   language: string;
   name: string;
   quality: string;
+};
+
+export type Phrase = {
+  en: string;
+  uk: string;
 };
 
 export type LogType = 'error' | 'info' | 'success' | 'warning';

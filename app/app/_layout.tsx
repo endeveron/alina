@@ -1,14 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
-
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
+import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import {
+  configureReanimatedLogger,
+  ReanimatedLogLevel,
+} from 'react-native-reanimated';
 
 import { colors } from '@/core/constants/colors';
 import SessionProvider from '@/core/context/SessionProvider';
@@ -17,11 +16,16 @@ import { Screen } from '@/core/types/common';
 
 import '@/core/styles/global.css';
 
+configureReanimatedLogger({
+  level: ReanimatedLogLevel.error,
+  strict: false,
+});
+
 const screens: Screen[] = [
-  { name: '(app)', title: '' },
-  { name: '+not-found', title: 'Not Found' },
-  { name: 'sign-in', title: 'Sign In' },
-  { name: 'sign-up', title: 'Sign Up' },
+  { name: '(app)' },
+  { name: '+not-found' },
+  { name: 'sign-in' },
+  { name: 'sign-up' },
 ];
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -37,21 +41,15 @@ export default function RootLayout() {
   const colorScheme = useColorScheme() ?? 'light';
 
   const [loaded] = useFonts({
-    // Heading
-    'Merriweather-Light': require('../assets/fonts/Merriweather-Light.ttf'), // 300
-    'Merriweather-Regular': require('../assets/fonts/Merriweather-Regular.ttf'), // 400
-    'Merriweather-Bold': require('../assets/fonts/Merriweather-Bold.ttf'), // 700
-    'Merriweather-Black': require('../assets/fonts/Merriweather-Black.ttf'), // 900
-    // Paragraph
-    'Poppins-Thin': require('../assets/fonts/Poppins-Thin.ttf'), // 100
-    'Poppins-ExtraLight': require('../assets/fonts/Poppins-ExtraLight.ttf'), // 200
-    'Poppins-Light': require('../assets/fonts/Poppins-Light.ttf'), // 300
-    'Poppins-Regular': require('../assets/fonts/Poppins-Regular.ttf'), // 400
-    'Poppins-Medium': require('../assets/fonts/Poppins-Medium.ttf'), // 500
-    'Poppins-SemiBold': require('../assets/fonts/Poppins-SemiBold.ttf'), // 600
-    'Poppins-Bold': require('../assets/fonts/Poppins-Bold.ttf'), // 700
-    'Poppins-ExtraBold': require('../assets/fonts/Poppins-ExtraBold.ttf'), // 800
-    'Poppins-Black': require('../assets/fonts/Poppins-Black.ttf'), // 900
+    'MontserratAlt-Thin': require('../assets/fonts/MontserratAlt-Thin.ttf'), // 100
+    'MontserratAlt-ExtraLight': require('../assets/fonts/MontserratAlt-ExtraLight.ttf'), // 200
+    'MontserratAlt-Light': require('../assets/fonts/MontserratAlt-Light.ttf'), // 300
+    'MontserratAlt-Regular': require('../assets/fonts/MontserratAlt-Regular.ttf'), // 400
+    'MontserratAlt-Medium': require('../assets/fonts/MontserratAlt-Medium.ttf'), // 500
+    'MontserratAlt-SemiBold': require('../assets/fonts/MontserratAlt-SemiBold.ttf'), // 600
+    'MontserratAlt-Bold': require('../assets/fonts/MontserratAlt-Bold.ttf'), // 700
+    'MontserratAlt-ExtraBold': require('../assets/fonts/MontserratAlt-ExtraBold.ttf'), // 800
+    'MontserratAlt-Black': require('../assets/fonts/MontserratAlt-Black.ttf'), // 900
   });
 
   useEffect(() => {
@@ -65,26 +63,23 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <GestureHandlerRootView style={{ flex: 1 }}>
       <SessionProvider>
-        <Stack>
+        <Stack
+          screenOptions={{
+            // presentation: 'modal',
+            headerShown: false,
+            contentStyle: {
+              backgroundColor: colors[colorScheme].background,
+            },
+          }}
+        >
           {screens.map((screen: Screen) => (
-            <Stack.Screen
-              name={screen.name}
-              options={{
-                presentation: 'modal',
-                title: screen.title,
-                headerShown: false,
-                contentStyle: {
-                  backgroundColor: colors[colorScheme].background,
-                },
-              }}
-              key={screen.name}
-            />
+            <Stack.Screen name={screen.name} key={screen.name} />
           ))}
         </Stack>
         <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
       </SessionProvider>
-    </ThemeProvider>
+    </GestureHandlerRootView>
   );
 }

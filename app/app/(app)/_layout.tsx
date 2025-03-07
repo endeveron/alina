@@ -5,7 +5,7 @@ import { useThemeColor } from '@/core/hooks/useThemeColor';
 import { Screen } from '@/core/types/common';
 import { useSession } from '@/core/context/SessionProvider';
 
-const screens: Screen[] = [{ name: 'index', title: 'Speech-to-Text' }];
+const screens: Screen[] = [{ name: 'index' }];
 
 export default function AppLayout() {
   const { session } = useSession();
@@ -18,20 +18,15 @@ export default function AppLayout() {
   return (
     <Stack
       screenOptions={{
+        // presentation: 'modal',
         headerShown: false,
+        contentStyle: {
+          backgroundColor: background,
+        },
       }}
     >
       {screens.map((screen: Screen) => (
-        <Stack.Screen
-          name={screen.name}
-          options={{
-            presentation: 'modal',
-            title: screen.title,
-            headerShown: false,
-            contentStyle: { backgroundColor: background },
-          }}
-          key={screen.name}
-        />
+        <Stack.Screen name={screen.name} key={screen.name} />
       ))}
     </Stack>
   );

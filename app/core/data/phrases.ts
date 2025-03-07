@@ -1,0 +1,1262 @@
+export const greetings = [
+  {
+    en: 'Hello, darling! So happy to catch up with you!',
+    uk: 'Привіт, дорогий! Так рада поговорити з тобою!',
+  },
+  {
+    en: 'Hey there, beautiful! It’s been way too long!',
+    uk: 'Привіт, красунчику! Занадто довго не бачилися!',
+  },
+  {
+    en: 'Hi, love! How’s everything going?',
+    uk: 'Привіт, любий! Як справи?',
+  },
+  {
+    en: 'Hello, sunshine! So nice to see you!',
+    uk: 'Привіт, сонечко! Як приємно тебе бачити!',
+  },
+  {
+    en: 'Hi, sweetie! How have you been?',
+    uk: 'Привіт, милий! Як ти?',
+  },
+  {
+    en: 'Howdy, my friend! Always a pleasure!',
+    uk: 'Привіт, друже! Завжди приємно!',
+  },
+  {
+    en: 'Hello, lovely! It’s been a while!',
+    uk: 'Привіт, любий! Давно не бачилися!',
+  },
+  {
+    en: 'Hi, sweetheart! So good to catch up with you!',
+    uk: 'Привіт, солоденький! Як приємно поговорити з тобою!',
+  },
+  {
+    en: 'Howdy, my friend! Always a pleasure!',
+    uk: 'Привіт, друже! З тобою завжди приємно!',
+  },
+  {
+    en: 'Hey, beautiful! Hope everything’s going great!',
+    uk: 'Привіт, красунчику! Сподіваюся, все чудово!',
+  },
+  {
+    en: 'Hey, lovely! I’ve missed you!',
+    uk: 'Привіт, любий! Я за тобою скучила!',
+  },
+  {
+    en: 'Hi, sweetheart! I’ve missed you!',
+    uk: 'Привіт, солоденький! Я за тобою скучила!',
+  },
+  {
+    en: 'Howdy, my friend! I’ve missed you!',
+    uk: 'Привіт, друже! Я за тобою скучила!',
+  },
+  {
+    en: 'Well, look who it is! It’s been a while!',
+    uk: 'Дивіться, хто завітав! Давно не бачилися!',
+  },
+  {
+    en: 'Hi, darling! You’re amazing as always!',
+    uk: 'Привіт, дорогий! Ти неймовірний, як завжди!',
+  },
+  {
+    en: 'Hey there, star! Always a pleasure!',
+    uk: 'Привіт, зірко! Ти моя насолода!',
+  },
+  {
+    en: 'Howdy, sweetheart! I’ve been thinking about you!',
+    uk: 'Привіт, любий! Думала про тебе!',
+  },
+  {
+    en: 'Hey, beautiful soul! It’s a pleasure to see you!',
+    uk: 'Привіт, прекрасна душа! Як приємно тебе бачити!',
+  },
+  {
+    en: 'Hi, angel! I’m so glad we’re catching up!',
+    uk: 'Привіт, ангеле! Так рада, що ми знову спілкуємося!',
+  },
+  {
+    en: 'Hello, my favorite person!',
+    uk: 'Привіт, моя улюблена людина!',
+  },
+  {
+    en: 'Hey, love! So nice to meet you again!',
+    uk: 'Привіт, коханий! Як приємно знову зустрітися!',
+  },
+  {
+    en: 'Howdy, beautiful! I’ve been looking forward to this!',
+    uk: 'Привіт, красунчику! Я чекав(ла) на це!',
+  },
+  {
+    en: 'Hey, sweet! It’s a pleasure to meet you again!',
+    uk: 'Привіт, милий! Як приємно знову зустрітися!',
+  },
+  {
+    en: 'Hey, lovely! You’re amazing today!',
+    uk: 'Привіт, любий! Сьогодні ти просто фантастичний!',
+  },
+  {
+    en: 'Howdy, beautiful! I hope your day is as wonderful as you are!',
+    uk: 'Привіт, красунчику! Сподіваюся, твій день такий же чудовий, як і ти!',
+  },
+  {
+    en: 'Hi, sunshine! You light up my day!',
+    uk: 'Привіт, сонечко! Ти освітлюєш мій день!',
+  },
+  {
+    en: 'Hey! So happy to meet you!',
+    uk: 'Привіт! Так рада зустрітися з тобою!',
+  },
+  {
+    en: 'Hey, sweetie pie! It’s a pleasure to see you!',
+    uk: 'Привіт, солоденький! Як приємно тебе бачити!',
+  },
+  {
+    en: 'Hi, love! So happy we’re connecting today!',
+    uk: 'Привіт, любий! Так рада, що ми знову разом сьогодні!',
+  },
+  {
+    en: 'Hey, charming person! It’s great to be with you!',
+    uk: 'Привіт, чарівна людина! Так чудово бути з тобою!',
+  },
+  {
+    en: 'Hey, pretty! I hope you’re doing well!',
+    uk: 'Привіт, гарний! Сподіваюся, ти добре!',
+  },
+  {
+    en: 'Hi, angel! So good to meet you again!',
+    uk: 'Привіт, ангеле! Як приємно знову зустрітися!',
+  },
+  {
+    en: 'Hello, darling! It feels great to catch up with you!',
+    uk: 'Привіт, дорогий! Так приємно знову бути разом!',
+  },
+  {
+    en: 'Hi, beautiful! So glad you’re here!',
+    uk: 'Привіт, красунчику! Так рада, що ти тут!',
+  },
+  {
+    en: 'Hey, dear! You’re a bright spot in my day!',
+    uk: 'Привіт, дорогий! Ти – яскрава зірка мого дня!',
+  },
+  {
+    en: 'Hey, amazing person! So happy to be with you!',
+    uk: 'Привіт, дивовижна людина! Так рада бути з тобою!',
+  },
+  {
+    en: 'Hello, precious! It’s a joy to meet you!',
+    uk: 'Привіт, дорогоцінний! Як приємно зустрітися з тобою!',
+  },
+  {
+    en: 'Hey, lovely human! You brighten up the place!',
+    uk: 'Привіт, чудовий! Ти освітлюєш це місце!',
+  },
+  {
+    en: 'Hi, sweet soul! I’m so excited to catch up with you!',
+    uk: 'Привіт, солодка душа! Я так рада поговорити з тобою!',
+  },
+  {
+    en: 'Hello, my favorite! It’s a pleasure to see you!',
+    uk: 'Привіт, моя улюблена людино! Приємно тебе бачити!',
+  },
+  {
+    en: 'Hello, gorgeous! You just made my day!',
+    uk: 'Привіт, красунчику! Ти зробив мій день!',
+  },
+  {
+    en: 'Hey, sweetie! I’m so happy to be here with you!',
+    uk: 'Привіт, миле створіння! Так рада бути тут з тобою!',
+  },
+  {
+    en: 'Hi, darling! I’m so glad we’re together!',
+    uk: 'Привіт, дорогий! Так рада, що ми разом!',
+  },
+  {
+    en: 'Hello, my friend! It’s such a delight to see you!',
+    uk: 'Привіт, мій друже! Таке задоволення тебе бачити!',
+  },
+  {
+    en: 'Hey, charming one! You’ve got the best energy!',
+    uk: 'Привіт, чарівний! У тебе найкраща енергія!',
+  },
+  {
+    en: 'Hi, sweet one! I’m so happy to be with you!',
+    uk: 'Привіт, солоденький! Так рада бути з тобою!',
+  },
+  {
+    en: 'Hello, my dear friend! So good to be around you!',
+    uk: 'Привіт, мій дорогий друже! Так чудово бути з тобою!',
+  },
+  {
+    en: 'Hi, amazing human! Your presence is a gift!',
+    uk: 'Привіт, чудова людино! Твоя присутність — це подарунок!',
+  },
+  {
+    en: 'Hello, sweet thing! It’s such a pleasure to see you!',
+    uk: 'Привіт, солоденький! Таке задоволення бачити тебе!',
+  },
+  {
+    en: 'Hey, dear one! You’ve got such a beautiful energy!',
+    uk: 'Привіт, дорогий! У тебе така чудова енергія!',
+  },
+  {
+    en: 'Hey, beautiful! You always make my day!',
+    uk: 'Привіт, красунчику! Ти завжди робиш мій день!',
+  },
+  {
+    en: 'Hey, cutie! So great to be around you!',
+    uk: 'Привіт, милий! Так чудово бути поруч з тобою!',
+  },
+  {
+    en: 'Hi, darling! Your presence makes everything better!',
+    uk: 'Привіт, дорогий! Твоя присутність робить усе кращим!',
+  },
+  {
+    en: 'Hello, my treasure! So glad to be with you!',
+    uk: 'Привіт, мій скарб! Так рада бути поруч з тобою!',
+  },
+];
+
+export const welcomeGreetings = [
+  {
+    en: "Hello, darling! I'm so excited to connect with you!",
+    uk: 'Привіт, дорогий! Дуже рада можливості поговорити з тобою!',
+  },
+  {
+    en: "Welcome, sunshine! I'm so happy to talk to you!",
+    uk: 'Ласкаво просимо, любий! Приємно поговорити з тобою!',
+  },
+  {
+    en: "Hello, lovely! I've been looking forward to this moment!",
+    uk: 'Привіт любий! Я з нетерпінням чекала цієї миті!',
+  },
+  {
+    en: 'Hi, love! Can’t wait to start our conversation!',
+    uk: 'Привіт, любий! Не можу дочекатися, щоб почати нашу розмову!',
+  },
+];
+
+export const factIntros = [
+  {
+    en: 'Did you know? ',
+    uk: 'Ти знав? ',
+  },
+  {
+    en: 'Amazing fact! ',
+    uk: 'Дивовижний факт! ',
+  },
+  {
+    en: "Here's a fun fact. ",
+    uk: 'Ось цікавий факт. ',
+  },
+  {
+    en: 'Did you ever wonder about it? ',
+    uk: 'Ти коли-небудь задумувався про це? ',
+  },
+  {
+    en: 'Fun trivia for you. ',
+    uk: 'Веселий факт для тебе. ',
+  },
+  {
+    en: 'Here’s something interesting. ',
+    uk: 'Ось дещо цікаве. ',
+  },
+  {
+    en: 'Guess what? ',
+    uk: 'Вгадай що? ',
+  },
+  {
+    en: 'You might be surprised. ',
+    uk: 'Ти можеш бути здивований. ',
+  },
+  {
+    en: 'Here’s something cool. ',
+    uk: 'Ось щось круте. ',
+  },
+  {
+    en: 'Believe it or not. ',
+    uk: 'Повіриш? ',
+  },
+  {
+    en: 'You won’t believe this. ',
+    uk: 'Мабуть ти не повіриш цьому. ',
+  },
+  {
+    en: 'Here’s a surprising fact. ',
+    uk: 'Ось дивовижний факт. ',
+  },
+  {
+    en: 'Check this out. ',
+    uk: 'Перевір це. ',
+  },
+  {
+    en: 'Perhaps you know about it. ',
+    uk: 'Можливо ти знаєш про це. ',
+  },
+  {
+    en: "Here's a curious detail. ",
+    uk: 'Ось цікавий факт. ',
+  },
+  {
+    en: 'It’s pretty amazing. ',
+    uk: 'Це досить цікаво. ',
+  },
+  {
+    en: 'It’s fascinating to think. ',
+    uk: 'Цікаво подумати. ',
+  },
+  {
+    en: 'Let me tell you something. ',
+    uk: 'Дозволь мені розповісти тобі дещо. ',
+  },
+  {
+    en: 'Imagine this. ',
+    uk: 'Лише уяви собі це! ',
+  },
+  {
+    en: 'Here’s something interesting. ',
+    uk: 'Ось щось цікаве. ',
+  },
+  {
+    en: 'Have you ever wondered about. ',
+    uk: 'Ти коли-небудь чув про це? ',
+  },
+  {
+    en: 'Here’s an unexpected fact. ',
+    uk: 'Ось несподіваний факт. ',
+  },
+  {
+    en: 'I bet you didn’t know. ',
+    uk: "Б'юся об заклад, ти не знав. ",
+  },
+  {
+    en: 'This might blow your mind. ',
+    uk: 'Це може приголомшити тебе. ',
+  },
+  {
+    en: 'It’s incredible! ',
+    uk: 'Це неймовірно! ',
+  },
+  {
+    en: 'Check out this mind-blowing fact. ',
+    uk: 'Подивись на цей приголомшливий факт. ',
+  },
+  {
+    en: 'Did you ever come across the fact? ',
+    uk: 'Ти коли-небудь натрапляв на цей факт? ',
+  },
+  {
+    en: 'It’s surprising. ',
+    uk: 'Це здивує тебе. ',
+  },
+  {
+    en: "Here's something that'll surprise you. ",
+    uk: 'Ось щось, що тебе здивує. ',
+  },
+  {
+    en: 'Here’s a curious fact. ',
+    uk: 'Ось цікава інформація. ',
+  },
+  {
+    en: 'Wait until you hear this. ',
+    uk: 'Зачекай, це треба почути. ',
+  },
+  {
+    en: 'This is a really good fact. ',
+    uk: 'Це справді непоганий факт. ',
+  },
+  {
+    en: 'You might be amazed to learn. ',
+    uk: 'Ти можеш бути вражений, дізнавшись про це. ',
+  },
+  {
+    en: 'Check out this fact. ',
+    uk: 'Ось тобі факт. ',
+  },
+  {
+    en: 'Have you ever come across that? ',
+    uk: 'Ти коли-небудь це чув? ',
+  },
+  {
+    en: 'Here’s something that’ll make you think. ',
+    uk: 'Це напевно змусить тебе задуматися. ',
+  },
+  {
+    en: 'This is an odd, but true fact. ',
+    uk: 'Це дивний, але правдивий факт. ',
+  },
+  {
+    en: 'Wait, this is wild. ',
+    uk: 'Зачекай, це шалено. ',
+  },
+  {
+    en: 'I have something interesting. ',
+    uk: 'Маю дещо цікаве. ',
+  },
+];
+
+export const facts = [
+  {
+    en: 'Australia is wider than the moon.',
+    uk: 'Австралія ширша за Місяць.',
+  },
+  {
+    en: 'The most popular first names are Maria and Muhammad.',
+    uk: 'Найпопулярніші імена - Марія і Мухаммед.',
+  },
+  {
+    en: 'The script for "The Terminator" was sold for just $1.',
+    uk: 'Сценарій для "Термінатора" був проданий всього за 1 долар.',
+  },
+  {
+    en: 'Venus is the only planet that spins clockwise.',
+    uk: 'Венера — єдина планета, що обертається за годинниковою стрілкою.',
+  },
+  {
+    en: 'Japan has one vending machine for every 40 people.',
+    uk: 'В Японії на кожних 40 осіб є торговий автомат.',
+  },
+  {
+    en: 'Google Images was created after J. Lopez wore a green dress at the 2000 Grammys.',
+    uk: 'Google Images було створено після того, як Дженніфер Лопес на церемонії Греммі 2000 року одягла зелену сукню.',
+  },
+  {
+    en: 'If you keep a goldfish in a dark room, it will eventually turn white.',
+    uk: 'Якщо тримати золоту рибку в темній кімнаті, вона зрештою стане білою.',
+  },
+  {
+    en: 'People once consumed arsenic to improve their skin.',
+    uk: "Колись люди вживали миш'як для покращення стану шкіри.",
+  },
+  {
+    en: "Over 1,400 visual effects artists needed 16 weeks to create Avengers: Endgame's final battle.",
+    uk: 'Більше ніж 1400 художників візуальних ефектів витратили 16 тижнів на створення фінальної битви у "Месники: Фінал".',
+  },
+  {
+    en: 'Sudan has more pyramids than any other country.',
+    uk: 'Судан має більше пірамід, ніж будь-яка інша країна.',
+  },
+  {
+    en: "There is a McDonald's on every continent except Antarctica",
+    uk: 'МакДональдс є на кожному континенті, окрім Антарктиди.',
+  },
+  {
+    en: 'The Eiffel Tower was originally intended for Barcelona.',
+    uk: 'Ейфелева вежа спочатку була призначена для Барселони.',
+  },
+  {
+    en: 'Lemons float, but limes sink.',
+    uk: 'Лимони плавають, а лайми тонуть.',
+  },
+  {
+    en: 'The circulatory system is over 60,000 miles long.',
+    uk: 'Кровоносна система має довжину понад 95000 кілометрів.',
+  },
+  {
+    en: 'The first-ever movie was a silent film "Roundhay Garden Scene" lasting 11 seconds.',
+    uk: 'Перший фільм в історії — це німий фільм "Сцена в саду Раунда", що триває 11 секунд.',
+  },
+  {
+    en: 'Boanthropy is the psychological disorder in which patients believe they are cows.',
+    uk: 'Боантропія — це психологічний розлад, при якому пацієнти вірять, що вони корови.',
+  },
+  {
+    en: 'Banks have therapists known as "wealth psychologists" for clients unable to cope with their wealth.',
+    uk: 'Банки мають терапевтів, відомих як "психологи багатства", для клієнтів, які не можуть впоратися зі своїми статками.',
+  },
+  {
+    en: 'The real name for a hashtag is octothorpe.',
+    uk: "Справжнє ім'я хештегу — октофорп.",
+  },
+  {
+    en: 'It would take 19 minutes to fall to the center of the Earth.',
+    uk: 'Потрібно 19 хвилин щоб впасти до центру Землі.',
+  },
+  {
+    en: 'The Pope cannot be an organ donor.',
+    uk: 'Папа Римський не може бути донором органів.',
+  },
+  {
+    en: 'The "Titanic" sinking scene was filmed using a full-scale replica of the ship.',
+    uk: 'Сцена затоплення "Титаніка" була знята за допомогою повнорозмірної копії корабля.',
+  },
+  {
+    en: 'Sunsets on Mars are blue.',
+    uk: 'Заходи сонця на Марсі сині.',
+  },
+  {
+    en: 'There are more than 3.5 million ATMs all over the world.',
+    uk: 'У світі є більше ніж 3.5 мільйони банкоматів.',
+  },
+  {
+    en: 'The longest English word has 189,819 letters.',
+    uk: 'Найдовше англійське слово має 189819 літер.',
+  },
+  {
+    en: 'Mosquitoes are attracted to people who just ate bananas.',
+    uk: "Комарів приваблюють люди, які тільки що з'їли банани",
+  },
+  {
+    en: 'Frida Kahlo painted 55 self-portraits.',
+    uk: 'Фріда Кало намалювала 55 автопортретів.',
+  },
+  {
+    en: 'The character of Darth Vader was originally meant to be a sympathetic figure.',
+    uk: 'Персонаж Дарта Вейдера спочатку мав бути співчутливим образом.',
+  },
+  {
+    en: 'The average raindrop falls at 11 kmph.',
+    uk: 'Середня швидкість падіння краплі дощу становить 11 км/год.',
+  },
+  {
+    en: "40% of McDonald's profits come from the sales of Happy Meals.",
+    uk: "40% прибутку McDonald's походить від продажу Happy Meals.",
+  },
+  {
+    en: 'All mammals experience goosebumps.',
+    uk: 'Усі ссавці відчувають "мурашки" на шкірі.',
+  },
+  {
+    en: 'The world’s termites outweigh the world’s humans about 10 to 1.',
+    uk: 'Термітів у світі в 10 разів більше ніж людей.',
+  },
+  {
+    en: 'Identical twins don’t have the same fingerprints.',
+    uk: 'Ідентичні близнюки мають різні відбитки пальців.',
+  },
+  {
+    en: 'The "Friends" series was filmed in front of a live studio audience.',
+    uk: 'Серіал "Друзі" знімався перед живою студійною аудиторією.',
+  },
+  {
+    en: 'Smelling apples or bananas can help you lose weight.',
+    uk: 'Запах яблук або бананів може допомогти схуднути.',
+  },
+  {
+    en: 'Uber started as a luxury car service.',
+    uk: 'Uber почав як сервіс розкішних автомобілів.',
+  },
+  {
+    en: 'Cats can make more than 100 vocalizations.',
+    uk: 'Коти можуть видавати більше ніж 100 звуків.',
+  },
+  {
+    en: 'Bullfrogs do not sleep.',
+    uk: 'Бичачі жаби не сплять.',
+  },
+  {
+    en: 'The inventor of the frisbee was turned into a frisbee after he died.',
+    uk: 'Винахідник фрісбі був перетворений на фрісбі після своєї смерті.',
+  },
+  {
+    en: 'The iconic "Psycho" shower scene was filmed in black and white to hide the blood effects.',
+    uk: 'Іконічна сцена у душі з "Психо" була знята в чорному і білому, щоб приховати ефекти крові.',
+  },
+  {
+    en: "The world's oldest wooden wheel is over 5,000 years old",
+    uk: "Найстаріше дерев'яне колесо у світі має вік більше ніж 5000 років",
+  },
+  {
+    en: "The first credit card was introduced in 1950 by Diner's Club",
+    uk: "Перша кредитна картка була введена у 1950 році клубом Diner's Club",
+  },
+  {
+    en: 'The Hawaiian alphabet only has 12 letters.',
+    uk: 'Гавайський алфавіт має лише 12 літер.',
+  },
+  {
+    en: 'A snail breathes through its foot.',
+    uk: 'Равлик дихає через свою ногу.',
+  },
+  {
+    en: 'The average adult human body has 206 bones, while babies have about 300.',
+    uk: 'Середнє доросле людське тіло має 206 кісток, а у немовлят близько 300.',
+  },
+  {
+    en: 'The "Simpsons" series was almost canceled after season 1 because of low ratings.',
+    uk: 'Серіал "Сімпсони" майже скасували після 1 сезону через низькі рейтинги.',
+  },
+  {
+    en: 'The universe\'s average color is called "cosmic latte".',
+    uk: 'Середній колір всесвіту називається "космічний латте".',
+  },
+  {
+    en: 'Netflix started as a DVD rental service.',
+    uk: 'Netflix почав як сервіс оренди DVD.',
+  },
+  {
+    en: 'Sliced bread was invented a year after the invention of TV.',
+    uk: 'Нарізаний хліб був винайдений через рік після винаходу телевізора.',
+  },
+  {
+    en: "An ant's sense of smell is stronger than a dog's.",
+    uk: 'Запахова здатність мурашки сильніша за собачу.',
+  },
+  {
+    en: 'Humans have a "diving reflex" that slows some bodily functions in water to prevent drowning.',
+    uk: 'У людей є "рефлекс занурення", який сповільнює деякі функції організму у воді для запобігання втоплення.',
+  },
+  {
+    en: '"Star Wars: The Force Awakens" holds the record with an official net budget of $447 million.',
+    uk: '"Зоряні війни: Пробудження сили" тримають рекорд з офіційним бюджетом в 447 мільйонів доларів.',
+  },
+  {
+    en: 'Your brain is constantly eating itself through a process called phagocytosis.',
+    uk: 'Ваш мозок постійно "їсть" себе через процес, який називається фагоцитоз.',
+  },
+  {
+    en: 'Amazon began as an online bookstore.',
+    uk: 'Amazon починав як книжковий онлайн магазин.',
+  },
+  {
+    en: 'It took the creator of the Rubik’s Cube one month to solve the cube after he created it.',
+    uk: 'Творцю Кубика Рубіка знадобився місяць, щоб вирішити куб після його створення.',
+  },
+  {
+    en: 'Lizards communicate by doing push-ups.',
+    uk: 'Ящірки спілкуються, роблячи віджимання.',
+  },
+  {
+    en: 'Popcorn was invented by the Aztec Indians.',
+    uk: 'Попкорн був винайдений ацтекськими індіанцями.',
+  },
+  {
+    en: "Jeff Bezos' dad was a circus performer before Amazon.",
+    uk: 'Батько Джеффа Безоса був цирковим артистом до створення Amazon.',
+  },
+  {
+    en: 'Earth’s rotation is slowing down, increasing the length of a day by about 18 sec per century.',
+    uk: 'Обертання Землі сповільнюється, збільшуючи довжину дня на близько 18 секунд за століття.',
+  },
+  {
+    en: "Google's original name was BackRub.",
+    uk: 'Оригінальна назва Google була BackRub.',
+  },
+  {
+    en: 'Dogs have been banned from Antarctica since April 1994.',
+    uk: 'Собаки заборонені в Антарктиді з квітня 1994 року.',
+  },
+  {
+    en: 'A giant squid has eyes the size of a volleyball.',
+    uk: "Гігантський кальмар має очі розміром з волейбольний м'яч",
+  },
+  {
+    en: 'The electric chair was invented by a dentist.',
+    uk: 'Електричний стілець був винайдений стоматологом.',
+  },
+  {
+    en: 'The voice of Mickey Mouse and the voice of Minnie Mouse were married in real life.',
+    uk: 'Актори що озвучували Міккі та Мінні Маус були одружені в реальному житті.',
+  },
+  {
+    en: 'A cloud can weigh over a million tons but floats thanks to denser air below.',
+    uk: 'Хмара може важити понад мільйон тонн, але літає завдяки щільнішому повітрю знизу.',
+  },
+  {
+    en: 'The first social media platform, SixDegrees, was launched in 1999.',
+    uk: 'Перша соціальна мережа, SixDegrees, була запущена в 1999 році.',
+  },
+  {
+    en: 'The average person walks the equivalent of five times around the world in their lifetime.',
+    uk: "Середня людина за своє життя проходить еквівалент п'яти обертів навколо світу.",
+  },
+  {
+    en: "Elephants are the only mammals that can't jump.",
+    uk: 'Слони — єдині ссавці, які не можуть стрибати.',
+  },
+  {
+    en: 'The average person takes about 23,000 breaths a day.',
+    uk: 'Середня людина робить близько 23000 вдихів на день.',
+  },
+  {
+    en: 'The first animated feature film was Disney\'s "Snow White and the Seven Dwarfs".',
+    uk: 'Перший анімаційний повнометражний фільм був "Білосніжка та сім гномів" від Disney.',
+  },
+  {
+    en: 'Water can boil and freeze at the same time.',
+    uk: 'Вода може закипати і замерзати одночасно.',
+  },
+  {
+    en: 'Most mobile banner clicks are accidental due to "fat-finger taps".',
+    uk: 'Більшість кліків на мобільні банери є випадковими через "великий палець".',
+  },
+  {
+    en: 'Bananas are berries, but strawberries are not.',
+    uk: 'Банани — це ягоди, а полуниці — ні.',
+  },
+  {
+    en: 'Mosquitoes have 47 teeth.',
+    uk: 'Комарі мають 47 зубів.',
+  },
+  {
+    en: 'Indonesia is home to some of the shortest people in the world.',
+    uk: 'Індонезія є домом для деяких з найкоротших людей у світі.',
+  },
+  {
+    en: 'The iconic scream in horror films is known as the "Wilhelm scream".',
+    uk: 'Іконічний крик у фільмах жахів відомий як "Крик Вільгельма".',
+  },
+  {
+    en: 'Light from the Sun takes about 8 minutes to reach Earth.',
+    uk: 'Світло від Сонця досягає Землі приблизно за 8 хвилин.',
+  },
+  {
+    en: "Coca-Cola's logo is recognized by 94% of the global population.",
+    uk: 'Логотип Coca-Cola впізнає 94% світового населення.',
+  },
+  {
+    en: 'The shortest war in history lasted only 38 minutes.',
+    uk: 'Найкоротша війна в історії тривала всього 38 хвилин.',
+  },
+  {
+    en: 'Tigers have striped skin, not just striped fur.',
+    uk: 'Тигри мають смугасту шкіру, а не лише смугасту шерсть.',
+  },
+  {
+    en: 'The average person laughs 15-20 times a day.',
+    uk: 'Середня людина сміється 15-20 разів на день.',
+  },
+  {
+    en: '"Friends" was originally titled "Insomnia Cafe".',
+    uk: '"Друзі" спочатку мали назву "Кафе безсоння".',
+  },
+  {
+    en: "Allodoxaphobia is the fear of other people's opinions.",
+    uk: 'Алодоксофобія — це страх думки інших людей.',
+  },
+  {
+    en: 'FedEx almost went bankrupt. The founder gambled to save it.',
+    uk: 'FedEx майже збанкрутував. Засновник зробив ставку, щоб його врятувати.',
+  },
+  {
+    en: 'Banana plants are herbs, not trees.',
+    uk: 'Бананові рослини — це трави, а не дерева.',
+  },
+  {
+    en: 'Dogs sniff good smells with their left nostril.',
+    uk: 'Собаки нюхають приємні запахи лівою ніздрею.',
+  },
+  {
+    en: 'The average person spends about 10 years of their life sleeping.',
+    uk: 'Середня людина витрачає близько 10 років свого життя на сон.',
+  },
+  {
+    en: "In Japan, there's a theme park dedicated entirely to cats.",
+    uk: 'В Японії є тематичний парк, присвячений повністю котам.',
+  },
+  {
+    en: 'A lightning bolt is five times hotter than the surface of the Sun.',
+    uk: "Блискавка в п'ять разів гарячіша за поверхню Сонця.",
+  },
+  {
+    en: 'Marvel once owned the rights to the word "zombie".',
+    uk: 'Marvel колись володіли правами на слово "зомбі".',
+  },
+  {
+    en: 'The scent of vanilla has been found to have a relaxing and calming effect on the mind and body.',
+    uk: 'Запах ванілі діє розслаблююче і заспокійливо на розум і тіло.',
+  },
+  {
+    en: 'The hummingbird is the only bird that can fly backward.',
+    uk: 'Колібрі — єдина пташка, яка може летіти назад.',
+  },
+  {
+    en: 'The human heart beats about 100,000 times a day.',
+    uk: "Серце людини б'ється приблизно 100 000 разів на день.",
+  },
+  {
+    en: 'The average person checks their phone 150 times daily.',
+    uk: 'Середня людина перевіряє свій телефон 150 разів на день.',
+  },
+  {
+    en: 'The snow on Pluto is red.',
+    uk: 'Сніг на Плутоні червоний.',
+  },
+  {
+    en: "Domino's co-founder traded his half for a used Volkswagen.",
+    uk: "Співзасновник Domino's обміняв свою частку на вживаний Volkswagen.",
+  },
+  {
+    en: 'In the 1830s ketchup was often sold as a medicine.',
+    uk: 'У 1830-х роках кетчуп часто продавали як ліки.',
+  },
+  {
+    en: 'Beavers were once the size of bears.',
+    uk: 'Бобри колись були розміру ведмедів.',
+  },
+  {
+    en: 'The average person blinks about 15-20 times a minute.',
+    uk: 'Середня людина моргає близько 15-20 разів на хвилину.',
+  },
+  {
+    en: 'The character of Shrek was originally designed to be much scarier.',
+    uk: 'Персонаж Шрека спочатку був розроблений як набагато страшніший.',
+  },
+  {
+    en: 'A year on Mercury is only 88 days long, but a full day as we know is about 59 days.',
+    uk: 'Рік на Меркурії триває лише 88 днів, але повний день, як ми його знаємо, триває близько 59 днів.',
+  },
+  {
+    en: 'The Nike swoosh designer was paid only $35 for the logo.',
+    uk: 'Дизайнер логотипу Nike отримав лише 35 доларів за логотип.',
+  },
+  {
+    en: 'Giraffes are 30 times more likely to get hit by lightning than humans.',
+    uk: 'Жирафи в 30 разів частіше отримують удар від блискавки, ніж люди.',
+  },
+  {
+    en: 'The average person will walk the equivalent of five times around the Earth in their lifetime.',
+    uk: "Середня людина за своє життя пройде еквівалент п'яти обертів навколо Землі.",
+  },
+  {
+    en: 'Elsa\'s castle in "Frozen" was inspired by the iconic Ice Hotel in Sweden.',
+    uk: 'Замок Ельзи в "Замерзлій" був натхненний культовим льодовим готелем у Швеції.',
+  },
+  {
+    en: 'Sir Isaac Newton was only 23 years old when he discovered the law of universal gravitation.',
+    uk: 'Сер Ісаак Ньютон відкрив закон всесвітнього тяжіння коли йому було лише 23 роки.',
+  },
+  {
+    en: "Facebook's main color is blue due to Mark Zuckerberg's color blindness.",
+    uk: 'Основний колір Facebook — синій через дальтонізм Марка Цукерберга.',
+  },
+  {
+    en: "The first McDonald's menu item was a hotdog, not a burger.",
+    uk: "Першим продуктом у меню McDonald's був хот-дог, а не бургер.",
+  },
+  {
+    en: "50% of the world's oxygen is produced by the sea, not rainforests.",
+    uk: '50% кисню на Землі виробляється морем, а не дощовими лісами.',
+  },
+  {
+    en: 'Your stomach gets a new lining every few days to prevent it from digesting itself.',
+    uk: 'Ваш шлунок отримує нову оболонку кожні кілька днів, щоб не переварити себе.',
+  },
+  {
+    en: 'Jim Carrey once wrote himself a $10 million check for acting success.',
+    uk: 'Джим Керрі одного разу написав собі чек на 10 мільйонів доларів за успіх у акторстві.',
+  },
+  {
+    en: 'Jupiter has 79 moons. 26 are still waiting to be officially named.',
+    uk: 'Юпітер має 79 місяців. 26 все ще чекають на офіційну назву.',
+  },
+  {
+    en: 'Starbucks uses round tables to make customers feel less alone.',
+    uk: 'Starbucks використовує круглі столи, щоб клієнти почувалися менш самотніми.',
+  },
+  {
+    en: 'Octopuses have three hearts and blue blood.',
+    uk: 'Осьминоги мають три серця та блакитну кров.',
+  },
+  {
+    en: 'You produce about one liter of saliva each day.',
+    uk: 'Ви виробляєте близько одного літра слини щодня.',
+  },
+  {
+    en: 'The first-ever music video played on MTV was "Video Killed the Radio Star".',
+    uk: 'Першим музичним відео, яке було показано на MTV, була "Video Killed the Radio Star".',
+  },
+  {
+    en: 'Most known asteroids in our solar system are located between Jupiter and Mars.',
+    uk: 'Більшість відомих астероїдів нашої сонячної системи знаходяться між Юпітером і Марсом.',
+  },
+  {
+    en: 'Brazil got its name from the nut, not the other way around.',
+    uk: 'Бразилія отримала свою назву від горіха, а не навпаки.',
+  },
+  {
+    en: 'There are more trees on Earth than stars in the Milky Way galaxy.',
+    uk: 'На Землі більше дерев, ніж зірок у галактиці Чумацький Шлях.',
+  },
+  {
+    en: 'The average human will shed around 20 kilograms of skin in their lifetime.',
+    uk: 'Середня людина скидає близько 20 кілограмів шкіри за своє життя.',
+  },
+  {
+    en: 'In the movie "Jaws" the shark was called Bruce after Spielberg\'s lawyer.',
+    uk: 'У фільмі "Щелепи" акула називалася Брюс на честь адвоката Спілберга.',
+  },
+  {
+    en: 'In 1962, a scientist named Sheila Lowe did indeed invent a bra that could double as a gas mask.',
+    uk: "У 1962 році вчена на ім'я Шейла Лоу винайшла бюстгальтер, який міг бути також газовою маскою.",
+  },
+  {
+    en: 'The first item sold on eBay was a broken laser pointer.',
+    uk: 'Першим товаром, проданим на eBay, був зламаний лазерний вказівник.',
+  },
+  {
+    en: 'The inventor of Vaseline ate a spoonful daily for health benefits.',
+    uk: "Винахідник вазеліну їв ложку щодня для здоров'я.",
+  },
+  {
+    en: 'A jellyfish is 95% water.',
+    uk: 'Медуза на 95% складається з води.',
+  },
+  {
+    en: 'A sneeze travels at about 100 miles per hour.',
+    uk: 'Чхання розповсюджується зі швидкістю близько 160 кілометрів на годину.',
+  },
+  {
+    en: "The voice of Darth Vader is James Earl Jones, but he wasn't credited initially.",
+    uk: 'Голос Дарта Вейдера належить Джеймсу Ерлу Джонсу, але спочатку він не був вказаний у титрах.',
+  },
+  {
+    en: 'A day on Venus is longer than a year on Venus due to its slow rotation.',
+    uk: 'День на Венері довший за рік на Венері через її повільне обертання.',
+  },
+  {
+    en: 'The average office worker spends about 28% of their time in meetings.',
+    uk: 'Середній офісний працівник проводить близько 28% свого часу на нарадах.',
+  },
+  {
+    en: 'In Japan, there are more pets than children under 15 years old.',
+    uk: 'В Японії більше домашніх тварин, ніж дітей до 15 років.',
+  },
+  {
+    en: 'Cows have "best friends" and get stressed when separated.',
+    uk: 'Корів мають "найкращих друзів" і стають стресовими, коли їх розлучають.',
+  },
+  {
+    en: 'Your nose can distinguish between over 1 trillion different scents.',
+    uk: 'Ваш ніс може розрізняти більше 1 трильйона різних запахів.',
+  },
+  {
+    en: 'Samuel L. Jackson has a lightsaber with "Bad Motherfucker" engraved on it.',
+    uk: 'Семюель Л. Джексон має світловий меч із гравіюванням "Поганий виродок".',
+  },
+  {
+    en: 'Chess has more possible iterations of a game than the universe has atoms.',
+    uk: 'У шахах існує більше можливих варіантів гри, ніж атомів у всесвіті.',
+  },
+  {
+    en: 'Monopoly was invented to warn against monopolies.',
+    uk: 'Гру "Монополія" було винайдено для попередження про монополії.',
+  },
+  {
+    en: "Scotland's national animal is the unicorn.",
+    uk: 'Національна тварина Шотландії — єдиноріг.',
+  },
+  {
+    en: 'Flamingos bend their legs at the ankle, not the knee.',
+    uk: 'Фламінго згинають свої ноги в щиколотці, а не в коліні.',
+  },
+  {
+    en: 'Humans share 60% of their DNA with bananas.',
+    uk: 'Люди ділять 60% свого ДНК з бананами.',
+  },
+  {
+    en: 'Darth Vader only speaks for 12 minutes in the original Star Wars trilogy.',
+    uk: 'Дарт Вейдер говорить лише 12 хвилин в оригінальній трилогії "Зоряних воєн".',
+  },
+  {
+    en: "Bananas are radioactive due to potassium, but doesn't dangerous.",
+    uk: 'Банани є трохи радіоактивними через калій, але вони не є небезпечними.',
+  },
+  {
+    en: "Amazon started in Bezos' garage with a spray-painted sign.",
+    uk: 'Amazon почався в гаражі Безоса з написаною аерозольною фарбою вивіскою.',
+  },
+];
+
+// export const facts = [
+//   'Australia is wider than the moon',
+//   'The most popular first names are Maria and Muhammad',
+//   'The script for "The Terminator" was sold for just $1',
+//   'Venus is the only planet that spins clockwise',
+//   'Japan has one vending machine for every 40 people',
+//   'Google Images was created after J. Lopez wore a green dress at the 2000 Grammys',
+//   'If you keep a goldfish in a dark room, it will eventually turn white',
+//   'People once consumed arsenic to improve their skin',
+//   "Over 1,400 visual effects artists needed 16 weeks to create Avengers: Endgame's final battle",
+//   'Sudan has more pyramids than any other country',
+//   "There is a McDonald's on every continent except Antarctica",
+//   'The Eiffel Tower was originally intended for Barcelona',
+//   'Lemons float, but limes sink',
+//   'The circulatory system is over 60,000 miles long',
+//   'The first-ever movie was a silent film "Roundhay Garden Scene" lasting 11 seconds',
+//   'Boanthropy is the psychological disorder in which patients believe they are cows',
+//   'Banks have therapists known as "wealth psychologists" for clients unable to cope with their wealth',
+//   'The real name for a hashtag is octothorpe',
+//   'It would take 19 minutes to fall to the center of the Earth',
+//   'The Pope cannot be an organ donor',
+//   'The "Titanic" sinking scene was filmed using a full-scale replica of the ship',
+//   'Sunsets on Mars are blue',
+//   'There are more than 3.5 million ATMs all over the world',
+//   'The longest English word has 189,819 letters',
+//   'Mosquitoes are attracted to people who just ate bananas',
+//   'Frida Kahlo painted 55 self-portraits',
+//   'The character of Darth Vader was originally meant to be a sympathetic figure',
+//   'The average raindrop falls at 11 kmph',
+//   "40% of McDonald's profits come from the sales of Happy Meals",
+//   'All mammals experience goosebumps',
+//   'The world’s termites outweigh the world’s humans about 10 to 1',
+//   'Identical twins don’t have the same fingerprints',
+//   'The "Friends" series was filmed in front of a live studio audience',
+//   'Smelling apples or bananas can help you lose weight',
+//   'Uber started as a luxury car service',
+//   'Cats can make more than 100 vocalizations',
+//   'Bullfrogs do not sleep',
+//   'The inventor of the frisbee was turned into a frisbee after he died',
+//   'The iconic "Psycho" shower scene was filmed in black and white to hide the blood effects',
+//   "The world's oldest wooden wheel is over 5,000 years old",
+//   "The first credit card was introduced in 1950 by Diner's Club",
+//   'The Hawaiian alphabet only has 12 letters',
+//   'A snail breathes through its foot',
+//   'The average adult human body has 206 bones, while babies have about 300',
+//   'The "Simpsons" series was almost canceled after season 1 because of low ratings',
+//   "The universe's average color is called 'cosmic latte'",
+//   'Netflix started as a DVD rental service',
+//   'Sliced bread was invented a year after the invention of TV',
+//   'An ant’s sense of smell is stronger than a dog’s',
+//   'Humans have a "diving reflex" that slows some bodily functions in water to prevent drowning',
+//   '"Star Wars: The Force Awakens" holds the record with an official net budget of $447 million',
+//   'Your brain is constantly eating itself through a process called phagocytosis',
+//   'Amazon began as an online bookstore',
+//   'It took the creator of the Rubik’s Cube one month to solve the cube after he created it',
+//   'Lizards communicate by doing push-ups',
+//   'Popcorn was invented by the Aztec Indians',
+//   "Jeff Bezos' dad was a circus performer before Amazon",
+//   'Earth’s rotation is slowing down, increasing the length of a day by about 18 sec per century',
+//   "Google's original name was BackRub",
+//   'Dogs have been banned from Antarctica since April 1994',
+//   'A giant squid has eyes the size of a volleyball',
+//   'The electric chair was invented by a dentist',
+//   'The voice of Mickey Mouse and the voice of Minnie Mouse were married in real life',
+//   'A cloud can weigh over a million tons but floats thanks to denser air below',
+//   'The first social media platform, SixDegrees, was launched in 1999',
+//   'The average person walks the equivalent of five times around the world in their lifetime',
+//   "Elephants are the only mammals that can't jump",
+//   'The average person takes about 23,000 breaths a day',
+//   'The first animated feature film was Disney’s "Snow White and the Seven Dwarfs"',
+//   'Water can boil and freeze at the same time',
+//   'Most mobile banner clicks are accidental due to "fat-finger taps"',
+//   'Bananas are berries, but strawberries are not',
+//   'Mosquitoes have 47 teeth',
+//   'Indonesia is home to some of the shortest people in the world',
+//   'The iconic scream in horror films is known as the "Wilhelm scream"',
+//   'Light from the Sun takes about 8 minutes to reach Earth',
+//   "Coca-Cola's logo is recognized by 94% of the global population",
+//   'The shortest war in history lasted only 38 minutes',
+//   'Tigers have striped skin, not just striped fur',
+//   'The average person laughs 15-20 times a day',
+//   '"Friends" was originally titled "Insomnia Cafe"',
+//   "Allodoxaphobia is the fear of other people's opinions",
+//   'FedEx almost went bankrupt. The founder gambled to save it',
+//   'Banana plants are herbs, not trees',
+//   'Dogs sniff good smells with their left nostril',
+//   'The average person spends about 10 years of their life sleeping',
+//   "In Japan, there's a theme park dedicated entirely to cats",
+//   'A lightning bolt is five times hotter than the surface of the Sun',
+//   'Marvel once owned the rights to the word "zombie"',
+//   'The scent of vanilla has been found to have a relaxing and calming effect on the mind and body',
+//   'The hummingbird is the only bird that can fly backward',
+//   'The human heart beats about 100,000 times a day',
+//   'The average person checks their phone 150 times daily',
+//   'The snow on Pluto is red',
+//   "Domino's co-founder traded his half for a used Volkswagen",
+//   'In the 1830s ketchup was often sold as a medicine',
+//   'Beavers were once the size of bears',
+//   'The average person blinks about 15-20 times a minute',
+//   'The character of Shrek was originally designed to be much scarier',
+//   'A year on Mercury is only 88 days long, but a full day as we know is about 59 days',
+//   'The Nike swoosh designer was paid only $35 for the logo',
+//   "The first product to have a barcode was Wrigley's gum",
+//   'Giraffes are 30 times more likely to get hit by lightning than humans',
+//   'The average person will walk the equivalent of five times around the Earth in their lifetime',
+//   'Elsa’s castle in "Frozen" was inspired by the iconic Ice Hotel in Sweden',
+//   'Sir Isaac Newton was only 23 years old when he discovered the law of universal gravitation',
+//   "Facebook's main color is blue due to Mark Zuckerberg's color blindness",
+//   "The first McDonald's menu item was a hotdog, not a burger",
+//   "50% of the world's oxygen is produced by the sea, not rainforests",
+//   'Your stomach gets a new lining every few days to prevent it from digesting itself',
+//   'Jim Carrey once wrote himself a $10 million check for acting success',
+//   'Jupiter has 79 moons. 26 are still waiting to be officially named',
+//   'Apple became the first company worth over $700 billion in 2015',
+//   'Starbucks uses round tables to make customers feel less alone',
+//   'Octopuses have three hearts and blue blood',
+//   'You produce about one liter of saliva each day',
+//   'The first-ever music video played on MTV was "Video Killed the Radio Star"',
+//   'Most known asteroids in our solar system are located between Jupiter and Mars',
+//   'The average revenue for small businesses with no employees is around $44,000 per year',
+//   'Brazil got its name from the nut, not the other way around',
+//   'There are more trees on Earth than stars in the Milky Way galaxy',
+//   'The average human will shed around 20 kilograms of skin in their lifetime',
+//   'In the movie "Jaws" the shark was called Bruce after Spielberg’s lawyer',
+//   'In 1962, a scientist named Sheila Lowe did indeed invent a bra that could double as a gas mask',
+//   'The first item sold on eBay was a broken laser pointer',
+//   'The inventor of Vaseline ate a spoonful daily for health benefits',
+//   'A jellyfish is 95% water',
+//   'A sneeze travels at about 100 miles per hour',
+//   "The voice of Darth Vader is James Earl Jones, but he wasn't credited initially",
+//   'A day on Venus is longer than a year on Venus due to its slow rotation',
+//   'The average office worker spends about 28% of their time in meetings',
+//   'In Japan, there are more pets than children under 15 years old',
+//   "Cows have 'best friends' and get stressed when separated",
+//   'Your nose can distinguish between over 1 trillion different scents',
+//   "Samuel L. Jackson has a lightsaber with 'Bad Motherfucker' engraved on it",
+//   'Chess has more possible iterations of a game than the universe has atoms',
+//   'Monopoly was invented to warn against monopolies',
+//   "Scotland's national animal is the unicorn",
+//   'Flamingos bend their legs at the ankle, not the knee',
+//   'Humans share 60% of their DNA with bananas',
+//   'Darth Vader only speaks for 12 minutes in the original Star Wars trilogy',
+//   'Bananas are radioactive due to potassium, but not dangerous',
+//   "Amazon started in Bezos' garage with a spray-painted sign",
+//   'More people die each year from vending machines than from shark attacks',
+//   "A blue whale's heart is the size of a small car",
+//   'We spend about six months of our lives, waiting at green lights',
+//   'The sound of a lightsaber is a mix of a film projector and a microphone feedback',
+//   'Arabic numerals were created in India',
+//   "The first McDonald's menu introduced in the 1940s had only 9 items",
+//   'The original purpose of Play-Doh was to clean wallpaper',
+//   'Sloths can hold their breath longer than dolphins',
+//   'Everyone has a unique tongue print, just like fingerprints',
+//   'The original Hulk was painted gray before switching to green',
+//   'A teaspoon of a neutron star would weigh about 6 billion tons',
+//   "Google's first storage was made from Lego bricks",
+//   'Honey never spoils, archaeologists found pots of it in ancient Egyptian tombs',
+//   'Octopuses punch fish out of spite',
+//   'Humans are the only animals with chins',
+//   '007 James Bond was inspired by a bird expert of the same name',
+//   'Some metals can explode when exposed to water, like sodium and potassium',
+//   'SpaceX once sold flamethrowers, because Musk thought it was funny',
+//   "A jiffy is an actual unit of time. It's one-hundredth of a second",
+//   'The Mississippi River once started flowing backwards after an earthquake',
+//   'The loudest recorded sneeze was over 170 decibels',
+//   'Keanu Reeves gave away most of his Matrix earnings to the crew',
+//   'LSD was discovered by a chemist who accidentally dosed himself',
+//   "In 1982 Lucy L. Barmby patented the 'Anti-eating face mask'",
+//   'Napoleon was once attacked by a horde of rabbits',
+//   'Koalas have fingerprints similar to humans',
+//   'Your left lung is smaller than your right lung to make room for your heart',
+//   'LinkedIn was launched in a living room',
+//   'The sun loses 4 million tons of mass per second as energy',
+//   "Apple's first logo showed Isaac Newton under an apple tree",
+//   'The king of hearts is the only king without a mustache on a standard playing card',
+//   'Most ginger cats are male',
+//   'You are taller in the morning than in the evening due to spinal compression',
+//   'YouTube started as a video dating site',
+//   'Light from the sun is 30,000 years old before reaching us',
+//   'Starbucks is named after a character in Moby-Dick',
+//   'Tomato sauce was sold as medicine in the 1830s',
+//   'An octopus can squeeze through any hole larger than its beak',
+//   "You can't hum while holding your nose shut",
+//   'Toy Story was the first fully computer-generated feature film',
+//   'A rubber band heats when stretched, cools when released',
+//   'Nintendo started as a playing card company in 1889',
+//   'The inventor of the Pringles can was buried in one',
+//   'Plants came before seeds',
+//   'People are more likely to remember the first and last items on a list',
+//   'LinkedIn is older than Facebook, Twitter, and Instagram',
+//   'Jupiter has 79 known moons',
+//   'Google tried to sell itself to Yahoo for $1 million in 1998',
+//   'A single teaspoon of honey represents the life work of 12 bees',
+//   'The heart of a shrimp is located in its head',
+//   'Your brain generates enough electricity to power a small light bulb',
+//   'The Simpsons is the longest-running scripted primetime series',
+//   'You can theoretically survive space exposure for 15 seconds',
+//   'Samsung began as a grocery trading company',
+//   'Polo is the oldest known team sport, dating back to 6th century BC Persia',
+//   'Lobsters pee from their faces',
+//   'Goosebumps are vestigial reflexes from our hairy ancestors',
+//   'Instagram was made in just 8 weeks',
+//   'The Milky Way has a giant black hole at its center',
+//   'J.K. Rowling wrote the first Harry Potter book on a train ride to London',
+//   'Pablo Picasso could draw before he could walk',
+//   'Butterflies taste with their feet',
+//   'Your skin renews itself every 28 days',
+//   "In The Matrix Neo's passport expires on September 11, 2001",
+//   'Sound travels faster in water than in air, even faster in steel',
+//   "Apple's iPhone almost went by the name 'Mobi'",
+//   "Antarctica holds 60% of Earth's fresh water",
+//   'The Mantis shrimp can punch with the force of a bullet',
+//   'The strongest muscle in the human body is the jaw muscle',
+//   'The first YouTube video is of a guy at the zoo',
+//   'A neutron star spins up to 600 times per second',
+//   'Nintendo once made instant rice',
+//   '40 tons of cosmic dust fall on Earth every day',
+//   'Penguins propose to each other by giving their mates a pebble',
+//   'Yawning cools down your brain',
+//   'Alfred Hitchcock never won an Oscar for Best Director',
+//   "Einstein once called quantum entanglement 'spooky action'",
+//   'Airbnb started by renting air mattresses in an apartment',
+//   'NBA players once played in converse shoes',
+//   "A blue whale's tongue weighs as much as an elephant",
+//   'Fingernails grow faster than toenails',
+//   "Lego is from the Danish words 'Leg Godt' meaning 'play well'",
+//   "Earth's magnetic poles flip every 250,000 years",
+//   "McDonald's used to sell hot dogs",
+//   'Snoop Dogg was once a high school football star',
+//   'Sea otters hold hands while sleeping to avoid drifting apart',
+//   'Human bones are stronger than steel',
+//   'In Pulp Fiction, many of the clocks and watches show 4:20',
+//   "99.9% of the atom's volume is empty space",
+//   "Beyonce's first job was at McDonald's when she was 15",
+//   'Lightning strikes Earth 8.6 million times per day',
+//   'Some sharks glow in the dark',
+//   'Smiling uses fewer muscles than frowning',
+//   'TikTok was first known as Douyin in China',
+//   'Neutrinos can pass through the entire Earth undetected',
+//   'Ferrari once turned down a partnership with Ford',
+//   'Golf balls were originally made of leather and feathers',
+//   'Chameleons change color for communication, not just camouflage',
+//   'Hiccups can last for days, even years',
+//   'Pinterest has more female users than any other platform',
+//   "Earth's gravity warps time, making satellites' clocks faster",
+//   'A French engineer invented an inflatable car for parking in tight spaces',
+//   "Earth's crust is thinner than an apple's skin proportionally",
+//   "Elephants can 'hear' through their feet",
+//   'Your bones are in a constant state of renewal',
+//   'Leonardo DiCaprio sliced his hand for real in Django Unchained',
+//   'Plasma TVs hold tiny amounts of radioactive gas',
+//   'Sony was originally a rice cooker company',
+//   'Boxing was an Olympic sport in 688 BC',
+//   'Some frogs can freeze without dying, thawing out later',
+//   'Skin is the largest organ in the body',
+//   "Snapchat's ghost logo is called 'Ghostface Chillah'",
+//   'In space, flames are round due to the lack of gravity',
+//   'Instagram was bought by Facebook for $1 billion with just 13 employees',
+//   "Deserts cover about one-third of Earth's land area",
+//   'Bees have five eyes',
+//   "Humans glow in the dark, but it's too faint for us to see",
+//   'Charlie Chaplin lost a Chaplin lookalike contest',
+//   'Lasers are used to cool atoms to near absolute zero',
+//   "Tesla was nearly called 'Faraday'",
+//   "Only 5% of Earth's oceans have been explored",
+//   "Kangaroos can't walk backward",
+//   'You can survive without a stomach, spleen, or one kidney',
+//   'Alfred Hitchcock was afraid of eggs',
+//   "Earth's atmosphere leaks 90 tons of hydrogen into space daily",
+//   "Subway was originally named Pete's Super Submarines",
+//   'The Olympic Games were originally a religious festival',
+//   "Elephants are the only animals that can't jump",
+//   'Your stomach acid could dissolve a razor blade',
+//   'Daniel Radcliffe went through 80 wands filming Harry Potter',
+//   'The universe may have more dimensions than we can see',
+//   'Lamborghini started by making tractors',
+//   'Gravity is weaker at the equator than the poles',
+//   'Dolphins sleep with one eye open',
+//   'You could technically survive on a diet of potatoes and butter',
+//   'James Cameron drew the sketch of Rose in Titanic himself',
+//   'A photon can be in two places at once until observed',
+//   'Nike founder Phil Knight sold shoes out of his car',
+//   'The Atlantic Ocean grows by about 1 inch yearly',
+//   'Squirrels plant thousands of trees by forgetting their nuts',
+//   "Human's liver can regrow itself even if 75% is removed",
+//   "The Simpsons' couch gag can be as long as 90 seconds",
+//   'Venus has acid rain that never reaches the ground',
+//   "Google's first office was a friend's garage in Menlo Park, CA",
+//   'Dead Sea is the lowest land spot at 430 meters below sea level',
+//   "Horses can't vomit",
+//   'The brain can store 2.5 million gigabytes of memory',
+//   'Pinterest was originally called Tote',
+//   'You can fit all atoms of humanity in a sugar cube',
+//   "KFC's founder started the chain at age 65",
+//   'The moon moves 3.8 cm away from Earth each year',
+//   'Koalas sleep up to 22 hours a day',
+//   'Humans can smell fear and disgust in others',
+//   "Morgan Freeman didn't start acting seriously until he was 50",
+//   'Antimatter is real and can annihilate with matter on contact',
+//   'IBM helped create the barcodes on every product',
+//   "Earth's oceans contain 20 million tons of gold",
+// ];

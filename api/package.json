@@ -1,6 +1,6 @@
 {
-  "name": "voice-server",
-  "version": "1.0.0",
+  "name": "alina-server",
+  "version": "1.0.1",
   "main": "build/server.js",
   "scripts": {
     "start": "nodemon --exec ts-node src/server.ts",
@@ -16,25 +16,29 @@
     "@langchain/core": "^0.3.18",
     "@langchain/google-genai": "^0.1.4",
     "bcryptjs": "^2.4.3",
+    "compression": "^1.8.0",
     "cors": "^2.8.5",
-    "elevenlabs": "^0.18.0",
     "express": "^4.21.1",
+    "express-rate-limit": "^7.5.0",
     "express-validator": "^7.2.0",
+    "helmet": "^8.0.0",
     "jsonwebtoken": "^9.0.2",
     "langchain": "^0.3.6",
     "mongoose": "^8.8.1"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
+    "@types/compression": "^1.7.5",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/jsonwebtoken": "^9.0.7",
     "@types/node": "^22.9.0",
-    "eslint": "^9.14.0",
+    "eslint": "^9.21.0",
     "globals": "^15.12.0",
     "nodemon": "^3.1.7",
     "rimraf": "^6.0.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.26.0"
   }
 }

@@ -21,7 +21,7 @@ const genetrateJWToken = (userId: string, next: NextFunction) => {
     const token = jwt.sign({ userId }, jwtKey, { expiresIn: '48h' });
     return token;
   } catch (err: any) {
-    logger.r('genetrateJWToken', err?._message || err);
+    logger.error('genetrateJWToken', err?._message || err);
     return handleJWTException();
   }
 };
@@ -82,7 +82,7 @@ export const signup = async (
       },
     });
   } catch (err) {
-    logger.r('Signup', err);
+    logger.error('Signup', err);
     return next(
       new HttpError('Could not create account. Please try again later.', 500)
     );
@@ -128,7 +128,7 @@ export const signin = async (
       },
     });
   } catch (err) {
-    logger.r('Login', err);
+    logger.error('Login', err);
     return next(new HttpError('Login failed. Please try again later', 500));
   }
 };

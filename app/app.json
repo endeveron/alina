@@ -13,10 +13,11 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/icon_colored.png",
+        "foregroundImage": "./assets/images/icon_monochrome.png",
         "monochromeImage": "./assets/images/icon_monochrome.png",
         "backgroundColor": "#6c17ad"
       },
+      "backgroundColor": "#181827",
       "permissions": [
         "android.permission.RECORD_AUDIO",
         "android.permission.MODIFY_AUDIO_SETTINGS"
