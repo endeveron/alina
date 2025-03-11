@@ -9,6 +9,8 @@ import logger from '../helpers/logger';
 import { configureUserData } from '../helpers/user';
 import UserModel from '../models/user';
 import { User } from '../types/user';
+import StatisticsModel from '../models/statistics';
+import ChatModel from '../models/chat';
 
 const genetrateJWToken = (userId: string, next: NextFunction) => {
   const jwtKey = process.env.JWT_KEY;
@@ -20,8 +22,12 @@ const genetrateJWToken = (userId: string, next: NextFunction) => {
     if (!jwtKey) return handleJWTException();
     const token = jwt.sign({ userId }, jwtKey, { expiresIn: '48h' });
     return token;
-  } catch (err: any) {
-    logger.error('genetrateJWToken', err?._message || err);
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      logger.error('genetrateJWToken', err.message);
+    } else {
+      logger.error('genetrateJWToken', err);
+    }
     return handleJWTException();
   }
 };
@@ -35,18 +41,18 @@ export const signup = async (
   const { name, email, password } = req.body;
 
   try {
-    // check if email in use.
+    // Check if the provided email in use
     const emailInUse = await UserModel.exists({ 'account.email': email });
 
     if (emailInUse) {
       return next(new HttpError('Email in use', 409));
     }
 
-    // hashing the provided password.
+    // Hash the provided password
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    // create a new user.
-    const user = new UserModel({
+    // Create a new user
+    const user = await UserModel.create({
       account: {
         name,
         email,
@@ -56,25 +62,34 @@ export const signup = async (
           name: 'user',
         },
       },
-      statistics: {
-        google: {
-          ai: {
-            inputTokens: 0,
-            outputTokens: 0,
-          },
-          sttBilledTime: 0,
-        },
-        updTimestamp: Date.now(),
-      },
     });
 
-    await user.save();
+    const userId = user._id;
 
-    // generate JWT.
-    const userId = user._id.toString();
-    const token = genetrateJWToken(userId, next);
+    // Create a new statistics doc
+    await StatisticsModel.create({
+      userId,
+      google: {
+        ai: {
+          inputTokens: 0,
+          outputTokens: 0,
+        },
+        sttBilledTime: 0,
+      },
+      updTimestamp: 0,
+    });
 
-    // successfully signed up.
+    // Create a new chat doc
+    await ChatModel.create({
+      userId,
+      chatSummary: '',
+      updTimestamp: 0,
+    });
+
+    // generate JWT
+    const userIdStr = user._id.toString();
+    const token = genetrateJWToken(userIdStr, next);
+
     res.status(201).json({
       data: {
         token,
@@ -98,7 +113,7 @@ export const signin = async (
   const { email, password } = req.body;
 
   try {
-    // get user account data from the DB.
+    // Get user account data from the DB
     const userData = await getItem<User>(UserModel, {
       'account.email': email,
     });
@@ -107,7 +122,7 @@ export const signin = async (
     }
     const user = userData.data;
 
-    // check provided password.
+    // Check provided password
     const isPasswordValid = await bcrypt.compare(
       password,
       user.account.password
@@ -116,11 +131,10 @@ export const signin = async (
       return next(new HttpError('Invalid password', 401));
     }
 
-    // generate JWT
+    // Generate JWT
     const userId = user._id.toString();
     const token = genetrateJWToken(userId, next);
 
-    // successfully signed in.
     res.status(200).json({
       data: {
         token,

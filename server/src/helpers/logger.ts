@@ -1,5 +1,10 @@
+type LoggerMethod = (msg: string, data?: unknown) => void;
+
 type Logger = {
-  [key: string]: (msg: string, data?: unknown) => void;
+  success: LoggerMethod;
+  info: LoggerMethod;
+  warning: LoggerMethod;
+  error: LoggerMethod;
 };
 
 const colors = {

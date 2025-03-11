@@ -1,5 +1,5 @@
 import { ObjectId } from 'mongoose';
-import { AIUsageStatistics } from './chat';
+import { AIUsageStatistics } from './statistics';
 
 type UserAccount = {
   name: string;
@@ -22,7 +22,6 @@ export type Statistics = {
 export type User = {
   _id: ObjectId;
   account: UserAccount;
-  statistics: Statistics;
 };
 
 export type AuthData = {

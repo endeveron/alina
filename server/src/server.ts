@@ -61,6 +61,15 @@ const configureRoutes = (app: Application): Application => {
     });
   });
 
+  // Health check endpoint
+  app.use(`${API}/health`, (_req: Request, res: Response) => {
+    res.status(200).json({
+      status: 'ok',
+      uptime: process.uptime(),
+      timestamp: Date.now(),
+    });
+  });
+
   return app;
 };
 

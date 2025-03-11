@@ -31,21 +31,16 @@ const userSchema = new Schema<User>(
         },
       },
     },
-    statistics: {
-      google: {
-        ai: {
-          inputTokens: { type: Number },
-          outputTokens: { type: Number },
-        },
-        sttBilledTime: { type: Number },
-      },
-      updTimestamp: { type: Number },
-    },
   },
   {
     versionKey: false,
   }
 );
 
+userSchema.index({
+  'account.email': 'text',
+});
+
 const UserModel = model<User>('User', userSchema);
+
 export default UserModel;

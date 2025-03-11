@@ -4,6 +4,7 @@ import { HttpError } from './error';
 import logger from './logger';
 
 const handleResData = <T>(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   resData: any,
   itemModel: Model<T>,
   notFoundMsg: string
@@ -23,7 +24,7 @@ const handleResData = <T>(
   };
 };
 
-const handleHttpError = <T>(err: any, itemModel: Model<T>) => {
+const handleHttpError = <T>(err: Error | unknown, itemModel: Model<T>) => {
   logger.error(`getItem 500 ${itemModel.modelName}`, err);
   return {
     data: null,
@@ -39,7 +40,7 @@ const getItem = async <T>(
   try {
     const resData = await itemModel.findOne(query);
     return handleResData(resData, itemModel, notFoundMsg || 'Not found.');
-  } catch (err) {
+  } catch (err: unknown) {
     return handleHttpError(err, itemModel);
   }
 };
