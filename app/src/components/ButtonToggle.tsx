@@ -6,7 +6,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import { useThemeColor } from '@/core/hooks/useThemeColor';
+import { useThemeColor } from '@/src/hooks/useThemeColor';
 
 type TButtonToggleProps = {
   onChange: (isToggled: boolean) => void;
@@ -23,9 +23,10 @@ export const ButtonToggle = ({
   isActive,
   isLoading,
 }: TButtonToggleProps) => {
-  const textColor = useThemeColor('text');
-  const mutedColor = useThemeColor('muted');
-  const backgroundColor = useThemeColor('background');
+  const text = useThemeColor('text');
+  const muted = useThemeColor('muted');
+  const border = useThemeColor('border');
+  const background = useThemeColor('background');
   const opacity = useSharedValue(OPACITY_FROM_VALUE);
 
   const [isToggled, setToggled] = useState(!!isActive);
@@ -58,15 +59,15 @@ export const ButtonToggle = ({
         onTouchEnd={handlePress}
         style={{
           borderWidth: 2,
-          borderColor: mutedColor,
-          backgroundColor,
+          borderColor: border,
+          backgroundColor: background,
         }}
-        className={`rounded-full w-16 p-1 items-center opacity-80 ${
+        className={`rounded-full w-16 p-1 items-center ${
           isToggled ? 'flex-row-reverse' : 'flex-row'
         }`}
       >
         <View
-          style={{ backgroundColor: isToggled ? textColor : mutedColor }}
+          style={{ backgroundColor: isToggled ? text : border }}
           className="h-6 w-6 rounded-full"
         ></View>
       </View>

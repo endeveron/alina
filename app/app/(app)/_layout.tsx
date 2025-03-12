@@ -1,9 +1,9 @@
 import { Redirect, Stack } from 'expo-router';
 import React from 'react';
 
-import { useThemeColor } from '@/core/hooks/useThemeColor';
-import { Screen } from '@/core/types/common';
-import { useSession } from '@/core/context/SessionProvider';
+import { useThemeColor } from '@/src/hooks/useThemeColor';
+import { Screen } from '@/src/types/common';
+import { useSession } from '@/src/context/SessionProvider';
 
 const screens: Screen[] = [{ name: 'index' }];
 

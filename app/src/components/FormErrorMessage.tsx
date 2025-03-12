@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 
-import { Text } from '@/components/Text';
+import { Text } from '@/src/components/Text';
 
 export const FormErrorMessage = ({ children }: PropsWithChildren) => {
   return (

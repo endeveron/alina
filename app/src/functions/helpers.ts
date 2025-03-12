@@ -1,6 +1,6 @@
-import { LANG_MAP } from '@/core/constants';
-import { consoleClors } from '@/core/constants/colors';
-import { LogType, Phrase } from '@/core/types/common';
+import { LANG_MAP } from '@/src/constants';
+import { consoleClors } from '@/src/constants/colors';
+import { LogType, Phrase } from '@/src/types/common';
 
 const { cyan, green, red, yellow, reset } = consoleClors;
 

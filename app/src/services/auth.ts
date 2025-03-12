@@ -1,7 +1,7 @@
-import { API_BASE_URL } from '@/core/constants';
-import { BASE_HEADERS } from '@/core/constants';
-import { AuthCredentials, UserAuthData } from '@/core/types/auth';
-import { Result } from '@/core/types/common';
+import { API_BASE_URL } from '@/src/constants';
+import { BASE_HEADERS } from '@/src/constants';
+import { AuthCredentials, UserAuthData } from '@/src/types/auth';
+import { Result } from '@/src/types/common';
 
 export const postSignUp = async ({
   name,

@@ -9,38 +9,41 @@ import * as Speech from 'expo-speech';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { ScrollView, TouchableOpacity, View } from 'react-native';
 
-import AIAnimation from '@/components/AIAnimation';
-import { Button } from '@/components/Button';
-import { ButtonToggle } from '@/components/ButtonToggle';
-import { StatusBar } from '@/components/StatusBar';
-import { Text } from '@/components/Text';
-import { useSession } from '@/core/context/SessionProvider';
+import AIAnimation from '@/src/components/AIAnimation';
+import { Button } from '@/src/components/Button';
+import { ButtonToggle } from '@/src/components/ButtonToggle';
+import { StatusBar } from '@/src/components/StatusBar';
+import { Text } from '@/src/components/Text';
+import { useSession } from '@/src/context/SessionProvider';
 import {
   factIntros,
   facts,
   greetings,
   welcomeGreetings,
-} from '@/core/data/phrases';
-import { askAI, recordSpeech } from '@/core/functions/chat';
+} from '@/src/data/phrases';
+import { askAI, recordSpeech } from '@/src/functions/chat';
 import {
   getLanguageName,
   getRandomPhrase,
   logMessage,
   prepareTextForSynthesis,
-} from '@/core/functions/helpers';
+} from '@/src/functions/helpers';
 import {
   getAIMsgTranscrStatusFromAsyncStorage,
   getAudioPermissionStatusFromAsyncStorage,
   getChatLangCodeFromAsyncStorage,
   getGreetStatusFromAsyncStorage,
+  getStorageNumber,
   saveAudioPermissionStatusInAsyncStorage,
   saveChatLangCodeInAsyncStorage,
   setAIMsgTranscrStatusInAsyncStorage,
   setGreetStatusInAsyncStorage,
-} from '@/core/functions/store';
-import { useThemeColor } from '@/core/hooks/useThemeColor';
-import { useToast } from '@/core/hooks/useToast';
-import { ChatConfig, LangCode } from '@/core/types/chat';
+  setStorageNumber,
+} from '@/src/functions/store';
+import { useThemeColor } from '@/src/hooks/useThemeColor';
+import { useToast } from '@/src/hooks/useToast';
+import { ChatConfig, LangCode } from '@/src/types/chat';
+import { KEY_BG_IMAGE_NUMBER } from '@/src/constants/store';
 
 const recording = new Audio.Recording();
 
@@ -77,7 +80,7 @@ export default function HomeScreen() {
   const [isFetching, setIsFetching] = useState(false);
   const [aiMessage, setAiMessage] = useState('');
   const [curBgImgNum, setCurBgImgNum] = useState(1);
-  const [bgImgSource, setBgImgSource] = useState(bgImageSourceMap.get(1));
+  const [bgImgSource, setBgImgSource] = useState();
 
   const audioRecordingRef = useRef<Audio.Recording>(recording);
   const transcriptTimerRef = useRef<NodeJS.Timeout | null>(null);
@@ -91,7 +94,7 @@ export default function HomeScreen() {
   };
 
   const text = useThemeColor('text');
-  const muted = useThemeColor('muted');
+  const red = useThemeColor('red');
   const border = useThemeColor('border');
   const background = useThemeColor('background');
 
@@ -172,6 +175,7 @@ export default function HomeScreen() {
     const newBgImgNumber = curBgImgNum < bgImageMaxNumber ? curBgImgNum + 1 : 1;
     setBgImgSource(bgImageSourceMap.get(newBgImgNumber));
     setCurBgImgNum(newBgImgNumber);
+    setStorageNumber(KEY_BG_IMAGE_NUMBER, newBgImgNumber);
   };
 
   const handleSpeakFact = () => {
@@ -321,7 +325,20 @@ export default function HomeScreen() {
     }, showTime);
   };
 
+  const setBackgroundImage = () => {
+    // Get image key from MMKV storage
+    let key = getStorageNumber(KEY_BG_IMAGE_NUMBER);
+    if (!key) {
+      setStorageNumber(KEY_BG_IMAGE_NUMBER, 1);
+      key = 1;
+    }
+    setBgImgSource(bgImageSourceMap.get(key));
+  };
+
   const initApp = async () => {
+    // Set background image
+    setBackgroundImage();
+
     // Check audio permissions
     const isGranted = await getAudioPermissions();
     setIsRecordAllowed(!!isGranted);
@@ -358,21 +375,21 @@ export default function HomeScreen() {
     <View className="relative flex-1">
       <StatusBar />
       <View className="relative flex-1 flex-col justify-between pt-16 z-20">
+        <View className="flex-grow"></View>
         {/* Transcript section */}
-        <ScrollView className="flex-col-reverse flex-1 rounded-[32px]">
-          <View className="flex-col items-center justify-end">
-            {aiMessage ? (
-              <View className="py-6 px-12 rounded-[32px] bg-slate-50">
-                <Text
-                  onPress={() => handleCopyToClipboard(aiMessage)}
-                  colorName="background"
-                  className="font-pbold text-2xl w-auto text-center"
-                >
-                  {aiMessage}
-                </Text>
-              </View>
-            ) : null}
-          </View>
+        <ScrollView className="flex-grow-0 mx-2 rounded-[32px]">
+          {aiMessage ? (
+            // Message container
+            <View className="p-8 rounded-[32px] bg-white/95">
+              <Text
+                onPress={() => handleCopyToClipboard(aiMessage)}
+                colorName="textInversed"
+                className="font-pbold text-2xl w-auto text-center"
+              >
+                {aiMessage}
+              </Text>
+            </View>
+          ) : null}
         </ScrollView>
 
         {/* Buttons (Record / Stop) */}
@@ -396,11 +413,11 @@ export default function HomeScreen() {
                     }
                   >
                     <View
-                      style={{ backgroundColor: text }}
-                      className="w-24 h-24 items-center justify-center rounded-full"
+                      style={{ backgroundColor: isRecording ? red : text }}
+                      className="w-24 h-24 items-center justify-center rounded-full transition-colors"
                     >
                       {isRecording ? (
-                        <IonIcon size={38} name="stop" color={background} />
+                        <IonIcon size={38} name="stop" color={text} />
                       ) : (
                         <FontAwesomeIcon
                           size={40}
@@ -449,7 +466,9 @@ export default function HomeScreen() {
 
           {/* Update background image */}
           <TouchableOpacity activeOpacity={0.5} onPress={handleUpdBgImage}>
-            <View className="opacity-60 w-16 h-16 items-center justify-center rounded-full bg-white/0"></View>
+            <View className="opacity-60 w-16 h-16 items-center justify-center rounded-full bg-white/10">
+              <IonIcon size={22} name="sync-sharp" color={text} />
+            </View>
           </TouchableOpacity>
 
           {/* Open Bottom Sheet */}
@@ -466,17 +485,17 @@ export default function HomeScreen() {
           index={-1}
           snapPoints={bottomSheetSnapPoints}
           enablePanDownToClose={true}
-          handleIndicatorStyle={{ backgroundColor: muted }}
+          handleIndicatorStyle={{ width: 80, backgroundColor: border }}
           backgroundStyle={{ backgroundColor: background, borderRadius: 24 }}
         >
           <BottomSheetView>
             <View className="p-8 pt-6 gap-4">
               {session?.user ? (
                 <View className="">
-                  <Text className="text-2xl font-pmedium opacity-90">
+                  <Text className="text-2xl font-pmedium">
                     {session.user.account.name}
                   </Text>
-                  <Text colorName="muted" className="text-lg font-pregular">
+                  <Text colorName="muted" className="text-lg font-pmedium">
                     {session.user.account.email}
                   </Text>
                 </View>
@@ -488,7 +507,7 @@ export default function HomeScreen() {
               >
                 {/* Greet message */}
                 <View className="flex-row items-center justify-between">
-                  <Text className="text-lg font-pmedium opacity-90">
+                  <Text className="text-lg font-pmedium ">
                     Greet at session start
                   </Text>
                   <ButtonToggle
@@ -498,7 +517,7 @@ export default function HomeScreen() {
                 </View>
                 {/* AI messages */}
                 <View className="flex-row items-center justify-between">
-                  <Text className="text-lg font-pmedium opacity-90">
+                  <Text className="text-lg font-pmedium ">
                     Transcript AI messages
                   </Text>
                   <ButtonToggle

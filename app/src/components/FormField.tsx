@@ -10,9 +10,9 @@ import {
   View,
 } from 'react-native';
 
-import { FormErrorMessage } from '@/components/FormErrorMessage';
-import { Text } from '@/components/Text';
-import { useThemeColor } from '@/core/hooks/useThemeColor';
+import { FormErrorMessage } from '@/src/components/FormErrorMessage';
+import { Text } from '@/src/components/Text';
+import { useThemeColor } from '@/src/hooks/useThemeColor';
 
 export const FormField = ({
   name,
@@ -39,10 +39,10 @@ export const FormField = ({
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 
-  const textColor = useThemeColor('text');
-  const inputColor = useThemeColor('input');
-  const redColor = useThemeColor('red');
-  const mutedColor = useThemeColor('muted');
+  const text = useThemeColor('text');
+  const input = useThemeColor('input');
+  const red = useThemeColor('red');
+  const muted = useThemeColor('muted');
 
   const nultiline = numberOfLines > 1;
   let heightClassName = 'h-16';
@@ -60,25 +60,25 @@ export const FormField = ({
   return (
     <View className={`${containerClassName}`}>
       {!!label ? (
-        <Text colorName="muted" className="font-pmedium mb-3">
+        <Text colorName="muted" className="font-psemibold mb-3">
           {label}
         </Text>
       ) : null}
 
       <View
         style={{
-          backgroundColor: inputColor,
-          borderColor: redColor,
+          backgroundColor: input,
+          borderColor: red,
           borderWidth: !!error ? 2 : 0,
         }}
         className={`${heightClassName} w-full px-4 border-2 rounded-xl flex flex-row items-center`}
       >
         <TextInput
           className="flex-1 font-pmedium text-xl"
-          style={{ color: textColor }}
+          style={{ color: text }}
           value={value}
           placeholder={placeholder}
-          placeholderTextColor={mutedColor}
+          placeholderTextColor={muted}
           onChangeText={handleChangeText}
           onBlur={onBlur}
           multiline={nultiline}
@@ -90,13 +90,13 @@ export const FormField = ({
 
         {name === 'password' ? (
           <TouchableOpacity
-            className="opacity-40"
+            className="opacity-70"
             onPress={() => setShowPassword(!showPassword)}
           >
             <IonIcon
               size={24}
               name={showPassword ? 'eye' : 'eye-off'}
-              color={mutedColor}
+              color={muted}
             />
           </TouchableOpacity>
         ) : null}

@@ -1,7 +1,7 @@
 import { Text as ReactNativeText, type TextProps } from 'react-native';
 
-import { useThemeColor } from '@/core/hooks/useThemeColor';
-import { colors } from '@/core/constants/colors';
+import { useThemeColor } from '@/src/hooks/useThemeColor';
+import { colors } from '@/src/constants/colors';
 
 export function Text({
   style,

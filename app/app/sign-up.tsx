@@ -4,21 +4,21 @@ import { useEffect } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { View } from 'react-native';
 
-import { Button } from '@/components/Button';
-import { FormField } from '@/components/FormField';
-import { Text } from '@/components/Text';
+import { Button } from '@/src/components/Button';
+import { FormField } from '@/src/components/FormField';
+import { Text } from '@/src/components/Text';
 import {
   AUTH_EMAIL,
   AUTH_NAME,
   AUTH_PASSWORD,
   DEFAULT_REDIRECT_URL,
-} from '@/core/constants';
-import { useSession } from '@/core/context/SessionProvider';
-import { logMessage } from '@/core/functions/helpers';
-import { useToast } from '@/core/hooks/useToast';
-import { signUpSchema, SignUpFormData } from '@/core/utils/validation';
-import AuthScreen from '@/components/AuthScreen';
-import AIAnimation from '@/components/AIAnimation';
+} from '@/src/constants';
+import { useSession } from '@/src/context/SessionProvider';
+import { logMessage } from '@/src/functions/helpers';
+import { useToast } from '@/src/hooks/useToast';
+import { signUpSchema, SignUpFormData } from '@/src/utils/validation';
+import AuthScreen from '@/src/components/AuthScreen';
+import AIAnimation from '@/src/components/AIAnimation';
 
 const SignUp = () => {
   const { isLoading, signUp } = useSession();

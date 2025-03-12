@@ -385,7 +385,13 @@ export const getChatSummary = async ({ userId }: { userId: string }) => {
     const chat = await ChatModel.findOne({ userId });
     if (!chat) return;
 
-    return chat.summary || undefined;
+    const chatSummary = chat.summary;
+    if (!chatSummary) return;
+
+    // Save in the local map
+    chatSummaryMap.set(userId, chatSummary);
+
+    return chatSummary;
   } catch (err: unknown) {
     console.error(errMsg, err);
   }
@@ -684,7 +690,7 @@ export const createChainForCharacter = async ({
   const messageMemory = await getMessageMemory({ userId });
   const messages = await messageMemory.chatHistory.getMessages();
 
-  // Trying to get chat summary
+  // Trying to get chat summary string from the map or db
   if (!messages.length) {
     const chatSummary = await getChatSummary({ userId });
     if (chatSummary) {

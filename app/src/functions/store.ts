@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as SecureStore from 'expo-secure-store';
+import { MMKV } from 'react-native-mmkv';
 
 import {
   KEY_AUDIO_PERMISSION,
@@ -7,10 +8,36 @@ import {
   KEY_CHAT_LANG_CODE,
   KEY_CHAT_TRANSCRIPT,
   KEY_GREET,
-} from '@/core/constants/store';
+} from '@/src/constants/store';
 
-import { StoreAuthData, UserAuthData } from '@/core/types/auth';
-import { Result, Status } from '@/core/types/common';
+import { StoreAuthData, UserAuthData } from '@/src/types/auth';
+import { Result, Status } from '@/src/types/common';
+
+/** MMKV Storage */
+const storage = new MMKV();
+
+/**
+ * Checks whether the MMKV storage contains the item with the provided key.
+ * @returns a boolean
+ */
+export const checkStorageItem = (key: string): boolean => {
+  return storage.contains(key);
+};
+
+/**
+ * Retrieves a number by the provided key from the MMKV storage.
+ * @returns a boolean
+ */
+export const getStorageNumber = (key: string): number | undefined => {
+  return storage.getNumber(key);
+};
+
+/**
+ * Stores a number with the provided key in the MMKV storage.
+ */
+export const setStorageNumber = (key: string, number: number): void => {
+  storage.set(key, number);
+};
 
 /** Secure Store */
 

@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 import { ScrollView, View } from 'react-native';
 
-import { SafeAreaView } from '@/components/SafeAreaView';
+import { SafeAreaView } from '@/src/components/SafeAreaView';
 
 const AuthScreen = ({ children }: PropsWithChildren) => {
   // const theme = useColorScheme() ?? 'light';

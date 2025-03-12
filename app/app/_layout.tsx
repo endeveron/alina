@@ -9,12 +9,12 @@ import {
   ReanimatedLogLevel,
 } from 'react-native-reanimated';
 
-import { colors } from '@/core/constants/colors';
-import SessionProvider from '@/core/context/SessionProvider';
-import { useColorScheme } from '@/core/hooks/useColorScheme';
-import { Screen } from '@/core/types/common';
+import { colors } from '@/src/constants/colors';
+import SessionProvider from '@/src/context/SessionProvider';
+import { useColorScheme } from '@/src/hooks/useColorScheme';
+import { Screen } from '@/src/types/common';
 
-import '@/core/styles/global.css';
+import '@/src/styles/global.css';
 
 configureReanimatedLogger({
   level: ReanimatedLogLevel.error,
@@ -41,15 +41,15 @@ export default function RootLayout() {
   const colorScheme = useColorScheme() ?? 'light';
 
   const [loaded] = useFonts({
-    'MontserratAlt-Thin': require('../assets/fonts/MontserratAlt-Thin.ttf'), // 100
-    'MontserratAlt-ExtraLight': require('../assets/fonts/MontserratAlt-ExtraLight.ttf'), // 200
-    'MontserratAlt-Light': require('../assets/fonts/MontserratAlt-Light.ttf'), // 300
-    'MontserratAlt-Regular': require('../assets/fonts/MontserratAlt-Regular.ttf'), // 400
-    'MontserratAlt-Medium': require('../assets/fonts/MontserratAlt-Medium.ttf'), // 500
-    'MontserratAlt-SemiBold': require('../assets/fonts/MontserratAlt-SemiBold.ttf'), // 600
-    'MontserratAlt-Bold': require('../assets/fonts/MontserratAlt-Bold.ttf'), // 700
-    'MontserratAlt-ExtraBold': require('../assets/fonts/MontserratAlt-ExtraBold.ttf'), // 800
-    'MontserratAlt-Black': require('../assets/fonts/MontserratAlt-Black.ttf'), // 900
+    'Montserrat-Thin': require('../assets/fonts/Montserrat-Thin.ttf'), // 100
+    'Montserrat-ExtraLight': require('../assets/fonts/Montserrat-ExtraLight.ttf'), // 200
+    'Montserrat-Light': require('../assets/fonts/Montserrat-Light.ttf'), // 300
+    'Montserrat-Regular': require('../assets/fonts/Montserrat-Regular.ttf'), // 400
+    'Montserrat-Medium': require('../assets/fonts/Montserrat-Medium.ttf'), // 500
+    'Montserrat-SemiBold': require('../assets/fonts/Montserrat-SemiBold.ttf'), // 600
+    'Montserrat-Bold': require('../assets/fonts/Montserrat-Bold.ttf'), // 700
+    'Montserrat-ExtraBold': require('../assets/fonts/Montserrat-ExtraBold.ttf'), // 800
+    'Montserrat-Black': require('../assets/fonts/Montserrat-Black.ttf'), // 900
   });
 
   useEffect(() => {
@@ -78,7 +78,7 @@ export default function RootLayout() {
             <Stack.Screen name={screen.name} key={screen.name} />
           ))}
         </Stack>
-        <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
+        <StatusBar style={'light'} />
       </SessionProvider>
     </GestureHandlerRootView>
   );

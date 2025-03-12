@@ -1,7 +1,7 @@
-import { API_BASE_URL, BASE_HEADERS } from '@/core/constants';
-import { AuthData } from '@/core/types/auth';
-import { AskAIResData, GoogleSpeechToTextConfig } from '@/core/types/chat';
-import { Result } from '@/core/types/common';
+import { API_BASE_URL, BASE_HEADERS } from '@/src/constants';
+import { AuthData } from '@/src/types/auth';
+import { AskAIResData, GoogleSpeechToTextConfig } from '@/src/types/chat';
+import { Result } from '@/src/types/common';
 
 export const postChat = async ({
   authData,

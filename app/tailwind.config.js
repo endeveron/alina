@@ -1,39 +1,31 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    './app/**/*.{js,jsx,ts,tsx}',
-    './app/(tabs)/*.{js,jsx,ts,tsx}',
-    './components/**/*.{js,jsx,ts,tsx}',
-    './core/**/*.{js,jsx,ts,tsx}',
-  ],
+  content: ['./app/**/*.{js,jsx,ts,tsx}', './src/components/*.{js,jsx,ts,tsx}'],
   presets: [require('nativewind/preset')],
   theme: {
     extend: {
       fontFamily: {
-        // Paragraph
-        pthin: ['MontserratAlt-Thin', 'sans-serif'], // 100
-        pextralight: ['MontserratAlt-ExtraLight', 'sans-serif'], // 200
-        plight: ['MontserratAlt-Light', 'sans-serif'], // 300
-        pregular: ['MontserratAlt-Regular', 'sans-serif'], // 400
-        pmedium: ['MontserratAlt-Medium', 'sans-serif'], // 500
-        psemibold: ['MontserratAlt-SemiBold', 'sans-serif'], // 600
-        pbold: ['MontserratAlt-Bold', 'sans-serif'], // 700
-        pextrabold: ['MontserratAlt-ExtraBold', 'sans-serif'], // 800
-        pblack: ['MontserratAlt-Black', 'sans-serif'], // 900
+        pthin: ['Montserrat-Thin', 'sans-serif'], // 100
+        pextralight: ['Montserrat-ExtraLight', 'sans-serif'], // 200
+        plight: ['Montserrat-Light', 'sans-serif'], // 300
+        pregular: ['Montserrat-Regular', 'sans-serif'], // 400
+        pmedium: ['Montserrat-Medium', 'sans-serif'], // 500
+        psemibold: ['Montserrat-SemiBold', 'sans-serif'], // 600
+        pbold: ['Montserrat-Bold', 'sans-serif'], // 700
+        pextrabold: ['Montserrat-ExtraBold', 'sans-serif'], // 800
+        pblack: ['Montserrat-Black', 'sans-serif'], // 900
       },
       fontSize: {
         '2xl': [
           '1.375rem' /* 22px */,
           {
-            lineHeight: '2.125rem' /* 34px */,
-            letterSpacing: '-0.01em',
+            lineHeight: '2.25rem' /* 36px */,
           },
         ],
         '3xl': [
           '2rem' /* 32px */,
           {
             lineHeight: '2.75rem' /* 44px */,
-            letterSpacing: '-0.02em',
           },
         ],
       },
