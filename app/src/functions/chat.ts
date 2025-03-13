@@ -3,11 +3,11 @@ import * as FileSystem from 'expo-file-system';
 import { Dispatch, MutableRefObject, SetStateAction } from 'react';
 import { Platform } from 'react-native';
 
-import { postChat } from '@/src/services/chat';
-import { recordingOptions } from '@/src/settings/audio';
-import { AuthData } from '@/src/types/auth';
-import { AskAIResData } from '@/src/types/chat';
-import { Result } from '@/src/types/common';
+import { postChat } from '@/services/chat';
+import { recordingOptions } from '@/settings/audio';
+import { AuthData } from '@/types/auth';
+import { AskAIResData } from '@/types/chat';
+import { Result } from '@/types/common';
 
 export const recordSpeech = async (
   audioRecordingRef: MutableRefObject<Audio.Recording>,

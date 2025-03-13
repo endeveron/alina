@@ -9,24 +9,16 @@ import {
   ReanimatedLogLevel,
 } from 'react-native-reanimated';
 
-import { colors } from '@/src/constants/colors';
-import SessionProvider from '@/src/context/SessionProvider';
-import { useColorScheme } from '@/src/hooks/useColorScheme';
-import { Screen } from '@/src/types/common';
+import { colors } from '@/constants/colors';
+import SessionProvider from '@/context/SessionProvider';
+import { useColorScheme } from '@/hooks/useColorScheme';
 
-import '@/src/styles/global.css';
+import '@/styles/global.css';
 
 configureReanimatedLogger({
   level: ReanimatedLogLevel.error,
   strict: false,
 });
-
-const screens: Screen[] = [
-  { name: '(app)' },
-  { name: '+not-found' },
-  { name: 'sign-in' },
-  { name: 'sign-up' },
-];
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -67,17 +59,12 @@ export default function RootLayout() {
       <SessionProvider>
         <Stack
           screenOptions={{
-            // presentation: 'modal',
             headerShown: false,
             contentStyle: {
               backgroundColor: colors[colorScheme].background,
             },
           }}
-        >
-          {screens.map((screen: Screen) => (
-            <Stack.Screen name={screen.name} key={screen.name} />
-          ))}
-        </Stack>
+        />
         <StatusBar style={'light'} />
       </SessionProvider>
     </GestureHandlerRootView>

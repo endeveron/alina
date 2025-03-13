@@ -7,21 +7,21 @@ import {
   useState,
 } from 'react';
 
-import { DEFAULT_REDIRECT_URL } from '@/src/constants';
+import { DEFAULT_REDIRECT_URL } from '@/constants';
 import {
   deleteAuthDataFromSecureStore,
   getAuthDataFromSecureStore,
   saveAuthDataInSecureStore,
-} from '@/src/functions/store';
-import { useToast } from '@/src/hooks/useToast';
-import { postSignIn, postSignUp } from '@/src/services/auth';
+} from '@/functions/store';
+import { useToast } from '@/hooks/useToast';
+import { postSignIn, postSignUp } from '@/services/auth';
 import {
   AuthCredentials,
   AuthSession,
   SessionContext as TSessionContext,
   UserAuthData,
-} from '@/src/types/auth';
-import { logMessage } from '@/src/functions/helpers';
+} from '@/types/auth';
+import { logMessage } from '@/functions/helpers';
 
 const SessionContext = createContext<TSessionContext>({
   session: null,

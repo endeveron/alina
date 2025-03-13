@@ -10,9 +10,9 @@ import {
   View,
 } from 'react-native';
 
-import { FormErrorMessage } from '@/src/components/FormErrorMessage';
-import { Text } from '@/src/components/Text';
-import { useThemeColor } from '@/src/hooks/useThemeColor';
+import { FormErrorMessage } from '@/components/FormErrorMessage';
+import { Text } from '@/components/Text';
+import { useThemeColor } from '@/hooks/useThemeColor';
 
 export const FormField = ({
   name,

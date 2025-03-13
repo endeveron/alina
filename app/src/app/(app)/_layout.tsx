@@ -1,11 +1,8 @@
 import { Redirect, Stack } from 'expo-router';
 import React from 'react';
 
-import { useThemeColor } from '@/src/hooks/useThemeColor';
-import { Screen } from '@/src/types/common';
-import { useSession } from '@/src/context/SessionProvider';
-
-const screens: Screen[] = [{ name: 'index' }];
+import { useThemeColor } from '@/hooks/useThemeColor';
+import { useSession } from '@/context/SessionProvider';
 
 export default function AppLayout() {
   const { session } = useSession();
@@ -18,16 +15,11 @@ export default function AppLayout() {
   return (
     <Stack
       screenOptions={{
-        // presentation: 'modal',
         headerShown: false,
         contentStyle: {
           backgroundColor: background,
         },
       }}
-    >
-      {screens.map((screen: Screen) => (
-        <Stack.Screen name={screen.name} key={screen.name} />
-      ))}
-    </Stack>
+    />
   );
 }

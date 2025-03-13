@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 
-// import { convertSpeechToText } from '../functions/chat';
+import { RESET_CHAT_HISTORY_COMMAND } from '../constants';
 import { characterMap } from '../data/characters';
 import {
   convertSpeechToText,
@@ -53,7 +53,8 @@ export const akAI = async (req: Request, res: Response, next: NextFunction) => {
       transcript: humanMessage,
     } = speechToTextResult.data;
 
-    if (humanMessage.toLowerCase() === 'reset chat history') {
+    // Handle the reset chat history command
+    if (humanMessage.toLowerCase() === RESET_CHAT_HISTORY_COMMAND) {
       let aiMessage = `I see. I’ve forgotten what we were chatting about.`;
 
       // Clear message history in the buffer memory

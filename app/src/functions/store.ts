@@ -8,10 +8,10 @@ import {
   KEY_CHAT_LANG_CODE,
   KEY_CHAT_TRANSCRIPT,
   KEY_GREET,
-} from '@/src/constants/store';
+} from '@/constants/store';
 
-import { StoreAuthData, UserAuthData } from '@/src/types/auth';
-import { Result, Status } from '@/src/types/common';
+import { StoreAuthData, UserAuthData } from '@/types/auth';
+import { Result, Status } from '@/types/common';
 
 /** MMKV Storage */
 const storage = new MMKV();
