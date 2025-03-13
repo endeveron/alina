@@ -1,9 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Link, router, Stack } from 'expo-router';
+import { Link, router } from 'expo-router';
 import { useEffect } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { View } from 'react-native';
 
+import AIAnimation from '@/components/AIAnimation';
+import AuthScreen from '@/components/AuthScreen';
 import { Button } from '@/components/Button';
 import { FormField } from '@/components/FormField';
 import { Text } from '@/components/Text';
@@ -16,9 +18,7 @@ import {
 import { useSession } from '@/context/SessionProvider';
 import { logMessage } from '@/functions/helpers';
 import { useToast } from '@/hooks/useToast';
-import { signUpSchema, SignUpFormData } from '@/utils/validation';
-import AuthScreen from '@/components/AuthScreen';
-import AIAnimation from '@/components/AIAnimation';
+import { SignUpFormData, signUpSchema } from '@/utils/validation';
 
 const SignUp = () => {
   const { isLoading, signUp } = useSession();
@@ -57,92 +57,84 @@ const SignUp = () => {
   };
 
   return (
-    <>
-      <Stack.Screen
-        options={{
-          // title: 'Sign Up',
-          headerShown: false,
-        }}
+    <AuthScreen>
+      <View className="flex-row justify-center">
+        <AIAnimation />
+      </View>
+      <Text className="text-3xl font-pbold text-center">Sign Up</Text>
+      <Controller
+        control={control}
+        render={({
+          field: { onChange, onBlur, value },
+          fieldState: { error },
+        }) => (
+          <FormField
+            name="name"
+            label="Name"
+            value={value}
+            onBlur={onBlur}
+            handleChangeText={onChange}
+            containerClassName="mt-8"
+            error={error}
+          />
+        )}
+        name="name"
       />
-      <AuthScreen>
-        <View className="flex-row justify-center">
-          <AIAnimation />
-        </View>
-        <Text className="text-3xl font-pbold text-center">Sign Up</Text>
-        <Controller
-          control={control}
-          render={({
-            field: { onChange, onBlur, value },
-            fieldState: { error },
-          }) => (
-            <FormField
-              name="name"
-              label="Name"
-              value={value}
-              onBlur={onBlur}
-              handleChangeText={onChange}
-              containerClassName="mt-8"
-              error={error}
-            />
-          )}
-          name="name"
-        />
 
-        <Controller
-          control={control}
-          render={({
-            field: { onChange, onBlur, value },
-            fieldState: { error },
-          }) => (
-            <FormField
-              name="email"
-              label="Email"
-              value={value}
-              onBlur={onBlur}
-              handleChangeText={onChange}
-              containerClassName="mt-4"
-              error={error}
-              keyboardType="email-address"
-            />
-          )}
-          name="email"
-        />
+      <Controller
+        control={control}
+        render={({
+          field: { onChange, onBlur, value },
+          fieldState: { error },
+        }) => (
+          <FormField
+            name="email"
+            label="Email"
+            value={value}
+            onBlur={onBlur}
+            handleChangeText={onChange}
+            containerClassName="mt-4"
+            error={error}
+            keyboardType="email-address"
+          />
+        )}
+        name="email"
+      />
 
-        <Controller
-          control={control}
-          render={({
-            field: { onChange, onBlur, value },
-            fieldState: { error },
-          }) => (
-            <FormField
-              name="password"
-              label="Password"
-              value={value}
-              onBlur={onBlur}
-              handleChangeText={onChange}
-              containerClassName="mt-4"
-              error={error}
-            />
-          )}
-          name="password"
-        />
+      <Controller
+        control={control}
+        render={({
+          field: { onChange, onBlur, value },
+          fieldState: { error },
+        }) => (
+          <FormField
+            name="password"
+            label="Password"
+            value={value}
+            onBlur={onBlur}
+            handleChangeText={onChange}
+            containerClassName="mt-4"
+            error={error}
+          />
+        )}
+        name="password"
+      />
 
-        <Button
-          title="Sign Up"
-          handlePress={handleSubmit(onSubmit)}
-          containerClassName="mt-8"
-          isLoading={isLoading}
-        />
-        <View className="flex items-center justify-center py-8 flex-row gap-3">
-          <Text colorName="muted" className="font-pmedium py-4">
-            Have an account already?
-          </Text>
-          <Link href="/sign-in" className="ml-4 py-4 pr-4">
-            <Text className="font-pmedium text-lg">Sign In</Text>
-          </Link>
-        </View>
-      </AuthScreen>
-    </>
+      <Button
+        title="Sign Up"
+        handlePress={handleSubmit(onSubmit)}
+        containerClassName="mt-8"
+        isLoading={isLoading}
+      />
+      <View className="flex items-center justify-center py-8 flex-row gap-3">
+        <Text colorName="muted" className="font-pmedium py-4">
+          Have an account already?
+        </Text>
+        <Link href="/sign-in" className="ml-4 py-4 pr-4">
+          <Text className="font-pmedium text-lg">Sign In</Text>
+        </Link>
+      </View>
+    </AuthScreen>
   );
 };
 

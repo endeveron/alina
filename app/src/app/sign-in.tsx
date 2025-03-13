@@ -1,9 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Link, router, Stack } from 'expo-router';
+import { Link, router } from 'expo-router';
 import { useEffect } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { View } from 'react-native';
 
+import AIAnimation from '@/components/AIAnimation';
+import AuthScreen from '@/components/AuthScreen';
 import { Button } from '@/components/Button';
 import { FormField } from '@/components/FormField';
 import { Text } from '@/components/Text';
@@ -11,9 +13,7 @@ import { AUTH_EMAIL, AUTH_PASSWORD, DEFAULT_REDIRECT_URL } from '@/constants';
 import { useSession } from '@/context/SessionProvider';
 import { logMessage } from '@/functions/helpers';
 import { useToast } from '@/hooks/useToast';
-import { signInSchema, SignInFormData } from '@/utils/validation';
-import AuthScreen from '@/components/AuthScreen';
-import AIAnimation from '@/components/AIAnimation';
+import { SignInFormData, signInSchema } from '@/utils/validation';
 
 const SignIn = () => {
   const { isLoading, signIn, signOut } = useSession();
@@ -52,72 +52,64 @@ const SignIn = () => {
   };
 
   return (
-    <>
-      <Stack.Screen
-        options={{
-          // title: 'Sign In',
-          headerShown: false,
-        }}
+    <AuthScreen>
+      <View className="flex-row justify-center">
+        <AIAnimation />
+      </View>
+      <Text className="text-3xl font-pbold text-center">Sign In</Text>
+      <Controller
+        control={control}
+        render={({
+          field: { onChange, onBlur, value },
+          fieldState: { error },
+        }) => (
+          <FormField
+            name="email"
+            label="Email"
+            value={value}
+            onBlur={onBlur}
+            handleChangeText={onChange}
+            containerClassName="mt-8"
+            error={error}
+            keyboardType="email-address"
+          />
+        )}
+        name="email"
       />
-      <AuthScreen>
-        <View className="flex-row justify-center">
-          <AIAnimation />
-        </View>
-        <Text className="text-3xl font-pbold text-center">Sign In</Text>
-        <Controller
-          control={control}
-          render={({
-            field: { onChange, onBlur, value },
-            fieldState: { error },
-          }) => (
-            <FormField
-              name="email"
-              label="Email"
-              value={value}
-              onBlur={onBlur}
-              handleChangeText={onChange}
-              containerClassName="mt-8"
-              error={error}
-              keyboardType="email-address"
-            />
-          )}
-          name="email"
-        />
-        <Controller
-          control={control}
-          render={({
-            field: { onChange, onBlur, value },
-            fieldState: { error },
-          }) => (
-            <FormField
-              name="password"
-              label="Password"
-              value={value}
-              onBlur={onBlur}
-              handleChangeText={onChange}
-              containerClassName="mt-4"
-              error={error}
-            />
-          )}
-          name="password"
-        />
+      <Controller
+        control={control}
+        render={({
+          field: { onChange, onBlur, value },
+          fieldState: { error },
+        }) => (
+          <FormField
+            name="password"
+            label="Password"
+            value={value}
+            onBlur={onBlur}
+            handleChangeText={onChange}
+            containerClassName="mt-4"
+            error={error}
+          />
+        )}
+        name="password"
+      />
 
-        <Button
-          title="Sign In"
-          handlePress={handleSubmit(onSubmit)}
-          containerClassName="mt-8"
-          isLoading={isLoading}
-        />
-        <View className="flex items-center justify-center py-8 flex-row gap-3">
-          <Text colorName="muted" className="font-pmedium py-4">
-            Don't have an account?
-          </Text>
-          <Link href="/sign-up" className="ml-4 py-4 pr-4">
-            <Text className="font-pmedium text-lg">Sign Up</Text>
-          </Link>
-        </View>
-      </AuthScreen>
-    </>
+      <Button
+        title="Sign In"
+        handlePress={handleSubmit(onSubmit)}
+        containerClassName="mt-8"
+        isLoading={isLoading}
+      />
+      <View className="flex items-center justify-center py-8 flex-row gap-3">
+        <Text colorName="muted" className="font-pmedium py-4">
+          Don't have an account?
+        </Text>
+        <Link href="/sign-up" className="ml-4 py-4 pr-4">
+          <Text className="font-pmedium text-lg">Sign Up</Text>
+        </Link>
+      </View>
+    </AuthScreen>
   );
 };
 

@@ -1,5 +1,5 @@
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
+import { Slot } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
@@ -9,9 +9,7 @@ import {
   ReanimatedLogLevel,
 } from 'react-native-reanimated';
 
-import { colors } from '@/constants/colors';
 import SessionProvider from '@/context/SessionProvider';
-import { useColorScheme } from '@/hooks/useColorScheme';
 
 import '@/styles/global.css';
 
@@ -30,8 +28,6 @@ SplashScreen.setOptions({
 });
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme() ?? 'light';
-
   const [loaded] = useFonts({
     'Montserrat-Thin': require('../assets/fonts/Montserrat-Thin.ttf'), // 100
     'Montserrat-ExtraLight': require('../assets/fonts/Montserrat-ExtraLight.ttf'), // 200
@@ -57,14 +53,7 @@ export default function RootLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SessionProvider>
-        <Stack
-          screenOptions={{
-            headerShown: false,
-            contentStyle: {
-              backgroundColor: colors[colorScheme].background,
-            },
-          }}
-        />
+        <Slot />
         <StatusBar style={'light'} />
       </SessionProvider>
     </GestureHandlerRootView>

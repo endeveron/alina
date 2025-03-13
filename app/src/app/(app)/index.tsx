@@ -369,12 +369,7 @@ export default function HomeScreen() {
 
   return (
     <>
-      <Stack.Screen
-        options={{
-          // title: 'Main',
-          headerShown: false,
-        }}
-      />
+      <Stack.Screen />
       <View className="relative flex-1">
         <StatusBar />
         <View className="relative flex-1 flex-col justify-between pt-16 z-20">

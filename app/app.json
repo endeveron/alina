@@ -4,7 +4,7 @@
     "slug": "alina",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./src/assets/images/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -13,8 +13,8 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/icon_monochrome.png",
-        "monochromeImage": "./assets/images/icon_monochrome.png",
+        "foregroundImage": "./src/assets/images/icon_monochrome.png",
+        "monochromeImage": "./src/assets/images/icon_monochrome.png",
         "backgroundColor": "#6c17ad"
       },
       "backgroundColor": "#2a003d",
@@ -27,7 +27,7 @@
     "web": {
       "bundler": "metro",
       "output": "server",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./src/assets/images/favicon.png"
     },
     "plugins": [
       [
@@ -46,7 +46,7 @@
         "expo-splash-screen",
         {
           "backgroundColor": "#2a003d",
-          "image": "./assets/images/icon_colored.png",
+          "image": "./src/assets/images/icon_colored.png",
           "imageWidth": 256
         }
       ],
